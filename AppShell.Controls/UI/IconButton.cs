@@ -61,7 +61,7 @@ namespace AppShell.Controls.UI
         }
         private void DialogWindowBase_Loaded(object sender, RoutedEventArgs e)
         {
-            //var ss = Template.FindName("ButtonIconSpin", this);
+            //var ss = Template.FindName("ButtonIconSpin", this);цц
             //var ssss = ss.FindName("SSSS");
         }
     }
