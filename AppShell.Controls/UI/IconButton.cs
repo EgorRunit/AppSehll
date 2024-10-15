@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace AppShell.Controls.UI
 {
@@ -15,11 +16,11 @@ namespace AppShell.Controls.UI
         public static readonly DependencyProperty IconProperty;
 
 
-        public ControlTemplate Icon
+        public Geometry Icon
         {
             get
             {
-                return GetValue(IconProperty) as ControlTemplate;
+                return GetValue(IconProperty) as Geometry;
             }
             set
             {
@@ -40,9 +41,11 @@ namespace AppShell.Controls.UI
         }
 
 
+
         static IconButton()
         {
-            IconProperty = DependencyProperty.Register("Icon", typeof(ControlTemplate), typeof(IconButton),
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(IconButton), new FrameworkPropertyMetadata(typeof(Button)));
+            IconProperty = DependencyProperty.Register("Icon", typeof(Geometry), typeof(IconButton),
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
 
             IconWidthProperty = DependencyProperty.Register("IconWidth", typeof(double), typeof(IconButton),
@@ -54,12 +57,11 @@ namespace AppShell.Controls.UI
 
         public IconButton() 
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(IconButton), new FrameworkPropertyMetadata(typeof(IconButton)));
-            Loaded += DialogWindowBase_Loaded;
+            //Loaded += DialogWindowBase_Loaded;
         }
         private void DialogWindowBase_Loaded(object sender, RoutedEventArgs e)
         {
-            var ss = Template.FindName("ButtonIconSpin", this);
+            //var ss = Template.FindName("ButtonIconSpin", this);
             //var ssss = ss.FindName("SSSS");
         }
     }

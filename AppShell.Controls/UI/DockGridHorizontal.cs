@@ -24,14 +24,19 @@ namespace AppShell.Controls.UI
     }
 
 
-    public class HorisontalDockGrid : Grid, IDockPanelGrid
+    public class DockGridHorizontal : Grid, IDockPanelGrid
     {
-        public HorisontalDockGrid(SnapPanelType type, double addedSize, FrameworkElement previosContent, FrameworkElement addedContent)
+        internal DockGridHorizontal()
         {
             ShowGridLines = true;
             RowDefinitions.Add(new RowDefinition());
             ColumnDefinitions.Add(new ColumnDefinition());
             ColumnDefinitions.Add(new ColumnDefinition());
+        }
+
+        public DockGridHorizontal(SnapPanelType type, double addedSize, FrameworkElement previosContent, FrameworkElement addedContent)
+            : this()
+        {
             switch (type)
             {
                 case SnapPanelType.Left:

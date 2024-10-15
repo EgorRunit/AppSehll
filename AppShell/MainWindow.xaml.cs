@@ -29,5 +29,12 @@ namespace AppShell
             _messageQueue = new SnapManagerMessageQueue();
             //Content = new SnapManager(_messageQueue) { Tag = "EEEEEEEEEEEE" };
         }
+
+        protected override void OnInitialized(EventArgs e)
+        {
+            base.OnInitialized(e);
+            var ss = this.Resources;
+            var ddd = this.FindResource("dswgerghreger");
+        }
     }
 }

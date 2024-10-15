@@ -14,12 +14,12 @@ namespace AppShell.Controls.UI
 
         public ManagerDockGrid() 
         { 
-            var baseContent = new ContentDockPanel(_splitDockPanel);
+            var baseContent = new DockPanelCellContent(_splitDockPanel);
             _rootGrid = new BaseDockGrid(baseContent);
            Content = _rootGrid;
         }
 
-        void _splitDockPanel(ContentDockPanel panel, SnapPanelType type)
+        void _splitDockPanel(DockPanelCellContent panel, SnapPanelType type)
         {
             var perncent = 30;
             UIElement dockGrid = null;
@@ -28,19 +28,19 @@ namespace AppShell.Controls.UI
             var parentRowIndex = (int)panel.GetValue(Grid.RowProperty);
             parent.Children.Remove(panel);
 
-            var added = new ContentDockPanel(_splitDockPanel);
+            var added = new DockPanelCellContent(_splitDockPanel);
             switch (type)
             {
                 case SnapPanelType.Right:
                 case SnapPanelType.Left:
-                    dockGrid = new HorisontalDockGrid(type, panel.ActualWidth.GetPercent(perncent), panel, added);
+                    dockGrid = new DockGridHorizontal(type, panel.ActualWidth.GetPercent(perncent), panel, added);
                     dockGrid.SetValue(Grid.ColumnProperty, parentColumnIndex);
                     dockGrid.SetValue(Grid.RowProperty, parentRowIndex);
                     parent.Children.Add(dockGrid);
                     break;
                 case SnapPanelType.Top:
                 case SnapPanelType.Bottom:
-                    dockGrid = new VerticalDockGrid(type, panel.ActualHeight.GetPercent(perncent), panel, added);
+                    dockGrid = new DockGridVertical(type, panel.ActualHeight.GetPercent(perncent), panel, added);
                     dockGrid.SetValue(Grid.ColumnProperty, parentColumnIndex);
                     dockGrid.SetValue(Grid.RowProperty, parentRowIndex);
                     parent.Children.Add(dockGrid);
