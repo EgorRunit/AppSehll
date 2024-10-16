@@ -29,7 +29,7 @@ namespace AppShell.Controls.UI
         Button _left;
         Button _bottom;
         static int index = 0;
-        
+
         public bool IsActive { get; set; }
 
         static DockPanel()
@@ -81,27 +81,27 @@ namespace AppShell.Controls.UI
 
             _textBlockCaption = new TextBlock() { Text = "Window " + index };
             _textBlockCaption.SetBinding(TextBlock.ForegroundProperty, bindigHeaderForeground);
-            _textBlockCaption.Padding = new Thickness(5,2,0,3);
+            _textBlockCaption.Padding = new Thickness(5, 2, 0, 3);
             _textBlockCaption.TextTrimming = TextTrimming.CharacterEllipsis;
-            
+
             var closeButtonIcon = FindResource("ButtonIconClose") as Geometry;
             var closeButton = new IconButton();
-            //closeButton.Click += CloseButton_Click;
-            closeButton.Icon = closeButtonIcon; 
+            closeButton.Click += (x, y) => _panelClosed();
+            closeButton.Icon = closeButtonIcon;
             closeButton.HorizontalAlignment = HorizontalAlignment.Right;
             closeButton.Foreground = new SolidColorBrush(Colors.Black);
             //closeButton.MouseMove += CloseButton_MouseMove;
-            closeButton.Margin = new Thickness(0, 0,5, 0);
+            closeButton.Margin = new Thickness(0, 0, 5, 0);
             closeButton.SetValue(Grid.ColumnProperty, 1);
 
             var pinButtonIcon = FindResource("ButtonIconPin") as Geometry;
             var pinButton = new IconButton();
             //pinButton.Click += CloseButton_Click;
-            pinButton.Icon = pinButtonIcon;;
+            pinButton.Icon = pinButtonIcon; ;
             pinButton.HorizontalAlignment = HorizontalAlignment.Right;
             pinButton.Foreground = new SolidColorBrush(Colors.Black);
             //pinButton.MouseMove += CloseButton_MouseMove;
-            pinButton.Margin = new Thickness(0,0,23,0);
+            pinButton.Margin = new Thickness(0, 0, 23, 0);
             pinButton.SetValue(Grid.ColumnProperty, 1);
 
             _header.Children.Add(_textBlockCaption);
@@ -158,6 +158,12 @@ namespace AppShell.Controls.UI
                 IsActive = false;
             }
         }
+
+        void _panelClosed()
+        {
+            _dockMessageQueue.Publish(DockingManagerMessageType.PanelClosed, this);
+        }
+
 
         /// <summary>
         /// 

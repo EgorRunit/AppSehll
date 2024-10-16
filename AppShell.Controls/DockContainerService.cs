@@ -2,18 +2,34 @@ using System;
 using System.Windows.Controls;
 using System.Windows;
 using AppShell.Controls.UI;
+using System.Windows.Markup;
 
 namespace AppShell.Controls
 {
+    /// <summary>
+    /// Сервис для работы со структурой DockingManager.
+    /// </summary>
     public class DockContainerService : IDockContainerService
     {
+        /// <summary>
+        /// Экземпляр очереди сообщений DockingManager.
+        /// </summary>
         IDockingManagerMessageQueue _messageQueue;
 
+        /// <summary>
+        /// Конструктор.
+        /// </summary>
+        /// <param name="messageQueue">Экземпляр очереди сообщений DockingManager.</param>
         public DockContainerService(IDockingManagerMessageQueue messageQueue) 
         { 
             _messageQueue = messageQueue;
-        } 
+        }
 
+        #region AttachPanel(DockPanelAttachedArgs args)
+        /// <summary>
+        /// Присоеденение панели к указанному элементу.
+        /// </summary>
+        /// <param name="args">Аргументы присоеденения.</param>
         public void AttachPanel(DockPanelAttachedArgs args)
         {
             var perncent = 30;
@@ -45,5 +61,36 @@ namespace AppShell.Controls
                     throw new Exception("ee");
             }
         }
+        #endregion
+
+        #region RemovePanel(UI.DockPanel panel)
+        /// <summary>
+        /// Удаление паели из структуры докинга.
+        /// </summary>
+        /// <param name="panel">Экземпляр удаляемой панелию</param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="Exception"></exception>
+        public void RemovePanel(UI.DockPanel panel)
+        {
+            var parent = panel.Parent as Grid;
+            if (parent.Parent is DockingManager)
+            {
+                throw new Exception("Нельзя удалять корневой контейнер.");
+            }
+
+            var parentRowIndex = (int)parent.GetValue(Grid.RowProperty);
+            var parentColumnIndex = (int)parent.GetValue(Grid.ColumnProperty);
+
+            parent.Children.Remove(panel);
+            var remainingChild = parent.Children[0];
+            parent.Children.Clear();
+            var ownerParent = parent.Parent as Grid;
+
+            remainingChild.SetValue(Grid.RowProperty, parentRowIndex);
+            remainingChild.SetValue(Grid.ColumnProperty, parentColumnIndex);
+            ownerParent.Children.Remove(parent);
+            ownerParent.Children.Add(remainingChild);
+        }
+        #endregion
     }
 }

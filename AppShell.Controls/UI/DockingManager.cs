@@ -1,16 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
 
 namespace AppShell.Controls.UI
 {
     public class DockingManager : ContentControl
     {
+        /// <summary>
+        /// Экземпляр сервиса для создания контейнеров для DockPanel.
+        /// </summary>
         IDockContainerService _dockContainerService;
+        /// <summary>
+        /// Экземпляр сервиса очереди сообщений для DockingManager.
+        /// </summary>
         IDockingManagerMessageQueue _dockingManagerMessageQueue;
         DockPanelSingleContainer _rootGrid;
         IDockPanel _previousActiveDockPanel;
@@ -19,7 +19,8 @@ namespace AppShell.Controls.UI
         public DockingManager() 
         {
             _dockingManagerMessageQueue = new DockingManagerMessageQueue();
-            _dockingManagerMessageQueue.Register(DockingManagerMessageType.PanelAttached, _panellAttachedCallback);
+            _dockingManagerMessageQueue.Register(DockingManagerMessageType.PanelClosed, (x) => _dockContainerService.RemovePanel(x as DockPanel));
+            _dockingManagerMessageQueue.Register(DockingManagerMessageType.PanelAttached, (x) => _dockContainerService.AttachPanel(x as DockPanelAttachedArgs));
             _dockingManagerMessageQueue.Register(DockingManagerMessageType.PanelGotFocus, _dockPanelFocused);
             _dockContainerService = new DockContainerService(_dockingManagerMessageQueue);
 
@@ -36,11 +37,6 @@ namespace AppShell.Controls.UI
                 _previousActiveDockPanel.ChangeFocusState(false);
             }
             _previousActiveDockPanel = args as IDockPanel;
-        }
-
-        void _panellAttachedCallback(object args)
-        {
-            _dockContainerService.AttachPanel(args as DockPanelAttachedArgs);
         }
         #endregion
     }
