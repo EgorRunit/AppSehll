@@ -4,9 +4,9 @@ using System.Windows.Controls;
 
 namespace AppShell.Controls.UI
 {
-    public class DockGridVertical :Grid, IDockPanelGrid
+    public class DockGridVertical : Grid, IDockPanelGrid
     {
-        public DockGridVertical(SnapPanelType type, double addedSize, FrameworkElement previosContent, FrameworkElement addedContent)
+        public DockGridVertical(DockPanelAttachedType type, double addedSize, FrameworkElement previosContent, FrameworkElement addedContent)
         {
             ShowGridLines = true;
             RowDefinitions.Add(new RowDefinition());
@@ -14,7 +14,7 @@ namespace AppShell.Controls.UI
             ColumnDefinitions.Add(new ColumnDefinition());
             switch (type)
             {
-                case SnapPanelType.Top:
+                case DockPanelAttachedType.Top:
                     RowDefinitions[0].Height = new GridLength(addedSize, GridUnitType.Pixel);
                     RowDefinitions[1].Height = new GridLength(100, GridUnitType.Star);
                     addedContent.SetValue(RowProperty, 0);
@@ -22,7 +22,7 @@ namespace AppShell.Controls.UI
                     Children.Add(addedContent);
                     Children.Add(previosContent);
                     break;
-                case SnapPanelType.Bottom:
+                case DockPanelAttachedType.Bottom:
                     RowDefinitions[0].Height = new GridLength(100, GridUnitType.Star);
                     RowDefinitions[1].Height = new GridLength(addedSize, GridUnitType.Pixel);
                     previosContent.SetValue(RowProperty, 0);

@@ -21,20 +21,18 @@ namespace AppShell
     /// </summary>
     public partial class MainWindow : Window
     {
-        ISnapManagerMessageQueue _messageQueue;
+        //ISnapManagerMessageQueue _messageQueue;
 
         public MainWindow()
         {
             InitializeComponent();
-            _messageQueue = new SnapManagerMessageQueue();
+            //_messageQueue = new SnapManagerMessageQueue();
             //Content = new SnapManager(_messageQueue) { Tag = "EEEEEEEEEEEE" };
         }
 
         protected override void OnInitialized(EventArgs e)
         {
             base.OnInitialized(e);
-            var ss = this.Resources;
-            var ddd = this.FindResource("dswgerghreger");
         }
     }
 }

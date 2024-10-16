@@ -5,8 +5,6 @@ VisualStudioVersion = 17.4.33103.184
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppShell", "AppShell\AppShell.csproj", "{61D82A60-09DA-490C-BDC5-FCC1F4DF7280}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppShell.Controls.Test", "AppShell.Controls.Test\AppShell.Controls.Test.csproj", "{45592D18-D495-4A9D-9B38-E04842C90DDC}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppShell.Controls", "AppShell.Controls\AppShell.Controls.csproj", "{243A6514-B5D3-4F8A-BEE8-D2BD4373B1FA}"
 EndProject
 Global
@@ -19,10 +17,6 @@ Global
 		{61D82A60-09DA-490C-BDC5-FCC1F4DF7280}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61D82A60-09DA-490C-BDC5-FCC1F4DF7280}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61D82A60-09DA-490C-BDC5-FCC1F4DF7280}.Release|Any CPU.Build.0 = Release|Any CPU
-		{45592D18-D495-4A9D-9B38-E04842C90DDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{45592D18-D495-4A9D-9B38-E04842C90DDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{45592D18-D495-4A9D-9B38-E04842C90DDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{45592D18-D495-4A9D-9B38-E04842C90DDC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{243A6514-B5D3-4F8A-BEE8-D2BD4373B1FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{243A6514-B5D3-4F8A-BEE8-D2BD4373B1FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{243A6514-B5D3-4F8A-BEE8-D2BD4373B1FA}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -34,12 +34,12 @@ namespace AppShell.Controls.UI
             ColumnDefinitions.Add(new ColumnDefinition());
         }
 
-        public DockGridHorizontal(SnapPanelType type, double addedSize, FrameworkElement previosContent, FrameworkElement addedContent)
+        public DockGridHorizontal(DockPanelAttachedType type, double addedSize, FrameworkElement previosContent, FrameworkElement addedContent)
             : this()
         {
             switch (type)
             {
-                case SnapPanelType.Left:
+                case DockPanelAttachedType.Left:
                     ColumnDefinitions[0].Width = new GridLength(addedSize, GridUnitType.Pixel);
                     ColumnDefinitions[1].Width = new GridLength(100, GridUnitType.Star);
                     addedContent.SetValue(Grid.ColumnProperty, 0);
@@ -47,7 +47,7 @@ namespace AppShell.Controls.UI
                     Children.Add(addedContent);
                     Children.Add(previosContent);
                     break;
-                case SnapPanelType.Right:
+                case DockPanelAttachedType.Right:
                     ColumnDefinitions[0].Width = new GridLength(100, GridUnitType.Star);
                     ColumnDefinitions[1].Width = new GridLength(addedSize, GridUnitType.Pixel);
                     previosContent.SetValue(Grid.ColumnProperty, 0);

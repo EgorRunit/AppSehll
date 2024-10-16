@@ -10,37 +10,43 @@ namespace AppShell.Controls.UI
 {
     public class ManagerDockGrid : ContentControl
     {
+        IDockingManagerMessageQueue _dockingManagerMessageQueue;
         BaseDockGrid _rootGrid;
 
         public ManagerDockGrid() 
-        { 
-            var baseContent = new DockPanelCellContent(_splitDockPanel);
+        {
+            _dockingManagerMessageQueue = new DockingManagerMessageQueue();
+            _dockingManagerMessageQueue.Register(DockingManagerMessageType.PanelAttached, _panellAttachedCallback);
+            var baseContent = new DockPanelCellContent(_dockingManagerMessageQueue);
             _rootGrid = new BaseDockGrid(baseContent);
            Content = _rootGrid;
         }
 
-        void _splitDockPanel(DockPanelCellContent panel, SnapPanelType type)
+        void _panellAttachedCallback(object args)
         {
+            //DockPanelCellContent panel, SnapPanelType type
+            var messageArgs = args as DockingManagerPanelAttachedArgs;
             var perncent = 30;
             UIElement dockGrid = null;
+            var panel = messageArgs.DockPanelCellContent;
             IDockPanelGrid parent = panel.Parent as IDockPanelGrid;
             var parentColumnIndex = (int)panel.GetValue(Grid.ColumnProperty);
             var parentRowIndex = (int)panel.GetValue(Grid.RowProperty);
             parent.Children.Remove(panel);
 
-            var added = new DockPanelCellContent(_splitDockPanel);
-            switch (type)
+            var added = new DockPanelCellContent(_dockingManagerMessageQueue);
+            switch (messageArgs.DockPanelAttachedType)
             {
-                case SnapPanelType.Right:
-                case SnapPanelType.Left:
-                    dockGrid = new DockGridHorizontal(type, panel.ActualWidth.GetPercent(perncent), panel, added);
+                case DockPanelAttachedType.Right:
+                case DockPanelAttachedType.Left:
+                    dockGrid = new DockGridHorizontal(messageArgs.DockPanelAttachedType, panel.ActualWidth.GetPercent(perncent), panel, added);
                     dockGrid.SetValue(Grid.ColumnProperty, parentColumnIndex);
                     dockGrid.SetValue(Grid.RowProperty, parentRowIndex);
                     parent.Children.Add(dockGrid);
                     break;
-                case SnapPanelType.Top:
-                case SnapPanelType.Bottom:
-                    dockGrid = new DockGridVertical(type, panel.ActualHeight.GetPercent(perncent), panel, added);
+                case DockPanelAttachedType.Top:
+                case DockPanelAttachedType.Bottom:
+                    dockGrid = new DockGridVertical(messageArgs.DockPanelAttachedType, panel.ActualHeight.GetPercent(perncent), panel, added);
                     dockGrid.SetValue(Grid.ColumnProperty, parentColumnIndex);
                     dockGrid.SetValue(Grid.RowProperty, parentRowIndex);
                     parent.Children.Add(dockGrid);

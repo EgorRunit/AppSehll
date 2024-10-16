@@ -6,14 +6,11 @@ using System.Threading.Tasks;
 
 namespace AppShell.Controls
 {
-    public enum SnapPanelType
+    public enum DockPanelAttachedType
     {
-        Default,
-        Left, 
+        Left,
         Right,
-        Top, 
-        Bottom
+        Top,
+        Bottom,
     }
-
-
 }

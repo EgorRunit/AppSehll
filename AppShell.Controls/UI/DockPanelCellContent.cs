@@ -14,7 +14,11 @@ namespace AppShell.Controls.UI
 {
     public class DockPanelCellContent : Grid
     {
-        Grid _header;
+        //Экземпляр очереди сообщений элметов докинга
+        IDockingManagerMessageQueue _dockMessageQueue;
+
+
+                Grid _header;
 
         TextBlock _textBlockCaption;
         StackPanel _stackPanel;
@@ -22,8 +26,9 @@ namespace AppShell.Controls.UI
         Button _top;
         Button _left;
         Button _bottom;
-        Action<DockPanelCellContent, SnapPanelType> _action;
         static int index = 0;
+        
+        public bool IsActive { get; set; }
 
         static DockPanelCellContent()
         {
@@ -40,13 +45,14 @@ namespace AppShell.Controls.UI
             base.OnInitialized(e);
         }
 
-        internal DockPanelCellContent(Action<DockPanelCellContent, SnapPanelType> action)
+        internal DockPanelCellContent(IDockingManagerMessageQueue dockMessageQueue)
         {
+            _dockMessageQueue = dockMessageQueue;
+
             Background = new SolidColorBrush(Colors.Transparent);
             this.Focusable = true;
-            this.MouseDown += DockPanelCellContent_MouseDown; ;   
+            this.MouseDown += _gotFocus;   
 
-            _action = action;
             RowDefinitions.Add(new RowDefinition() { Height = new GridLength(0.0, GridUnitType.Auto) });
             RowDefinitions.Add(new RowDefinition() { Height = new GridLength(100.0, GridUnitType.Star) });
             RowDefinitions.Add(new RowDefinition() { Height = new GridLength(0.0, GridUnitType.Auto) });
@@ -75,21 +81,21 @@ namespace AppShell.Controls.UI
             
             var closeButtonIcon = FindResource("ButtonIconClose") as Geometry;
             var closeButton = new IconButton();
-            closeButton.Click += CloseButton_Click;
+            //closeButton.Click += CloseButton_Click;
             closeButton.Icon = closeButtonIcon; 
             closeButton.HorizontalAlignment = HorizontalAlignment.Right;
             closeButton.Foreground = new SolidColorBrush(Colors.Black);
-            closeButton.MouseMove += CloseButton_MouseMove;
+            //closeButton.MouseMove += CloseButton_MouseMove;
             closeButton.Margin = new Thickness(0, 0,5, 0);
             closeButton.SetValue(Grid.ColumnProperty, 1);
 
             var pinButtonIcon = FindResource("ButtonIconPin") as Geometry;
             var pinButton = new IconButton();
-            pinButton.Click += CloseButton_Click;
+            //pinButton.Click += CloseButton_Click;
             pinButton.Icon = pinButtonIcon;;
             pinButton.HorizontalAlignment = HorizontalAlignment.Right;
             pinButton.Foreground = new SolidColorBrush(Colors.Black);
-            pinButton.MouseMove += CloseButton_MouseMove;
+            //pinButton.MouseMove += CloseButton_MouseMove;
             pinButton.Margin = new Thickness(0,0,23,0);
             pinButton.SetValue(Grid.ColumnProperty, 1);
 
@@ -103,16 +109,16 @@ namespace AppShell.Controls.UI
             _stackPanel = new StackPanel();
             _stackPanel.SetValue(Grid.RowProperty, 1);
 
-            _right = new Button() { Content = "right", CommandParameter = SnapPanelType.Right };
+            _right = new Button() { Content = "right", CommandParameter = DockPanelAttachedType.Right };
             _right.Click += _right_Click;
 
-            _left = new Button() { Content = "left", CommandParameter = SnapPanelType.Left };
+            _left = new Button() { Content = "left", CommandParameter = DockPanelAttachedType.Left };
             _left.Click += _right_Click;
 
-            _top = new Button() { Content = "top", CommandParameter = SnapPanelType.Top };
+            _top = new Button() { Content = "top", CommandParameter = DockPanelAttachedType.Top };
             _top.Click += _right_Click;
 
-            _bottom = new Button() { Content = "bottom", CommandParameter = SnapPanelType.Bottom };
+            _bottom = new Button() { Content = "bottom", CommandParameter = DockPanelAttachedType.Bottom };
             _bottom.Click += _right_Click;
 
             _stackPanel.Children.Add(_left);
@@ -129,32 +135,21 @@ namespace AppShell.Controls.UI
 
         }
 
-        private void DockPanelCellContent_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+
+        void _gotFocus(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            if (!IsActive)
+            {
+
+            }
         }
 
-        private void DockPanelCellContent_GotFocus(object sender, RoutedEventArgs e)
-        {
-        }
-
-        private void CloseButton_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-        }
-
-        private void CloseButton_Click(object sender, RoutedEventArgs e)
-        {
-        }
 
         private void _right_Click(object sender, RoutedEventArgs e)
         {
-            ///Viewbox.IsMouseOverProperty
-            var sss = this.Resources["RRR"];
             var button = sender as Button;
-            var type = (SnapPanelType)button.CommandParameter;
-            _action(this, type);
-            var ddd = this.FindResource("DockingManagerSetting") as DockingManagerSetting;
-            var dockingManagerSetting = FindResource("DockingManagerSetting") as DockingManagerSetting;
-
+            var args = new DockingManagerPanelAttachedArgs() { DockPanelCellContent = this, DockPanelAttachedType = (DockPanelAttachedType)button.CommandParameter };
+            _dockMessageQueue.Publish(DockingManagerMessageType.PanelAttached, args);
             //dockingManagerSetting.SetValue(DockingManagerSetting.DockGridContentHeader_Background_Property, new SolidColorBrush(Colors.Red));
            // dockingManagerSetting.SetValue(DockingManagerSetting.DockGridContentHeader_Foreground_Property, new SolidColorBrush(Colors.Black));
             //_textBlockCaption.Background
