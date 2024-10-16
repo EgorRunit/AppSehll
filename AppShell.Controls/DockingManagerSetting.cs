@@ -21,7 +21,7 @@ namespace AppShell.Controls
         /// Цвет текста заголовка элемента DockGridContent.
         /// </summary>
         public static readonly DependencyProperty DockGridContentHeader_Foreground_Property;
-
+        public static readonly DependencyProperty DockGridContentHeader_ActiveBackground_Property;
         public static readonly DependencyProperty DockGridContentIcon_Normal_Foreground_Property;
         public static readonly DependencyProperty DockGridContentIcon_Hover_Foreground_Property;
 
@@ -65,6 +65,20 @@ namespace AppShell.Controls
         }
 
 
+        public SolidColorBrush DockGridContentHeader_ActiveBackground
+        {
+            get
+            {
+
+                return GetValue(DockGridContentHeader_ActiveBackground_Property) as SolidColorBrush;
+            }
+            set
+            {
+                SetValue(DockGridContentHeader_ActiveBackground_Property, value);
+            }
+        }
+
+
         public SolidColorBrush DockGridContentHeader_Background
         {
             get
@@ -82,6 +96,8 @@ namespace AppShell.Controls
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(DockingManagerSetting), new FrameworkPropertyMetadata(typeof(DockingManagerSetting)));
 
+            DockGridContentHeader_ActiveBackground_Property = DependencyProperty.Register("DockGridContentHeader_ActiveBackground", typeof(SolidColorBrush), typeof(DockingManagerSetting),
+                new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
             DockGridContentHeader_Background_Property = DependencyProperty.Register("DockGridContentHeader_Background", typeof(SolidColorBrush), typeof(DockingManagerSetting),
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
             DockGridContentHeader_Foreground_Property = DependencyProperty.Register("DockGridContentHeader_Foreground", typeof(SolidColorBrush), typeof(DockingManagerSetting),

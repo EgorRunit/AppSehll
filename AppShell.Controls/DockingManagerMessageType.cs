@@ -2,16 +2,24 @@ using AppShell.Controls.UI;
 
 namespace AppShell.Controls
 {
+    /// <summary>
+    /// Перичесление доступных сообщений для DockingManager
+    /// </summary>
     public enum DockingManagerMessageType
     {
-        //Была приклеплена новая панель.
+        //Была приклеплена новая панель. В качестве аргумента события передается PanelAttachedArgs.
         PanelAttached,
+        //Содержимое панели палучило фокус.
+        PanelGotFocus,
 
     }
 
-    public class DockingManagerPanelAttachedArgs
+    /// <summary>
+    /// Класс предоставляет аргументы для события DockingManagerMessageType.PanelAttached
+    /// </summary>
+    public class PanelAttachedArgs
     {
-        public DockPanelCellContent DockPanelCellContent { get; set; }
-        public DockPanelAttachedType DockPanelAttachedType { get; set; }
+        public DockPanel DockPanel { get; set; }
+        public DockPanelAttachedType AttachedType { get; set; }
     }
 }

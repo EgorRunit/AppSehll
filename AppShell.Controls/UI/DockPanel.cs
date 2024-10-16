@@ -12,13 +12,15 @@ using System.Windows.Media.Media3D;
 
 namespace AppShell.Controls.UI
 {
-    public class DockPanelCellContent : Grid
+    public class DockPanel : Grid, IDockPanel
     {
         //Экземпляр очереди сообщений элметов докинга
         IDockingManagerMessageQueue _dockMessageQueue;
+        Binding _bindingHeaderBackgroundBrush;
+        Binding _bindingHeaderActiveBackgroundBrush;
 
 
-                Grid _header;
+        Grid _header;
 
         TextBlock _textBlockCaption;
         StackPanel _stackPanel;
@@ -30,12 +32,12 @@ namespace AppShell.Controls.UI
         
         public bool IsActive { get; set; }
 
-        static DockPanelCellContent()
+        static DockPanel()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(DockPanelCellContent), new FrameworkPropertyMetadata(typeof(DockPanelCellContent)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(DockPanel), new FrameworkPropertyMetadata(typeof(DockPanel)));
         }
 
-        public DockPanelCellContent()
+        public DockPanel()
         {
 
         }
@@ -45,13 +47,13 @@ namespace AppShell.Controls.UI
             base.OnInitialized(e);
         }
 
-        internal DockPanelCellContent(IDockingManagerMessageQueue dockMessageQueue)
+        internal DockPanel(IDockingManagerMessageQueue dockMessageQueue)
         {
             _dockMessageQueue = dockMessageQueue;
 
             Background = new SolidColorBrush(Colors.Transparent);
             this.Focusable = true;
-            this.MouseDown += _gotFocus;   
+            this.GotMouseCapture += (x, y) => ChangeFocusState(true);
 
             RowDefinitions.Add(new RowDefinition() { Height = new GridLength(0.0, GridUnitType.Auto) });
             RowDefinitions.Add(new RowDefinition() { Height = new GridLength(100.0, GridUnitType.Star) });
@@ -61,8 +63,10 @@ namespace AppShell.Controls.UI
             index++;
 
             var dockingManagerSetting = FindResource("DockingManagerSetting") as DockingManagerSetting;
-            var bindigHeaderBackground = new Binding("DockGridContentHeader_Background");
-            bindigHeaderBackground.Source = dockingManagerSetting;
+            _bindingHeaderBackgroundBrush = new Binding("DockGridContentHeader_Background");
+            _bindingHeaderActiveBackgroundBrush = new Binding("DockGridContentHeader_ActiveBackground");
+            _bindingHeaderBackgroundBrush.Source = dockingManagerSetting;
+            _bindingHeaderActiveBackgroundBrush.Source = dockingManagerSetting;
             var bindigHeaderForeground = new Binding("DockGridContentHeader_Foreground");
             bindigHeaderForeground.Source = dockingManagerSetting;
 
@@ -70,7 +74,7 @@ namespace AppShell.Controls.UI
             _header = new Grid();
             _header.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(100.0, GridUnitType.Star) });
             _header.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(0, GridUnitType.Auto) });
-            _header.SetBinding(Grid.BackgroundProperty, bindigHeaderBackground);
+            _header.SetBinding(Grid.BackgroundProperty, _bindingHeaderBackgroundBrush);
             //_header.RowDefinitions.Add(new RowDefinition());
             //_header.ColumnDefinitions.Add(new ColumnDefinition());
 
@@ -110,16 +114,16 @@ namespace AppShell.Controls.UI
             _stackPanel.SetValue(Grid.RowProperty, 1);
 
             _right = new Button() { Content = "right", CommandParameter = DockPanelAttachedType.Right };
-            _right.Click += _right_Click;
+            _right.Click += _buttonHandlers;
 
             _left = new Button() { Content = "left", CommandParameter = DockPanelAttachedType.Left };
-            _left.Click += _right_Click;
+            _left.Click += _buttonHandlers;
 
             _top = new Button() { Content = "top", CommandParameter = DockPanelAttachedType.Top };
-            _top.Click += _right_Click;
+            _top.Click += _buttonHandlers;
 
             _bottom = new Button() { Content = "bottom", CommandParameter = DockPanelAttachedType.Bottom };
-            _bottom.Click += _right_Click;
+            _bottom.Click += _buttonHandlers;
 
             _stackPanel.Children.Add(_left);
             _stackPanel.Children.Add(_right);
@@ -135,24 +139,42 @@ namespace AppShell.Controls.UI
 
         }
 
-
-        void _gotFocus(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        /// <summary>
+        /// Обработчик события получения содержисого панели фокуса.
+        /// </summary>
+        /// <param name="focusable">True - Содержисое панели стало активным, false в противном случае.</param>
+        public void ChangeFocusState(bool focusable)
         {
-            if (!IsActive)
+            if (focusable && !IsActive)
             {
-
+                IsActive = true;
+                _header.SetBinding(StackPanel.BackgroundProperty, _bindingHeaderActiveBackgroundBrush);
+                _dockMessageQueue.Publish(DockingManagerMessageType.PanelGotFocus, this);
+            }
+            if (!focusable && IsActive)
+            {
+                _header.SetBinding(StackPanel.BackgroundProperty, _bindingHeaderBackgroundBrush);
+                IsActive = false;
             }
         }
 
-
-        private void _right_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _buttonHandlers(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
-            var args = new DockingManagerPanelAttachedArgs() { DockPanelCellContent = this, DockPanelAttachedType = (DockPanelAttachedType)button.CommandParameter };
+            var args = new PanelAttachedArgs() { DockPanel = this, AttachedType = (DockPanelAttachedType)button.CommandParameter };
             _dockMessageQueue.Publish(DockingManagerMessageType.PanelAttached, args);
-            //dockingManagerSetting.SetValue(DockingManagerSetting.DockGridContentHeader_Background_Property, new SolidColorBrush(Colors.Red));
-           // dockingManagerSetting.SetValue(DockingManagerSetting.DockGridContentHeader_Foreground_Property, new SolidColorBrush(Colors.Black));
-            //_textBlockCaption.Background
         }
     }
 }
+
+
+
+//dockingManagerSetting.SetValue(DockingManagerSetting.DockGridContentHeader_Background_Property, new SolidColorBrush(Colors.Red));
+// dockingManagerSetting.SetValue(DockingManagerSetting.DockGridContentHeader_Foreground_Property, new SolidColorBrush(Colors.Black));
+//_textBlockCaption.Background
+

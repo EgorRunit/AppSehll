@@ -6,6 +6,9 @@
 
 
     <local1:DockingManagerSetting x:Key="DockingManagerSetting">
+        <local1:DockingManagerSetting.DockGridContentHeader_ActiveBackground>
+            <SolidColorBrush Color="#F5CC84" />
+        </local1:DockingManagerSetting.DockGridContentHeader_ActiveBackground>
         <local1:DockingManagerSetting.DockGridContentHeader_Background>
             <SolidColorBrush Color="#40568D" />
         </local1:DockingManagerSetting.DockGridContentHeader_Background>
@@ -260,20 +263,5 @@
             </Setter.Value>
         </Setter>
     </Style>-->
-
-    <local:DockPanelCellContent x:Key="dswgerghreger" Background="CadetBlue">
-        <local:DockPanelCellContent.Resources>
-            <SolidColorBrush x:Key="RRR" Color="Yellow"/>
-        </local:DockPanelCellContent.Resources>
-        <local:DockPanelCellContent.RowDefinitions>
-            
-        </local:DockPanelCellContent.RowDefinitions>
-    </local:DockPanelCellContent>
-    
-    <Style x:Key="rrrr" TargetType="{x:Type local:DockPanelCellContent}" >
-        <Style.Resources>
-            <SolidColorBrush x:Key="RRR" Color="Yellow"/>
-        </Style.Resources>
-    </Style>
 
 </ResourceDictionary>

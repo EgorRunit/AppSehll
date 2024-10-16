@@ -21,7 +21,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <controls:ManagerDockGrid></controls:ManagerDockGrid>
+        <controls:DockingManager></controls:DockingManager>
         <!--<controls:IconButton Icon="ButtonIconSpin"></controls:IconButton>-->
 
 
