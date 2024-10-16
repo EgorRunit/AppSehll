@@ -54,6 +54,7 @@ namespace AppShell.Controls.UI
             Background = new SolidColorBrush(Colors.Transparent);
             this.Focusable = true;
             this.GotMouseCapture += (x, y) => ChangeFocusState(true);
+            this.MouseDown += (x, y) => ChangeFocusState(true);
 
             RowDefinitions.Add(new RowDefinition() { Height = new GridLength(0.0, GridUnitType.Auto) });
             RowDefinitions.Add(new RowDefinition() { Height = new GridLength(100.0, GridUnitType.Star) });
