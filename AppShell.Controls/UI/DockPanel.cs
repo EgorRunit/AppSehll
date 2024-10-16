@@ -167,7 +167,7 @@ namespace AppShell.Controls.UI
         private void _buttonHandlers(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
-            var args = new PanelAttachedArgs() { DockPanel = this, AttachedType = (DockPanelAttachedType)button.CommandParameter };
+            var args = new DockPanelAttachedArgs() { DockPanel = this, AttachedType = (DockPanelAttachedType)button.CommandParameter };
             _dockMessageQueue.Publish(DockingManagerMessageType.PanelAttached, args);
         }
     }

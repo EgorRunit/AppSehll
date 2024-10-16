@@ -13,20 +13,11 @@ namespace AppShell.Controls.UI
         UIElementCollection Children { get; }
     }
 
-    public class BaseDockGrid : Grid, IDockPanelGrid
-    {
-        public BaseDockGrid(FrameworkElement baseContent)
-        {
-            RowDefinitions.Add(new RowDefinition());
-            ColumnDefinitions.Add(new ColumnDefinition());
-            Children.Add(baseContent);
-        }
-    }
 
 
-    public class DockGridHorizontal : Grid, IDockPanelGrid
+    public class DockPanelHorizontalContainer : Grid, IDockPanelGrid
     {
-        internal DockGridHorizontal()
+        internal DockPanelHorizontalContainer()
         {
             ShowGridLines = true;
             RowDefinitions.Add(new RowDefinition());
@@ -34,7 +25,7 @@ namespace AppShell.Controls.UI
             ColumnDefinitions.Add(new ColumnDefinition());
         }
 
-        public DockGridHorizontal(DockPanelAttachedType type, double addedSize, FrameworkElement previosContent, FrameworkElement addedContent)
+        public DockPanelHorizontalContainer(DockPanelAttachedType type, double addedSize, FrameworkElement previosContent, FrameworkElement addedContent)
             : this()
         {
             switch (type)

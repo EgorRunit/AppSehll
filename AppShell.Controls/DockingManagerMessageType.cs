@@ -17,7 +17,7 @@ namespace AppShell.Controls
     /// <summary>
     /// Класс предоставляет аргументы для события DockingManagerMessageType.PanelAttached
     /// </summary>
-    public class PanelAttachedArgs
+    public class DockPanelAttachedArgs
     {
         public DockPanel DockPanel { get; set; }
         public DockPanelAttachedType AttachedType { get; set; }

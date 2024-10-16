@@ -4,9 +4,9 @@ using System.Windows.Controls;
 
 namespace AppShell.Controls.UI
 {
-    public class DockGridVertical : Grid, IDockPanelGrid
+    public class DockPanelVerticalContainer : Grid, IDockPanelGrid
     {
-        public DockGridVertical(DockPanelAttachedType type, double addedSize, FrameworkElement previosContent, FrameworkElement addedContent)
+        public DockPanelVerticalContainer(DockPanelAttachedType type, double addedSize, FrameworkElement previosContent, FrameworkElement addedContent)
         {
             ShowGridLines = true;
             RowDefinitions.Add(new RowDefinition());
