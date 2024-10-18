@@ -1,3 +1,4 @@
+using AppShell.Controls.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Media3D;
 
@@ -173,8 +175,8 @@ namespace AppShell.Controls.UI
         private void _buttonHandlers(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
-            var args = new DockPanelAttachedArgs() { DockPanel = this, AttachedType = (DockPanelAttachedType)button.CommandParameter };
-            _dockMessageQueue.Publish(DockingManagerMessageType.PanelAttached, args);
+            var args = new PanelSPlittedMessgage() { PanelSplitted = this, SplitType = (DockPanelAttachedType)button.CommandParameter };
+            _dockMessageQueue.Publish(DockingManagerMessageType.PanelSplitted, args);
         }
     }
 }

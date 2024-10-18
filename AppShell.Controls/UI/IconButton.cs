@@ -61,6 +61,8 @@ namespace AppShell.Controls.UI
         }
         private void DialogWindowBase_Loaded(object sender, RoutedEventArgs e)
         {
+            var ss = Resources.FindName("Dock_Placement_TopDock");
+
             //var ss = Template.FindName("ButtonIconSpin", this);цц
             //var ssss = ss.FindName("SSSS");
         }

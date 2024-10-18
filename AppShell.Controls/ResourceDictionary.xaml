@@ -135,9 +135,34 @@
     </Style>
 
 
+    <!--<ControlTemplate x:Key="Dock_Placement_TopDock" TargetType="{x:Type local:CanvasButton}">
+        <Canvas Width="Auto" Height="Auto">
+            <Rectangle Canvas.Top="0" Stroke="{TemplateBinding Stroke1}" Canvas.Left="0" Fill="{TemplateBinding Fill1}" Width="30" Height="30"/>
+            <Rectangle Stroke="{TemplateBinding Stroke2}" Canvas.Top="4" Canvas.Left="4" Fill="{TemplateBinding Fill2}" Width="22" Height="13"/>
+            <Rectangle Stroke="{TemplateBinding Stroke2}" Canvas.Top="5" Canvas.Left="5" Fill="{TemplateBinding Fill3}" Width="20" Height="3"/>
+            <Polyline Fill="{TemplateBinding Fill3}" Points="11,26 16,21, 21,26 11,26"></Polyline>
+        </Canvas>
+    </ControlTemplate>
+
+
+    <Style TargetType="{x:Type local:CanvasButton}" BasedOn="{StaticResource {x:Type ContentControl}}" >
+        <Setter Property="Background" Value="Red"/>
+        <Setter Property="Fill1" Value="#EDF0F4"/>
+        <Setter Property="Fill2" Value="#FCE7B5"/>
+        <Setter Property="Fill3" Value="#7C8AA1"/>
+        <Setter Property="Stroke1" Value="#ADB2BA"/>
+        <Setter Property="Stroke2" Value="#7C8AA1"/>
+        <Setter Property="Template" Value="{StaticResource ResourceKey=Dock_Placement_TopDock}"/>
+    </Style>-->
 
 
 
+
+
+    
+    
+
+    <!--{StaticResource ResourceKey=Dock_Placement_TopDock}-->
 
 
     <!--<Style Targe

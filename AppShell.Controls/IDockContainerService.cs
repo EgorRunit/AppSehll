@@ -2,7 +2,7 @@ namespace AppShell.Controls
 {
     public interface IDockContainerService
     {
-        void AttachPanel(DockPanelAttachedArgs args);
+        void SplitPanel(PanelSPlittedMessgage args);
         void RemovePanel(UI.DockPanel panel);
     }
 }

@@ -2,7 +2,6 @@ using System;
 using System.Windows.Controls;
 using System.Windows;
 using AppShell.Controls.UI;
-using System.Windows.Markup;
 
 namespace AppShell.Controls
 {
@@ -25,34 +24,34 @@ namespace AppShell.Controls
             _messageQueue = messageQueue;
         }
 
-        #region AttachPanel(DockPanelAttachedArgs args)
+        #region SplitPanel(DockPanelAttachedArgs args)
         /// <summary>
-        /// Присоеденение панели к указанному элементу.
+        /// Разбеение указанной панели на две панели.
         /// </summary>
         /// <param name="args">Аргументы присоеденения.</param>
-        public void AttachPanel(DockPanelAttachedArgs args)
+        public void SplitPanel(PanelSPlittedMessgage args)
         {
             var perncent = 30;
             UIElement dockGrid = null;
-            var panel = args.DockPanel;
+            var panel = args.PanelSplitted;
             IDockPanelGrid parent = panel.Parent as IDockPanelGrid;
             var parentColumnIndex = (int)panel.GetValue(Grid.ColumnProperty);
             var parentRowIndex = (int)panel.GetValue(Grid.RowProperty);
             parent.Children.Remove(panel);
 
             var added = new UI.DockPanel(_messageQueue);
-            switch (args.AttachedType)
+            switch (args.SplitType)
             {
                 case DockPanelAttachedType.Right:
                 case DockPanelAttachedType.Left:
-                    dockGrid = new DockPanelHorizontalContainer(args.AttachedType, panel.ActualWidth.GetPercent(perncent), panel, added);
+                    dockGrid = new DockPanelHorizontalContainer(args.SplitType, panel.ActualWidth.GetPercent(perncent), panel, added);
                     dockGrid.SetValue(Grid.ColumnProperty, parentColumnIndex);
                     dockGrid.SetValue(Grid.RowProperty, parentRowIndex);
                     parent.Children.Add(dockGrid);
                     break;
                 case DockPanelAttachedType.Top:
                 case DockPanelAttachedType.Bottom:
-                    dockGrid = new DockPanelVerticalContainer(args.AttachedType, panel.ActualHeight.GetPercent(perncent), panel, added);
+                    dockGrid = new DockPanelVerticalContainer(args.SplitType, panel.ActualHeight.GetPercent(perncent), panel, added);
                     dockGrid.SetValue(Grid.ColumnProperty, parentColumnIndex);
                     dockGrid.SetValue(Grid.RowProperty, parentRowIndex);
                     parent.Children.Add(dockGrid);

@@ -5,37 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AppShell"
         xmlns:controls="clr-namespace:AppShell.Controls.UI;assembly=AppShell.Controls"
-        
-
         mc:Ignorable="d"
-        
         Title="MainWindow" Height="450" Width="800">
-    <!--<Window.Resources>
-        
-    </Window.Resources>-->
-    <!--<controls:DockPanelCellContent>
-        
-    </controls:DockPanelCellContent>-->
+
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <controls:DockingManager></controls:DockingManager>
-        <!--<controls:IconButton Icon="ButtonIconSpin"></controls:IconButton>-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Menu>
+            <MenuItem Header="View">
+                <MenuItem Header="RabbitMQ" Click="MenuItem_Click"/>
+            </MenuItem>
+        </Menu>
+        <controls:DockingManager x:Name="MainDockingManager" Grid.Row="1"></controls:DockingManager>
 
-
-        <!--<Viewbox Height="12" Width="12" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-            <Canvas Height="16" Width="16">
-                <Path Stroke="Black"  Data="M11,9V1.5L10.5,1h-6L4,1.5V9H3v1h9V9ZM5,9V2h5V9Z M8,10v5H7V10Z">
-                </Path>
-            </Canvas>
-        </Viewbox>-->
     </Grid>
-    <!--<Grid>
-        <controls:IconButton Icon="{StaticResource ButtonIconSpin}" ></controls:IconButton>
-        --><!--<controls:IconButton Icon="{StaticResource ButtonIconClose}" HorizontalAlignment="Right"></controls:IconButton>--><!--
-    </Grid>-->
-    <!--<Button Style="{DynamicResource ButtonStyle1}" Content="eee" >
-	</Button>-->
 </Window>

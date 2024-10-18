@@ -1,4 +1,5 @@
 using AppShell.Controls;
+using AppShell.Controls.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +34,41 @@ namespace AppShell
         protected override void OnInitialized(EventArgs e)
         {
             base.OnInitialized(e);
+        }
+
+        private void CanvasButton_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+
+            var window = new Window() { Topmost = true };
+            var s1 = this.Left;
+            var s2 = this.Padding;
+            var s3 = Margin;
+            var dd = this.PointToScreen(new Point());
+
+            window.Top = Application.Current.MainWindow.Top; 
+            window.Left = Application.Current.MainWindow.Left;
+            window.Height = ActualHeight;
+            window.Width = ActualWidth;
+            window.Show();
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            var windowType = CanvasButtonType.WindowLeftDock;
+            DockPanelAttachedType attachedType = DockPanelAttachedType.Top;
+            switch(windowType)
+            {
+                case CanvasButtonType.WindowLeftDock:
+                    attachedType = DockPanelAttachedType.Left; 
+                    break;
+                case CanvasButtonType.WindowRightDock:
+                    attachedType = DockPanelAttachedType.Right;
+                    break;
+                case CanvasButtonType.WindowBottomDock:
+                    attachedType = DockPanelAttachedType.Bottom;
+                    break;
+            }
+            MainDockingManager.AttachedPanel(attachedType);
         }
     }
 }
