@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AppShell.Controls\AppShell.Controls.csproj" />
+    <ProjectReference Include="..\Ovotan.Controls.Docking\Ovotan.Controls.Docking.csproj" />
   </ItemGroup>
 
 </Project>

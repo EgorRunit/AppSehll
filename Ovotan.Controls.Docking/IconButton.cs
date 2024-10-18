@@ -1,13 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows;
 
-namespace AppShell.Controls.UI
+namespace Ovotan.Controls.Docking
 {
     public class IconButton : Button
     {
@@ -55,7 +50,7 @@ namespace AppShell.Controls.UI
                 new FrameworkPropertyMetadata(0.0, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
         }
 
-        public IconButton() 
+        public IconButton()
         {
             //Loaded += DialogWindowBase_Loaded;
         }

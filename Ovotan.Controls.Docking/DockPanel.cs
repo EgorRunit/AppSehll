@@ -1,25 +1,23 @@
-using AppShell.Controls.Windows;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.NetworkInformation;
-using System.Text;
-using System.Threading.Tasks;
+using Ovotan.Controls.Docking.Enums;
+using Ovotan.Controls.Docking.Interfaces;
+using Ovotan.Controls.Docking.Messages;
+using Ovotan.Controls.Docking.Settings;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Interop;
 using System.Windows.Media;
-using System.Windows.Media.Media3D;
 
-namespace AppShell.Controls.UI
+namespace Ovotan.Controls.Docking
 {
     public class DockPanel : Grid, IDockPanel
     {
         //Экземпляр очереди сообщений элметов докинга
-        IDockingManagerMessageQueue _dockMessageQueue;
+        IDockingMessageQueue _dockMessageQueue;
+
         Binding _bindingHeaderBackgroundBrush;
         Binding _bindingHeaderActiveBackgroundBrush;
+        Binding _bindigHeaderForeground;
+        Binding _bindigHeaderActiveForeground;
 
 
         Grid _header;
@@ -49,7 +47,7 @@ namespace AppShell.Controls.UI
             base.OnInitialized(e);
         }
 
-        internal DockPanel(IDockingManagerMessageQueue dockMessageQueue)
+        internal DockPanel(IDockingMessageQueue dockMessageQueue)
         {
             _dockMessageQueue = dockMessageQueue;
 
@@ -65,13 +63,17 @@ namespace AppShell.Controls.UI
 
             index++;
 
-            var dockingManagerSetting = FindResource("DockingManagerSetting") as DockingManagerSetting;
-            _bindingHeaderBackgroundBrush = new Binding("DockGridContentHeader_Background");
-            _bindingHeaderActiveBackgroundBrush = new Binding("DockGridContentHeader_ActiveBackground");
-            _bindingHeaderBackgroundBrush.Source = dockingManagerSetting;
-            _bindingHeaderActiveBackgroundBrush.Source = dockingManagerSetting;
-            var bindigHeaderForeground = new Binding("DockGridContentHeader_Foreground");
-            bindigHeaderForeground.Source = dockingManagerSetting;
+            var canvasButtonSettings = FindResource("Ovotan_Control_DockPanel_Settings") as PanelSettings;
+            _bindingHeaderBackgroundBrush = new Binding("HeaderBackground");
+            _bindingHeaderBackgroundBrush.Source = canvasButtonSettings;
+
+            _bindingHeaderActiveBackgroundBrush = new Binding("HeaderActiveBackground");
+            _bindingHeaderActiveBackgroundBrush.Source = canvasButtonSettings;
+
+            _bindigHeaderForeground = new Binding("HeaderForeground");
+            _bindigHeaderForeground.Source = canvasButtonSettings;
+            _bindigHeaderActiveForeground = new Binding("HeaderActiveForeground");
+            _bindigHeaderActiveForeground.Source = canvasButtonSettings;
 
 
             _header = new Grid();
@@ -82,11 +84,11 @@ namespace AppShell.Controls.UI
             //_header.ColumnDefinitions.Add(new ColumnDefinition());
 
             _textBlockCaption = new TextBlock() { Text = "Window " + index };
-            _textBlockCaption.SetBinding(TextBlock.ForegroundProperty, bindigHeaderForeground);
+            _textBlockCaption.SetBinding(TextBlock.ForegroundProperty, _bindigHeaderForeground);
             _textBlockCaption.Padding = new Thickness(5, 2, 0, 3);
             _textBlockCaption.TextTrimming = TextTrimming.CharacterEllipsis;
 
-            var closeButtonIcon = FindResource("ButtonIconClose") as Geometry;
+            var closeButtonIcon = FindResource("Ovotan_Control_DockPanel_Settings_ButtonIconClose") as Geometry;
             var closeButton = new IconButton();
             closeButton.Click += (x, y) => _panelClosed();
             closeButton.Icon = closeButtonIcon;
@@ -96,7 +98,7 @@ namespace AppShell.Controls.UI
             closeButton.Margin = new Thickness(0, 0, 5, 0);
             closeButton.SetValue(Grid.ColumnProperty, 1);
 
-            var pinButtonIcon = FindResource("ButtonIconPin") as Geometry;
+            var pinButtonIcon = FindResource("Ovotan_Control_DockPanel_Settings_ButtonIconPin") as Geometry;
             var pinButton = new IconButton();
             //pinButton.Click += CloseButton_Click;
             pinButton.Icon = pinButtonIcon; ;
@@ -116,16 +118,16 @@ namespace AppShell.Controls.UI
             _stackPanel = new StackPanel();
             _stackPanel.SetValue(Grid.RowProperty, 1);
 
-            _right = new Button() { Content = "right", CommandParameter = DockPanelAttachedType.Right };
+            _right = new Button() { Content = "right", CommandParameter = PanelSplittedType.Right };
             _right.Click += _buttonHandlers;
 
-            _left = new Button() { Content = "left", CommandParameter = DockPanelAttachedType.Left };
+            _left = new Button() { Content = "left", CommandParameter = PanelSplittedType.Left };
             _left.Click += _buttonHandlers;
 
-            _top = new Button() { Content = "top", CommandParameter = DockPanelAttachedType.Top };
+            _top = new Button() { Content = "top", CommandParameter = PanelSplittedType.Top };
             _top.Click += _buttonHandlers;
 
-            _bottom = new Button() { Content = "bottom", CommandParameter = DockPanelAttachedType.Bottom };
+            _bottom = new Button() { Content = "bottom", CommandParameter = PanelSplittedType.Bottom };
             _bottom.Click += _buttonHandlers;
 
             _stackPanel.Children.Add(_left);
@@ -151,19 +153,21 @@ namespace AppShell.Controls.UI
             if (focusable && !IsActive)
             {
                 IsActive = true;
-                _header.SetBinding(StackPanel.BackgroundProperty, _bindingHeaderActiveBackgroundBrush);
-                _dockMessageQueue.Publish(DockingManagerMessageType.PanelGotFocus, this);
+                _header.SetBinding(Grid.BackgroundProperty, _bindingHeaderActiveBackgroundBrush);
+                _textBlockCaption.SetBinding(TextBlock.ForegroundProperty, _bindigHeaderActiveForeground);
+                _dockMessageQueue.Publish(DockingMessageType.PanelGotFocus, this);
             }
             if (!focusable && IsActive)
             {
-                _header.SetBinding(StackPanel.BackgroundProperty, _bindingHeaderBackgroundBrush);
+                _header.SetBinding(Grid.BackgroundProperty, _bindingHeaderBackgroundBrush);
+                _textBlockCaption.SetBinding(TextBlock.ForegroundProperty, _bindigHeaderForeground);
                 IsActive = false;
             }
         }
 
         void _panelClosed()
         {
-            _dockMessageQueue.Publish(DockingManagerMessageType.PanelClosed, this);
+            _dockMessageQueue.Publish(DockingMessageType.PanelClosed, this);
         }
 
 
@@ -175,8 +179,8 @@ namespace AppShell.Controls.UI
         private void _buttonHandlers(object sender, RoutedEventArgs e)
         {
             var button = sender as Button;
-            var args = new PanelSPlittedMessgage() { PanelSplitted = this, SplitType = (DockPanelAttachedType)button.CommandParameter };
-            _dockMessageQueue.Publish(DockingManagerMessageType.PanelSplitted, args);
+            var args = new PanelSplittedMessage() { PanelSplitted = this, SplitType = (PanelSplittedType)button.CommandParameter };
+            _dockMessageQueue.Publish(DockingMessageType.PanelSplitted, args);
         }
     }
 }

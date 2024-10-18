@@ -1,11 +1,12 @@
 using System.Windows.Controls;
 using System.Windows;
+using Ovotan.Controls.Docking.Interfaces;
 
-namespace AppShell.Controls.UI
+namespace Ovotan.Controls.Docking
 {
-    public class DockPanelSingleContainer : Grid, IDockPanelGrid
+    public class PanelContainer : Grid, IDockPanelContainer
     {
-        public DockPanelSingleContainer(FrameworkElement baseContent)
+        public PanelContainer(FrameworkElement baseContent)
         {
             RowDefinitions.Add(new RowDefinition());
             ColumnDefinitions.Add(new ColumnDefinition());

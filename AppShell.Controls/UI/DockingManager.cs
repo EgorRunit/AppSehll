@@ -13,14 +13,14 @@ namespace AppShell.Controls.UI
         /// <summary>
         /// Экземпляр сервиса очереди сообщений для DockingManager.
         /// </summary>
-        IDockingManagerMessageQueue _dockingManagerMessageQueue;
+        IDockingMessageQueue _dockingManagerMessageQueue;
         DockPanelSingleContainer _rootGrid;
         IDockPanel _previousActiveDockPanel;
 
 
         public DockingManager() 
         {
-            _dockingManagerMessageQueue = new DockingManagerMessageQueue();
+            _dockingManagerMessageQueue = new DockingMessageQueue();
             _dockingManagerMessageQueue.Register(DockingManagerMessageType.PanelClosed, (x) => _dockContainerService.RemovePanel(x as DockPanel));
             _dockingManagerMessageQueue.Register(DockingManagerMessageType.PanelSplitted, (x) => _dockAttachPanel(x as PanelSPlittedMessgage));
             _dockingManagerMessageQueue.Register(DockingManagerMessageType.PanelGotFocus, _dockPanelFocused);
@@ -57,7 +57,7 @@ namespace AppShell.Controls.UI
         #endregion
 
 
-        public void AttachedPanel(DockPanelAttachedType type)
+        public void AttachedPanel(PanelSplittedType type)
         {
             var ss = (_rootGrid.Children[0] as FrameworkElement).Parent;
             

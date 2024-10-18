@@ -1,27 +1,54 @@
-using System;
+using Ovotan.Controls.Docking.Enums;
+using Ovotan.Controls.Docking.Interfaces;
+using Ovotan.Controls.Docking.Messages;
 using System.Windows.Controls;
 using System.Windows;
-using AppShell.Controls.UI;
 
-namespace AppShell.Controls
+namespace Ovotan.Controls.Docking.Services
 {
-    /// <summary>
-    /// Сервис для работы со структурой DockingManager.
-    /// </summary>
-    public class DockContainerService : IDockContainerService
+    public class DockConstractureService : IDockConstractureService
     {
         /// <summary>
-        /// Экземпляр очереди сообщений DockingManager.
+        /// Экземпляр очереди сообщений docking.
         /// </summary>
-        IDockingManagerMessageQueue _messageQueue;
+        IDockingMessageQueue _messageQueue;
 
         /// <summary>
         /// Конструктор.
         /// </summary>
         /// <param name="messageQueue">Экземпляр очереди сообщений DockingManager.</param>
-        public DockContainerService(IDockingManagerMessageQueue messageQueue) 
-        { 
+        public DockConstractureService(IDockingMessageQueue messageQueue)
+        {
             _messageQueue = messageQueue;
+        }
+
+        public void AttachPanel(PanelAttachedType type, DockingHost dockingHost, FrameworkElement root)
+        {
+
+            var parent = dockingHost.Content as Grid;
+            var percent = 20;
+            var added = new DockPanel(_messageQueue);
+            var panel = parent.Children[0] as FrameworkElement;
+            FrameworkElement newPanelContainer = null;
+            parent.Children.Clear();
+            switch (type)
+            {
+                case PanelAttachedType.Left:
+                    newPanelContainer = new PanelHorizontalContainer(PanelSplittedType.Left,dockingHost.ActualWidth.GetPercent(percent), panel, added);
+                    break;
+                case PanelAttachedType.Right:
+                    newPanelContainer = new PanelHorizontalContainer(PanelSplittedType.Right, dockingHost.ActualWidth.GetPercent(percent), panel, added);
+                    break;
+                case PanelAttachedType.Top:
+                    newPanelContainer = new PanelVerticalContainer(PanelSplittedType.Top, dockingHost.ActualWidth.GetPercent(percent), panel, added);
+                    break;
+                case PanelAttachedType.Bottom:
+                    newPanelContainer = new PanelVerticalContainer(PanelSplittedType.Bottom, dockingHost.ActualWidth.GetPercent(percent), panel, added);
+                    break;
+            }
+            parent.Children.Add(newPanelContainer);
+            
+
         }
 
         #region SplitPanel(DockPanelAttachedArgs args)
@@ -29,29 +56,29 @@ namespace AppShell.Controls
         /// Разбеение указанной панели на две панели.
         /// </summary>
         /// <param name="args">Аргументы присоеденения.</param>
-        public void SplitPanel(PanelSPlittedMessgage args)
+        public void SplitPanel(PanelSplittedMessage args)
         {
-            var perncent = 30;
+            var percent = 30;
             UIElement dockGrid = null;
             var panel = args.PanelSplitted;
-            IDockPanelGrid parent = panel.Parent as IDockPanelGrid;
+            IDockPanelContainer parent = panel.Parent as IDockPanelContainer;
             var parentColumnIndex = (int)panel.GetValue(Grid.ColumnProperty);
             var parentRowIndex = (int)panel.GetValue(Grid.RowProperty);
             parent.Children.Remove(panel);
 
-            var added = new UI.DockPanel(_messageQueue);
+            var added = new DockPanel(_messageQueue);
             switch (args.SplitType)
             {
-                case DockPanelAttachedType.Right:
-                case DockPanelAttachedType.Left:
-                    dockGrid = new DockPanelHorizontalContainer(args.SplitType, panel.ActualWidth.GetPercent(perncent), panel, added);
+                case PanelSplittedType.Right:
+                case PanelSplittedType.Left:
+                    dockGrid = new PanelHorizontalContainer(args.SplitType, panel.ActualWidth.GetPercent(percent), panel, added);
                     dockGrid.SetValue(Grid.ColumnProperty, parentColumnIndex);
                     dockGrid.SetValue(Grid.RowProperty, parentRowIndex);
                     parent.Children.Add(dockGrid);
                     break;
-                case DockPanelAttachedType.Top:
-                case DockPanelAttachedType.Bottom:
-                    dockGrid = new DockPanelVerticalContainer(args.SplitType, panel.ActualHeight.GetPercent(perncent), panel, added);
+                case PanelSplittedType.Top:
+                case PanelSplittedType.Bottom:
+                    dockGrid = new PanelVerticalContainer(args.SplitType, panel.ActualHeight.GetPercent(percent), panel, added);
                     dockGrid.SetValue(Grid.ColumnProperty, parentColumnIndex);
                     dockGrid.SetValue(Grid.RowProperty, parentRowIndex);
                     parent.Children.Add(dockGrid);
@@ -69,10 +96,10 @@ namespace AppShell.Controls
         /// <param name="panel">Экземпляр удаляемой панелию</param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="Exception"></exception>
-        public void RemovePanel(UI.DockPanel panel)
+        public void RemovePanel(DockPanel panel)
         {
             var parent = panel.Parent as Grid;
-            if (parent.Parent is DockingManager)
+            if (parent.Parent is DockingHost)
             {
                 throw new Exception("Нельзя удалять корневой контейнер.");
             }

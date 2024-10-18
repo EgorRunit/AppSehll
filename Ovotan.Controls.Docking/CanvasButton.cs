@@ -1,20 +1,48 @@
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows;
-using System.Windows.Controls;
-using System;
+using Ovotan.Controls.Docking.Enums;
 
-namespace AppShell.Controls.UI
+namespace Ovotan.Controls.Docking
 {
+    /// <summary>
+    /// Эелемента управления кнопка.
+    /// Основывется на шаблоне ControlTemplate в котором настроен Canvas.
+    /// </summary>
     public class CanvasButton : ContentControl
     {
-        public static readonly DependencyProperty Fill1Property;
-        public static readonly DependencyProperty Fill2Property;
-        public static readonly DependencyProperty Fill3Property;
-        public static readonly DependencyProperty Stroke1Property;
-        public static readonly DependencyProperty Stroke2Property;
-        public static readonly DependencyProperty Stroke3Property;
+        /// <summary>
+        /// Зависимое свойство. Тип шаблона для кнопки.
+        /// </summary>
         public static readonly DependencyProperty CanvasButtonTypeProperty;
+        /// <summary>
+        /// Зависимое свойство. Цвет заливки в о бычном состоянии.
+        /// </summary>
+        public static readonly DependencyProperty Fill1Property;
+        /// <summary>
+        /// Зависимое свойство. Цвет заливки в о бычном состоянии.
+        /// </summary>
+        public static readonly DependencyProperty Fill2Property;
+        /// <summary>
+        /// Зависимое свойство. Цвет заливки в о бычном состоянии.
+        /// </summary>
+        public static readonly DependencyProperty Fill3Property;
+        /// <summary>
+        /// Зависимое свойство. Цвет линии в обычном состоянии.
+        /// </summary>
+        public static readonly DependencyProperty Stroke1Property;
+        /// <summary>
+        /// Зависимое свойство. Цвет линии в обычном состоянии.
+        /// </summary>
+        public static readonly DependencyProperty Stroke2Property;
+        /// <summary>
+        /// Зависимое свойство. Цвет линии в обычном состоянии.
+        /// </summary>
+        public static readonly DependencyProperty Stroke3Property;
 
+        /// <summary>
+        /// Get,Set - тип шаблона для кнопки.
+        /// </summary>
         public CanvasButtonType CanvasButtonType
         {
             get
@@ -28,6 +56,58 @@ namespace AppShell.Controls.UI
         }
 
 
+        /// <summary>
+        /// Get,Set - Цвет заливки в о бычном состоянии.
+        /// </summary>
+        public SolidColorBrush Fill1
+        {
+            get
+            {
+
+                return GetValue(Fill1Property) as SolidColorBrush;
+            }
+            set
+            {
+                SetValue(Fill1Property, value);
+            }
+        }
+
+        /// <summary>
+        /// Get,Set - Цвет заливки в о бычном состоянии.
+        /// </summary>
+        public SolidColorBrush Fill2
+        {
+            get
+            {
+
+                return GetValue(Fill2Property) as SolidColorBrush;
+            }
+            set
+            {
+                SetValue(Fill2Property, value);
+            }
+        }
+
+        /// <summary>
+        /// Get,Set - Цвет заливки в о бычном состоянии.
+        /// </summary>
+        public SolidColorBrush Fill3
+        {
+            get
+            {
+
+                return GetValue(Fill3Property) as SolidColorBrush;
+            }
+            set
+            {
+                SetValue(Fill3Property, value);
+            }
+        }
+
+
+        /// <summary>
+        /// Get,Set - Цвет злинии в обычном состоянии.
+        /// </summary>
         public SolidColorBrush Stroke1
         {
             get
@@ -40,6 +120,9 @@ namespace AppShell.Controls.UI
             }
         }
 
+        /// <summary>
+        /// Get,Set - Цвет злинии в обычном состоянии.
+        /// </summary>
         public SolidColorBrush Stroke2
         {
             get
@@ -52,6 +135,9 @@ namespace AppShell.Controls.UI
             }
         }
 
+        /// <summary>
+        /// Get,Set - Цвет злинии в обычном состоянии.
+        /// </summary>
         public SolidColorBrush Stroke3
         {
             get
@@ -64,47 +150,11 @@ namespace AppShell.Controls.UI
             }
         }
 
-        public SolidColorBrush Fill1
-        {
-            get
-            {
-                return GetValue(Fill1Property) as SolidColorBrush;
-            }
-            set
-            {
-                SetValue(Fill1Property, value);
-            }
-        }
-
-        public SolidColorBrush Fill2
-        {
-            get
-            {
-                return GetValue(Fill2Property) as SolidColorBrush;
-            }
-            set
-            {
-                SetValue(Fill2Property, value);
-            }
-        }
-
-        public SolidColorBrush Fill3
-        {
-            get
-            {
-                return GetValue(Fill3Property) as SolidColorBrush;
-            }
-            set
-            {
-                SetValue(Fill3Property, value);
-            }
-        }
-
         static CanvasButton()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(CanvasButton), new FrameworkPropertyMetadata(typeof(Canvas)));
 
-            CanvasButtonTypeProperty = DependencyProperty.Register("CanvasButtonType", typeof(CanvasButtonType), typeof(CanvasButton),
+            CanvasButtonTypeProperty = DependencyProperty.Register("CanvasButtonType", typeof(CanvasButtonType), typeof(Canvas),
                 new PropertyMetadata(CanvasButtonType.WindowTopDock));
             Fill1Property = DependencyProperty.Register("Fill1", typeof(SolidColorBrush), typeof(CanvasButton),
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
@@ -120,10 +170,6 @@ namespace AppShell.Controls.UI
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
         }
 
-
-        public CanvasButton()
-        {
-        }
 
         public override void OnApplyTemplate()
         {
@@ -144,14 +190,5 @@ namespace AppShell.Controls.UI
             }
             base.OnApplyTemplate();
         }
-
-        protected override void OnInitialized(EventArgs e)
-        {
-
-            base.OnInitialized(e);
-        }
-
-
-
     }
 }

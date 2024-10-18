@@ -1,12 +1,13 @@
-using System;
+using Ovotan.Controls.Docking.Enums;
+using Ovotan.Controls.Docking.Interfaces;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace AppShell.Controls.UI
+namespace Ovotan.Controls.Docking
 {
-    public class DockPanelVerticalContainer : Grid, IDockPanelGrid
+    public class PanelVerticalContainer : Grid, IDockPanelContainer
     {
-        public DockPanelVerticalContainer(DockPanelAttachedType type, double addedSize, FrameworkElement previosContent, FrameworkElement addedContent)
+        public PanelVerticalContainer(PanelSplittedType type, double addedSize, FrameworkElement previosContent, FrameworkElement addedContent)
         {
             ShowGridLines = true;
             RowDefinitions.Add(new RowDefinition());
@@ -14,7 +15,7 @@ namespace AppShell.Controls.UI
             ColumnDefinitions.Add(new ColumnDefinition());
             switch (type)
             {
-                case DockPanelAttachedType.Top:
+                case PanelSplittedType.Top:
                     RowDefinitions[0].Height = new GridLength(addedSize, GridUnitType.Pixel);
                     RowDefinitions[1].Height = new GridLength(100, GridUnitType.Star);
                     addedContent.SetValue(RowProperty, 0);
@@ -22,7 +23,7 @@ namespace AppShell.Controls.UI
                     Children.Add(addedContent);
                     Children.Add(previosContent);
                     break;
-                case DockPanelAttachedType.Bottom:
+                case PanelSplittedType.Bottom:
                     RowDefinitions[0].Height = new GridLength(100, GridUnitType.Star);
                     RowDefinitions[1].Height = new GridLength(addedSize, GridUnitType.Pixel);
                     previosContent.SetValue(RowProperty, 0);

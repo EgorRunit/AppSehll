@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AppShell"
-        xmlns:controls="clr-namespace:AppShell.Controls.UI;assembly=AppShell.Controls"
+        xmlns:controls="clr-namespace:Ovotan.Controls.Docking;assembly=Ovotan.Controls.Docking"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
 
@@ -21,7 +21,7 @@
                 <MenuItem Header="RabbitMQ" Click="MenuItem_Click"/>
             </MenuItem>
         </Menu>
-        <controls:DockingManager x:Name="MainDockingManager" Grid.Row="1"></controls:DockingManager>
+        <controls:DockingHost x:Name="MainDockingManager" Grid.Row="1"></controls:DockingHost>
 
     </Grid>
 </Window>
