@@ -22,12 +22,12 @@ namespace Ovotan.Controls.Docking.Services
             _messageQueue = messageQueue;
         }
 
-        public void AttachPanel(PanelAttachedType type, DockingHost dockingHost, FrameworkElement root)
+        public void AttachPanel(PanelAttachedType type, DockingHost dockingHost, FrameworkElement root, FrameworkElement dockPanelContent)
         {
 
             var parent = dockingHost.Content as Grid;
             var percent = 20;
-            var added = new DockPanel(_messageQueue);
+            var added = new DockPanel(_messageQueue, dockPanelContent);
             var panel = parent.Children[0] as FrameworkElement;
             FrameworkElement newPanelContainer = null;
             parent.Children.Clear();
@@ -66,7 +66,7 @@ namespace Ovotan.Controls.Docking.Services
             var parentRowIndex = (int)panel.GetValue(Grid.RowProperty);
             parent.Children.Remove(panel);
 
-            var added = new DockPanel(_messageQueue);
+            var added = new DockPanel(_messageQueue, null);
             switch (args.SplitType)
             {
                 case PanelSplittedType.Right:

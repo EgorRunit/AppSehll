@@ -61,13 +61,14 @@ namespace Ovotan.Controls.Docking.Windows
                     attachType = PanelAttachedType.Bottom;
                     break;
             }
-            var panelAttachedMessage = new PanelAttachedMessage() { Type = attachType, WindowContent = _dragginWindpow.Content as FrameworkElement };
+            var panelAttachedMessage = new PanelAttachedMessage() { Type = attachType, DockPanelContent = _dragginWindpow.DockPanelContent};
+            _dragginWindpow.Content = null;
             _dragginWindpow.Close();
             _dockingMessageQueue.Publish(DockingMessageType.PanelAttached, panelAttachedMessage);
         }
 
         public void Show(DockPanelWindow dragginWindpow, Action<MouseEventArgs> mouseMoveCallback)
-        {
+        {            
             _dragginWindpow = dragginWindpow;
             _isMouseCaptured = true;
             _mouseMoveCallback = mouseMoveCallback;

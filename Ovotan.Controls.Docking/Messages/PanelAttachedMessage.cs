@@ -11,6 +11,6 @@ namespace Ovotan.Controls.Docking.Messages
     public class PanelAttachedMessage
     {
         public PanelAttachedType Type { get; set; }
-        public FrameworkElement WindowContent { get; set; }
+        public FrameworkElement DockPanelContent { get; set; }
     }
 }

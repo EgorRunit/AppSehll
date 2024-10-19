@@ -1,19 +1,7 @@
-using Ovotan.Controls.Docking.Enums;
 using Ovotan.Controls.Docking.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Ovotan.Controls.Docking.Windows
 {
@@ -27,10 +15,17 @@ namespace Ovotan.Controls.Docking.Windows
         Point _location;
         DockingHost _docking;
 
+        public FrameworkElement DockPanelContent { get; private set; }
 
-        public DockPanelWindow()
+        public DockPanelWindow(FrameworkElement contentElement)
         {
             InitializeComponent();
+            DockPanelContent = contentElement;
+            DockPanelContent.SetValue(Grid.RowProperty, 1);
+            DockPanelContent.SetValue(HorizontalAlignmentProperty, HorizontalAlignment.Stretch);
+            DockPanelContent.SetValue(VerticalAlignmentProperty, VerticalAlignment.Stretch);
+            DockPanelContent.SetValue(Grid.RowProperty, 1);
+            MainGrid.Children.Add(DockPanelContent);
         }
 
         public void Initialize(DockPlacementWindow dockPlacementWindow, IDockingMessageQueue dockingMessageQueue)
@@ -52,5 +47,10 @@ namespace Ovotan.Controls.Docking.Windows
             _dockPlacementWindow.Show(this, DockPanelWindow_MouseMove);
         }
 
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+            MainGrid.Children.Clear();
+        }
     }
 }

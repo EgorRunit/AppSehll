@@ -13,7 +13,7 @@
     <WindowChrome.WindowChrome >
         <WindowChrome CaptionHeight="0" ResizeBorderThickness="1"  />
     </WindowChrome.WindowChrome>
-    <Grid>
+    <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -25,6 +25,5 @@
             </Grid.ColumnDefinitions>
             <TextBlock Text="RabbitMQ Exployer"/>
         </Grid>
-        <TextBox Text="RabbitMQ" Grid.Row="1" VerticalAlignment="Stretch" VerticalContentAlignment="Center"/>
     </Grid>
 </Window>

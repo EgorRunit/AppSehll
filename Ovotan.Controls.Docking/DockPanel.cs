@@ -47,7 +47,7 @@ namespace Ovotan.Controls.Docking
             base.OnInitialized(e);
         }
 
-        internal DockPanel(IDockingMessageQueue dockMessageQueue)
+        internal DockPanel(IDockingMessageQueue dockMessageQueue, FrameworkElement dockPanelContent)
         {
             _dockMessageQueue = dockMessageQueue;
 
@@ -66,10 +66,8 @@ namespace Ovotan.Controls.Docking
             var canvasButtonSettings = FindResource("Ovotan_Control_DockPanel_Settings") as PanelSettings;
             _bindingHeaderBackgroundBrush = new Binding("HeaderBackground");
             _bindingHeaderBackgroundBrush.Source = canvasButtonSettings;
-
             _bindingHeaderActiveBackgroundBrush = new Binding("HeaderActiveBackground");
             _bindingHeaderActiveBackgroundBrush.Source = canvasButtonSettings;
-
             _bindigHeaderForeground = new Binding("HeaderForeground");
             _bindigHeaderForeground.Source = canvasButtonSettings;
             _bindigHeaderActiveForeground = new Binding("HeaderActiveForeground");
@@ -80,8 +78,6 @@ namespace Ovotan.Controls.Docking
             _header.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(100.0, GridUnitType.Star) });
             _header.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(0, GridUnitType.Auto) });
             _header.SetBinding(Grid.BackgroundProperty, _bindingHeaderBackgroundBrush);
-            //_header.RowDefinitions.Add(new RowDefinition());
-            //_header.ColumnDefinitions.Add(new ColumnDefinition());
 
             _textBlockCaption = new TextBlock() { Text = "Window " + index };
             _textBlockCaption.SetBinding(TextBlock.ForegroundProperty, _bindigHeaderForeground);
@@ -117,23 +113,12 @@ namespace Ovotan.Controls.Docking
 
             _stackPanel = new StackPanel();
             _stackPanel.SetValue(Grid.RowProperty, 1);
+            if (dockPanelContent != null)
+            {
+                _stackPanel.Children.Add(dockPanelContent);
+                _stackPanel.SetValue(StackPanel.BackgroundProperty, new SolidColorBrush(Colors.Red));
+            }
 
-            _right = new Button() { Content = "right", CommandParameter = PanelSplittedType.Right };
-            _right.Click += _buttonHandlers;
-
-            _left = new Button() { Content = "left", CommandParameter = PanelSplittedType.Left };
-            _left.Click += _buttonHandlers;
-
-            _top = new Button() { Content = "top", CommandParameter = PanelSplittedType.Top };
-            _top.Click += _buttonHandlers;
-
-            _bottom = new Button() { Content = "bottom", CommandParameter = PanelSplittedType.Bottom };
-            _bottom.Click += _buttonHandlers;
-
-            _stackPanel.Children.Add(_left);
-            _stackPanel.Children.Add(_right);
-            _stackPanel.Children.Add(_top);
-            _stackPanel.Children.Add(_bottom);
 
             Children.Add(_header);
             Children.Add(_stackPanel);

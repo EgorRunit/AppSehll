@@ -2,6 +2,7 @@ using Ovotan.Controls.Docking.Enums;
 using Ovotan.Controls.Docking.Windows;
 using System;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace AppShell
@@ -28,7 +29,7 @@ namespace AppShell
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            var wnd = new DockPanelWindow();
+            var wnd = new DockPanelWindow(new Button() { Content="swdfewfrerew"});
             MainDockingManager._showDockPanelWindow(wnd);
         }
     }

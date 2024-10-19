@@ -35,20 +35,16 @@ namespace Ovotan.Controls.Docking
             //_dockingMessageQueue.Register(DockingMessageType.StartDraggingDockWindow, _showDockPlacementWindow);
             _dockConstractureService = new DockConstractureService(_dockingMessageQueue);
 
-            var baseContent = new DockPanel(_dockingMessageQueue);
+            var baseContent = new DockPanel(_dockingMessageQueue, null);
             // _rootGrid = new DockPanelSingleContainer(baseContent);
             Content = new PanelContainer(baseContent);
         }
 
 
-        public 
-
-
-
         #region DockingManagerMessageQueue handlers
         void _panelAttached(PanelAttachedMessage message)
         {
-            _dockConstractureService.AttachPanel(message.Type, this, _rootGrid);
+            _dockConstractureService.AttachPanel(message.Type, this, _rootGrid, message.DockPanelContent);
         }
 
         public void _showDockPanelWindow(DockPanelWindow window)
@@ -71,10 +67,7 @@ namespace Ovotan.Controls.Docking
 
         void _dockPanelFocused(object args)
         {
-            if (_previousActiveDockPanel != null)
-            {
-                _previousActiveDockPanel.ChangeFocusState(false);
-            }
+            _previousActiveDockPanel?.ChangeFocusState(false);
             _previousActiveDockPanel = args as IDockPanel;
         }
         #endregion
