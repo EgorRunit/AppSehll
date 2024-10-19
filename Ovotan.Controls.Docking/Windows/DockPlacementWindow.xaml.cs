@@ -3,6 +3,7 @@ using Ovotan.Controls.Docking.Interfaces;
 using Ovotan.Controls.Docking.Messages;
 using System.Diagnostics;
 using System.Windows;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -19,6 +20,8 @@ namespace Ovotan.Controls.Docking.Windows
         IDockingMessageQueue _dockingMessageQueue;
         DockingHost _dockingHost;
         Action<MouseEventArgs> _mouseMoveCallback;
+        List<ElementRectangle> _elementRectangles;
+        Point _location;
 
         public DockPlacementWindow(DockingHost dockingHost, IDockingMessageQueue dockingMessageQueue)
         {
@@ -29,11 +32,32 @@ namespace Ovotan.Controls.Docking.Windows
             InitializeComponent();
         }
 
+        FrameworkElement _oldElementUndexMouse = null;
         private void DockPlacementWindow_MouseMove(object sender, MouseEventArgs e)
         {
             if (_isMouseCaptured)
             {
-                Debug.WriteLine(Mouse.DirectlyOver + " " + Mouse.Captured);
+                //var dd = _dockingHost.scr
+                Point mousePosition = e.GetPosition(this);
+                var x =mousePosition.X + _location.X;
+                var y =mousePosition.Y + _location.Y;
+                var el = _elementRectangles.FindElementFromPoint(new Point(x,y));
+                if (el != null && el.Owner != _oldElementUndexMouse)
+                {
+                    _oldElementUndexMouse?.SetValue(BackgroundProperty, new SolidColorBrush(Colors.White));
+                    _oldElementUndexMouse = el.Owner;
+                    Debug.WriteLine("Enter to panel " + el.Owner.Name);
+
+                }
+                else if(_oldElementUndexMouse != null && (el == null || el.Owner != _oldElementUndexMouse))
+                {
+                    Debug.WriteLine("Exit to panel " + _oldElementUndexMouse.Name);
+                    _oldElementUndexMouse = null;
+                }
+
+
+
+
                 _mouseMoveCallback(e);
             }
         }
@@ -97,17 +121,41 @@ namespace Ovotan.Controls.Docking.Windows
 
 
         public void Show(DockPanelWindow dragginWindpow, Action<MouseEventArgs> mouseMoveCallback)
-        {            
+        {
+
+            var startPoints = _dockingHost.PointToScreen(new Point());
+            var ss = FindLogicalChildren<IDockPanel>(_dockingHost);
+            _elementRectangles = new List<ElementRectangle>(ss.Count());
+            _location = _dockingHost.PointToScreen(new Point());
+            foreach (var element in ss)
+            {
+                var frameworkElement = element as FrameworkElement;
+                var startPoint = (element as FrameworkElement).PointToScreen(new Point());
+                _elementRectangles.Add(new ElementRectangle(frameworkElement, startPoint.X, startPoint.Y, startPoint.X + frameworkElement.ActualWidth,startPoint.Y + frameworkElement.ActualHeight));
+            }
+            _oldElementUndexMouse = null;
             _dragginWindpow = dragginWindpow;
             _isMouseCaptured = true;
             _mouseMoveCallback = mouseMoveCallback;
-            var startPoints = _dockingHost.PointToScreen(new Point());
             Top = startPoints.Y;
             Left = startPoints.X;
             Height = _dockingHost.ActualHeight;
             Width = _dockingHost.ActualWidth;
             Show();
             Mouse.Capture(this, CaptureMode.SubTree);
+        }
+
+        public static IEnumerable<T> FindLogicalChildren<T>(DependencyObject obj) where T : class
+        {
+            if (obj != null)
+            {
+                if (obj is T)
+                    yield return obj as T;
+
+                foreach (DependencyObject child in LogicalTreeHelper.GetChildren(obj).OfType<DependencyObject>())
+                    foreach (T c in FindLogicalChildren<T>(child))
+                        yield return c;
+            }
         }
     }
 }
