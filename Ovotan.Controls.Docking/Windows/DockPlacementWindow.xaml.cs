@@ -1,7 +1,9 @@
 using Ovotan.Controls.Docking.Enums;
 using Ovotan.Controls.Docking.Interfaces;
+using Ovotan.Controls.Docking.Messages;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Shapes;
 
 namespace Ovotan.Controls.Docking.Windows
 {
@@ -10,19 +12,44 @@ namespace Ovotan.Controls.Docking.Windows
     /// </summary>
     public partial class DockPlacementWindow : Window
     {
+        bool _isMouseCaptured;
+        DockPanelWindow _dragginWindpow;
         IDockingMessageQueue _dockingMessageQueue;
+        DockingHost _dockingHost;
+        Action<MouseEventArgs> _mouseMoveCallback;
 
-        public DockPlacementWindow(IDockingMessageQueue dockingMessageQueue)
+        public DockPlacementWindow(DockingHost dockingHost, IDockingMessageQueue dockingMessageQueue)
         {
+            _dockingHost = dockingHost;
             _dockingMessageQueue = dockingMessageQueue;
+            this.MouseUp += DockPlacementWindow_MouseUp;
+            this.MouseMove += DockPlacementWindow_MouseMove;
             InitializeComponent();
         }
 
-        private void CanvasButton_MouseDown(object sender, MouseButtonEventArgs e)
+        private void DockPlacementWindow_MouseMove(object sender, MouseEventArgs e)
         {
+            if (_isMouseCaptured)
+            {
+                _mouseMoveCallback(e);
+            }
+        }
+
+        private void DockPlacementWindow_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            _isMouseCaptured = false;
+            ReleaseMouseCapture();
+            Hide();
+        }
+
+        private void CanvasButton_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            _isMouseCaptured = false;
+            ReleaseMouseCapture();
+            Hide();
             var args = sender as CanvasButton;
             PanelAttachedType attachType = PanelAttachedType.Left;
-            switch(args.CanvasButtonType)
+            switch (args.CanvasButtonType)
             {
                 case CanvasButtonType.WindowRightDock:
                     attachType = PanelAttachedType.Right;
@@ -34,7 +61,23 @@ namespace Ovotan.Controls.Docking.Windows
                     attachType = PanelAttachedType.Bottom;
                     break;
             }
-            _dockingMessageQueue.Publish(DockingMessageType.PanelAttached, attachType);
+            var panelAttachedMessage = new PanelAttachedMessage() { Type = attachType, WindowContent = _dragginWindpow.Content as FrameworkElement };
+            _dragginWindpow.Close();
+            _dockingMessageQueue.Publish(DockingMessageType.PanelAttached, panelAttachedMessage);
+        }
+
+        public void Show(DockPanelWindow dragginWindpow, Action<MouseEventArgs> mouseMoveCallback)
+        {
+            _dragginWindpow = dragginWindpow;
+            _isMouseCaptured = true;
+            _mouseMoveCallback = mouseMoveCallback;
+            var startPoints = _dockingHost.PointToScreen(new Point());
+            Top = startPoints.Y;
+            Left = startPoints.X;
+            Height = _dockingHost.ActualHeight;
+            Width = _dockingHost.ActualWidth;
+            Show();
+            Mouse.Capture(this, CaptureMode.SubTree);
         }
     }
 }

@@ -5,12 +5,13 @@ using Ovotan.Controls.Docking.Services;
 using Ovotan.Controls.Docking.Windows;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Ovotan.Controls.Docking
 {
     public class DockingHost : ContentControl
     {
-        DockPlacementWindow _dockPlacementWindow;
+        public DockPlacementWindow _dockPlacementWindow;
         /// <summary>
         /// Экземпляр сервиса для создания контейнеров для DockPanel.
         /// </summary>
@@ -19,18 +20,19 @@ namespace Ovotan.Controls.Docking
         /// Экземпляр сервиса очереди сообщений для DockingManager.
         /// </summary>
         public IDockingMessageQueue _dockingMessageQueue;
-        PanelContainer _rootGrid;
+        public PanelContainer _rootGrid;
         IDockPanel _previousActiveDockPanel;
 
         public DockingHost()
         {
             _dockingMessageQueue = new DockingMessageQueue();
-            _dockPlacementWindow = new DockPlacementWindow(_dockingMessageQueue);
+            _dockPlacementWindow = new DockPlacementWindow(this, _dockingMessageQueue);
             _dockingMessageQueue.Register(DockingMessageType.PanelClosed, (x) => _dockConstractureService.RemovePanel(x as DockPanel));
             _dockingMessageQueue.Register(DockingMessageType.PanelSplitted, (x) => _dockConstractureService.SplitPanel(x as PanelSplittedMessage));
-            _dockingMessageQueue.Register(DockingMessageType.PanelAttached, (x) => _panelAttached((PanelAttachedType)x));
+            _dockingMessageQueue.Register(DockingMessageType.PanelAttached, (x) => _panelAttached((PanelAttachedMessage)x));
+            _dockingMessageQueue.Register(DockingMessageType.ShowDockPanelWindow, (x) => _showDockPanelWindow(x as DockPanelWindow));
             _dockingMessageQueue.Register(DockingMessageType.PanelGotFocus, _dockPanelFocused);
-            _dockingMessageQueue.Register(DockingMessageType.StartDraggingDockWindow, _showDockPlacementWindow);
+            //_dockingMessageQueue.Register(DockingMessageType.StartDraggingDockWindow, _showDockPlacementWindow);
             _dockConstractureService = new DockConstractureService(_dockingMessageQueue);
 
             var baseContent = new DockPanel(_dockingMessageQueue);
@@ -39,23 +41,32 @@ namespace Ovotan.Controls.Docking
         }
 
 
+        public 
+
+
 
         #region DockingManagerMessageQueue handlers
-        void _panelAttached(PanelAttachedType type)
+        void _panelAttached(PanelAttachedMessage message)
         {
-            _dockPlacementWindow.Hide();
-            _dockConstractureService.AttachPanel(type, this, _rootGrid);
+            _dockConstractureService.AttachPanel(message.Type, this, _rootGrid);
         }
 
-        void _showDockPlacementWindow(object args)
+        public void _showDockPanelWindow(DockPanelWindow window)
         {
-            var startPoints = this.PointToScreen(new Point());
-            _dockPlacementWindow.Top = startPoints.Y;
-            _dockPlacementWindow.Left = startPoints.X;
-            _dockPlacementWindow.Height = ActualHeight;
-            _dockPlacementWindow.Width = ActualWidth;
-            _dockPlacementWindow.Show();
+            window.Initialize(_dockPlacementWindow, _dockingMessageQueue);
+            window.Show();
         }
+
+        //void _showDockPlacementWindow(object args)
+        //{
+        //    var startPoints = this.PointToScreen(new Point());
+        //    _dockPlacementWindow.Top = startPoints.Y;
+        //    _dockPlacementWindow.Left = startPoints.X;
+        //    _dockPlacementWindow.Height = ActualHeight;
+        //    _dockPlacementWindow.Width = ActualWidth;
+        //    _dockPlacementWindow.Show();
+
+        //}
 
 
         void _dockPanelFocused(object args)

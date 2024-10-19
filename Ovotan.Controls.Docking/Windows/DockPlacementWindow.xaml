@@ -7,6 +7,7 @@
         xmlns:controls="clr-namespace:Ovotan.Controls.Docking"
         Background="Transparent"
         mc:Ignorable="d"
+        ShowInTaskbar="False"
 		WindowStyle="None"
 		AllowsTransparency="True"
 		Topmost="True"	
@@ -25,9 +26,9 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <controls:CanvasButton CanvasButtonType="WindowTopDock" Width="30" Height="30" Grid.Column="1" MouseDown="CanvasButton_MouseDown"/>
-        <controls:CanvasButton CanvasButtonType="WindowBottomDock" Width="30" Height="30" Grid.Column="1" Grid.Row="2" MouseDown="CanvasButton_MouseDown"/>
-        <controls:CanvasButton CanvasButtonType="WindowRightDock" Width="30" Height="30" Grid.Column="2" Grid.Row="1" MouseDown="CanvasButton_MouseDown"/>
-        <controls:CanvasButton CanvasButtonType="WindowLeftDock" Width="30" Height="30" Grid.Column="0" Grid.Row="1" MouseDown="CanvasButton_MouseDown"/>
+        <controls:CanvasButton CanvasButtonType="WindowTopDock" Width="30" Height="30" Grid.Column="1" MouseUp="CanvasButton_MouseUp"/>
+        <controls:CanvasButton CanvasButtonType="WindowBottomDock" Width="30" Height="30" Grid.Column="1" Grid.Row="2" MouseUp="CanvasButton_MouseUp"/>
+        <controls:CanvasButton CanvasButtonType="WindowRightDock" Width="30" Height="30" Grid.Column="2" Grid.Row="1"  MouseUp="CanvasButton_MouseUp"/>
+        <controls:CanvasButton CanvasButtonType="WindowLeftDock" Width="30" Height="30" Grid.Column="0" Grid.Row="1"  MouseUp="CanvasButton_MouseUp"/>
     </Grid>
 </Window>

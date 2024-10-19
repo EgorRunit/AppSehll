@@ -28,7 +28,8 @@ namespace AppShell
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            MainDockingManager._dockingMessageQueue.Publish(DockingMessageType.StartDraggingDockWindow, null);
+            var wnd = new DockPanelWindow();
+            MainDockingManager._showDockPanelWindow(wnd);
         }
     }
 }

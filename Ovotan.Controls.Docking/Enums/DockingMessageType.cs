@@ -7,7 +7,7 @@ namespace Ovotan.Controls.Docking.Enums
     {
         /// <summary>
         /// Панель была приклена к указанному краю хоста.
-        /// В качестве аргумента события передается PanelAttachedType.
+        /// В качестве аргумента события передается PanelAttachedMessage.
         /// </summary>
         PanelAttached,
         /// <summary>
@@ -30,11 +30,11 @@ namespace Ovotan.Controls.Docking.Enums
         /// В качестве аргумента события передается DockPlacementWindow.
         /// </summary>
         StartDraggingDockWindow,
-        /// <summary>
-        /// Перетаскивание окна с панелью остановлено.
-        /// В качестве аргумента события передается DockPlacementWindow.
-        /// </summary>
-        StopDraggingDockWindow,
+        ///// <summary>
+        ///// Показать окно с панелью.
+        ///// В качестве аргумента события передается DockPanelWindow.
+        ///// </summary>
+        ShowDockPanelWindow,
 
     }
 }

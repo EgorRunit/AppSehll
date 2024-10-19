@@ -2,10 +2,18 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
+    <Compile Update="Windows\DockPanelWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Page Update="Resources\CanvasButtonResourceDictionary.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Resources\DockPanelResourceDictionary.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\DockPanelWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Windows\DockPlacementWindow.xaml">

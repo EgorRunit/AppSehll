@@ -1,0 +1,30 @@
+<Window x:Class="Ovotan.Controls.Docking.Windows.DockPanelWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Ovotan.Controls.Docking.Windows"
+        Background="Transparent"
+        mc:Ignorable="d"
+		WindowStyle="None"
+		AllowsTransparency="True"
+		Width="400" Height="300"
+        Title="DockPlacementWindow">
+    <WindowChrome.WindowChrome >
+        <WindowChrome CaptionHeight="0" ResizeBorderThickness="1"  />
+    </WindowChrome.WindowChrome>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Background="AliceBlue" MouseDown="_grid_MouseDown">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="RabbitMQ Exployer"/>
+        </Grid>
+        <TextBox Text="RabbitMQ" Grid.Row="1" VerticalAlignment="Stretch" VerticalContentAlignment="Center"/>
+    </Grid>
+</Window>
