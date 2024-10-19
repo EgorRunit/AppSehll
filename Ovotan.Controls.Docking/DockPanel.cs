@@ -108,6 +108,7 @@ namespace Ovotan.Controls.Docking
             _header.Children.Add(pinButton);
             _header.Children.Add(closeButton);
 
+            
 
 
 
@@ -116,7 +117,6 @@ namespace Ovotan.Controls.Docking
             if (dockPanelContent != null)
             {
                 _stackPanel.Children.Add(dockPanelContent);
-                _stackPanel.SetValue(StackPanel.BackgroundProperty, new SolidColorBrush(Colors.Red));
             }
 
 

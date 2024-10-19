@@ -46,15 +46,6 @@
         </Canvas>
     </ControlTemplate>
 
-    <ControlTemplate x:Key="Ovotan_Controls_Media_DockPlacementWindow_BottomDock" TargetType="{x:Type local:CanvasButton}">
-        <Canvas RenderOptions.EdgeMode="Aliased" SnapsToDevicePixels="True" Grid.Column="1" Grid.Row="2" Width="30" Height="30">
-            <Rectangle Canvas.Top="0" Canvas.Left="0" Stroke="{TemplateBinding Stroke1}" Fill="{TemplateBinding Fill1}" Width="30" Height="30"/>
-            <Rectangle Stroke="{TemplateBinding Stroke2}" Canvas.Top="13" Canvas.Left="4" Fill="{TemplateBinding Fill2}" Width="22" Height="13"/>
-            <Rectangle Stroke="{TemplateBinding Stroke2}" Canvas.Top="14" Canvas.Left="5" Fill="{TemplateBinding Fill3}" Width="20" Height="3"/>
-            <Polyline Fill="{TemplateBinding Fill3}" Points="11,4 16,10, 21,4 11,4"></Polyline>
-        </Canvas>
-    </ControlTemplate>
-
     <ControlTemplate x:Key="Ovotan_Controls_Media_DockPlacementWindow_LeftDock" TargetType="{x:Type local:CanvasButton}">
         <Canvas RenderOptions.EdgeMode="Aliased" SnapsToDevicePixels="True" Grid.Column="0" Grid.Row="1" Width="30" Height="30">
             <Rectangle Canvas.Top="0" Canvas.Left="0" Stroke="{TemplateBinding Stroke1}" Fill="{TemplateBinding Fill1}" Width="30" Height="30"/>
@@ -64,6 +55,14 @@
         </Canvas>
     </ControlTemplate>
 
+    <ControlTemplate x:Key="Ovotan_Controls_Media_DockPlacementWindow_BottomDock" TargetType="{x:Type local:CanvasButton}">
+        <Canvas RenderOptions.EdgeMode="Aliased" SnapsToDevicePixels="True" Grid.Column="1" Grid.Row="2" Width="30" Height="30">
+            <Rectangle Canvas.Top="0" Canvas.Left="0" Stroke="{TemplateBinding Stroke1}" Fill="{TemplateBinding Fill1}" Width="30" Height="30"/>
+            <Rectangle Stroke="{TemplateBinding Stroke2}" Canvas.Top="13" Canvas.Left="4" Fill="{TemplateBinding Fill2}" Width="22" Height="13"/>
+            <Rectangle Stroke="{TemplateBinding Stroke2}" Canvas.Top="14" Canvas.Left="5" Fill="{TemplateBinding Fill3}" Width="20" Height="3"/>
+            <Polyline Fill="{TemplateBinding Fill3}" Points="11,4 16,10, 21,4 11,4"></Polyline>
+        </Canvas>
+    </ControlTemplate>
 
     <ControlTemplate x:Key="Ovotan_Controls_Media_DockPlacementWindow_RightDock" TargetType="{x:Type local:CanvasButton}">
         <Canvas RenderOptions.EdgeMode="Aliased" SnapsToDevicePixels="True" Grid.Column="2" Grid.Row="1"  Width="30" Height="30">

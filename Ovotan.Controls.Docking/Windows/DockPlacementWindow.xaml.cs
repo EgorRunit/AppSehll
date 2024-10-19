@@ -1,8 +1,10 @@
 using Ovotan.Controls.Docking.Enums;
 using Ovotan.Controls.Docking.Interfaces;
 using Ovotan.Controls.Docking.Messages;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Shapes;
 
 namespace Ovotan.Controls.Docking.Windows
@@ -31,6 +33,7 @@ namespace Ovotan.Controls.Docking.Windows
         {
             if (_isMouseCaptured)
             {
+                Debug.WriteLine(Mouse.DirectlyOver + " " + Mouse.Captured);
                 _mouseMoveCallback(e);
             }
         }
@@ -42,7 +45,7 @@ namespace Ovotan.Controls.Docking.Windows
             Hide();
         }
 
-        private void CanvasButton_MouseUp(object sender, MouseButtonEventArgs e)
+        private void _attachPanel(object sender, MouseButtonEventArgs e)
         {
             _isMouseCaptured = false;
             ReleaseMouseCapture();
@@ -66,6 +69,32 @@ namespace Ovotan.Controls.Docking.Windows
             _dragginWindpow.Close();
             _dockingMessageQueue.Publish(DockingMessageType.PanelAttached, panelAttachedMessage);
         }
+
+        private void _splitPanel(object sender, MouseButtonEventArgs e)
+        {
+            _isMouseCaptured = false;
+            ReleaseMouseCapture();
+            Hide();
+            var args = sender as CanvasButton;
+            PanelSplittedType splitType = PanelSplittedType.Left;
+            switch (args.CanvasButtonType)
+            {
+                case CanvasButtonType.WindowRightDock:
+                    splitType = PanelSplittedType.Right;
+                    break;
+                case CanvasButtonType.WindowTopDock:
+                    splitType = PanelSplittedType.Top;
+                    break;
+                case CanvasButtonType.WindowBottomDock:
+                    splitType = PanelSplittedType.Bottom;
+                    break;
+            }
+            var panelAttachedMessage = new PanelSplittedMessage() { PanelSplitted = null, SplitType = splitType };
+            _dragginWindpow.Content = null;
+            _dragginWindpow.Close();
+            _dockingMessageQueue.Publish(DockingMessageType.PanelSplitted, panelAttachedMessage);
+        }
+
 
         public void Show(DockPanelWindow dragginWindpow, Action<MouseEventArgs> mouseMoveCallback)
         {            

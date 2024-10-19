@@ -50,6 +50,7 @@ namespace Ovotan.Controls.Docking
         public void _showDockPanelWindow(DockPanelWindow window)
         {
             window.Initialize(_dockPlacementWindow, _dockingMessageQueue);
+            window.Topmost = true;
             window.Show();
         }
 
