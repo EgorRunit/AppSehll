@@ -18,12 +18,12 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid Background="{Binding Source={StaticResource Ovotan_Control_DockPanel_Settings}, Path=HeaderBackground}" MouseDown="_grid_MouseDown">
+        <Grid Background="{Binding Source={StaticResource Ovotan_Controls_DockPanel_Settings}, Path=HeaderBackground}" MouseDown="_grid_MouseDown">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Foreground="{Binding Source={StaticResource Ovotan_Control_DockPanel_Settings}, Path=HeaderForeground}" Text="RabbitMQ Exployer"/>
+            <TextBlock Foreground="{Binding Source={StaticResource Ovotan_Controls_DockPanel_Settings}, Path=HeaderForeground}" Text="RabbitMQ Exployer"/>
         </Grid>
     </Grid>
 </Window>

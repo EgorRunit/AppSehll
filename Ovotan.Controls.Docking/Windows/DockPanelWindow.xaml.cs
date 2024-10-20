@@ -13,7 +13,6 @@ namespace Ovotan.Controls.Docking.Windows
         DockPlacementWindow _dockPlacementWindow;
         IDockingMessageQueue _dockingMessageQueue;
         Point _location;
-        DockingHost _docking;
 
         public FrameworkElement DockPanelContent { get; private set; }
 

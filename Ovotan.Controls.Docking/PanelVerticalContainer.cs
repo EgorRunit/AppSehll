@@ -12,7 +12,7 @@ namespace Ovotan.Controls.Docking
     {
         public PanelVerticalContainer(PanelSplittedType type, double addedSize, FrameworkElement previosContent, FrameworkElement addedContent)
         {
-            var panelSettings = FindResource("Ovotan_Control_DockPanel_Settings") as PanelSettings;
+            var panelSettings = FindResource("Ovotan_Controls_DockPanel_Settings") as PanelSettings;
             var bindigSplitterBackground = new Binding("SplitterBackground");
             bindigSplitterBackground.Source = panelSettings;
             RowDefinitions.Add(new RowDefinition());

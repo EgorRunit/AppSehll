@@ -17,7 +17,10 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Menu>
-            <MenuItem Header="View">
+            <MenuItem Header="Shells">
+                <MenuItem Header="RabbitMQ" Click="MenuItem_Click"/>
+            </MenuItem>
+            <MenuItem Header="Tools">
                 <MenuItem Header="RabbitMQ" Click="MenuItem_Click"/>
             </MenuItem>
         </Menu>

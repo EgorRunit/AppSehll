@@ -3,7 +3,7 @@
                     xmlns:local="clr-namespace:Ovotan.Controls.Docking"
                     xmlns:settings="clr-namespace:Ovotan.Controls.Docking.Settings">
 
-    <settings:CanvasButtonSettings x:Key="Ovotan_Control_Docking_CanvasButtonSettings">
+    <settings:CanvasButtonSettings x:Key="Ovotan_Controls_Docking_CanvasButtonSettings">
         <settings:CanvasButtonSettings.Fill1>
             <SolidColorBrush Color="#EDF0F4" />
         </settings:CanvasButtonSettings.Fill1>
@@ -77,19 +77,19 @@
 
 
     <Style TargetType="{x:Type local:CanvasButton}" BasedOn="{StaticResource {x:Type ContentControl}}" >
-        <Setter Property="Fill1" Value="{Binding Source={StaticResource Ovotan_Control_Docking_CanvasButtonSettings}, Path=Fill1}"/>
-        <Setter Property="Fill2" Value="{Binding Source={StaticResource Ovotan_Control_Docking_CanvasButtonSettings}, Path=Fill2}"/>
-        <Setter Property="Fill3" Value="{Binding Source={StaticResource Ovotan_Control_Docking_CanvasButtonSettings}, Path=Fill3}"/>
-        <Setter Property="Stroke1" Value="{Binding Source={StaticResource Ovotan_Control_Docking_CanvasButtonSettings}, Path=Stroke1}"/>
-        <Setter Property="Stroke2" Value="{Binding Source={StaticResource Ovotan_Control_Docking_CanvasButtonSettings}, Path=Stroke1}"/>
+        <Setter Property="Fill1" Value="{Binding Source={StaticResource Ovotan_Controls_Docking_CanvasButtonSettings}, Path=Fill1}"/>
+        <Setter Property="Fill2" Value="{Binding Source={StaticResource Ovotan_Controls_Docking_CanvasButtonSettings}, Path=Fill2}"/>
+        <Setter Property="Fill3" Value="{Binding Source={StaticResource Ovotan_Controls_Docking_CanvasButtonSettings}, Path=Fill3}"/>
+        <Setter Property="Stroke1" Value="{Binding Source={StaticResource Ovotan_Controls_Docking_CanvasButtonSettings}, Path=Stroke1}"/>
+        <Setter Property="Stroke2" Value="{Binding Source={StaticResource Ovotan_Controls_Docking_CanvasButtonSettings}, Path=Stroke1}"/>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Fill1" Value="{Binding Source={StaticResource Ovotan_Control_Docking_CanvasButtonSettings}, Path=OverFill1}"/>
-                <Setter Property="Fill2" Value="{Binding Source={StaticResource Ovotan_Control_Docking_CanvasButtonSettings}, Path=OverFill2}"/>
-                <Setter Property="Fill3" Value="{Binding Source={StaticResource Ovotan_Control_Docking_CanvasButtonSettings}, Path=OverFill3}"/>
-                <Setter Property="Stroke1" Value="{Binding Source={StaticResource Ovotan_Control_Docking_CanvasButtonSettings}, Path=OverStroke1}"/>
-                <Setter Property="Stroke2" Value="{Binding Source={StaticResource Ovotan_Control_Docking_CanvasButtonSettings}, Path=OverStroke2}"/>
-                <Setter Property="Stroke3" Value="{Binding Source={StaticResource Ovotan_Control_Docking_CanvasButtonSettings}, Path=OverStroke3}"/>
+                <Setter Property="Fill1" Value="{Binding Source={StaticResource Ovotan_Controls_Docking_CanvasButtonSettings}, Path=OverFill1}"/>
+                <Setter Property="Fill2" Value="{Binding Source={StaticResource Ovotan_Controls_Docking_CanvasButtonSettings}, Path=OverFill2}"/>
+                <Setter Property="Fill3" Value="{Binding Source={StaticResource Ovotan_Controls_Docking_CanvasButtonSettings}, Path=OverFill3}"/>
+                <Setter Property="Stroke1" Value="{Binding Source={StaticResource Ovotan_Controls_Docking_CanvasButtonSettings}, Path=OverStroke1}"/>
+                <Setter Property="Stroke2" Value="{Binding Source={StaticResource Ovotan_Controls_Docking_CanvasButtonSettings}, Path=OverStroke2}"/>
+                <Setter Property="Stroke3" Value="{Binding Source={StaticResource Ovotan_Controls_Docking_CanvasButtonSettings}, Path=OverStroke3}"/>
             </Trigger>
         </Style.Triggers>
     </Style>

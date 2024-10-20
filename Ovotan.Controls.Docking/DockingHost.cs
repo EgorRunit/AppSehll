@@ -20,8 +20,8 @@ namespace Ovotan.Controls.Docking
         /// Экземпляр сервиса очереди сообщений для DockingManager.
         /// </summary>
         public IDockingMessageQueue _dockingMessageQueue;
-        public PanelContainer _rootGrid;
         IDockPanel _previousActiveDockPanel;
+        SiteHost _siteHost;
 
         public DockingHost()
         {
@@ -32,11 +32,10 @@ namespace Ovotan.Controls.Docking
             _dockingMessageQueue.Register(DockingMessageType.PanelAttached, (x) => _panelAttached((PanelAttachedMessage)x));
             _dockingMessageQueue.Register(DockingMessageType.ShowDockPanelWindow, (x) => _showDockPanelWindow(x as DockPanelWindow));
             _dockingMessageQueue.Register(DockingMessageType.PanelGotFocus, _dockPanelFocused);
-            //_dockingMessageQueue.Register(DockingMessageType.StartDraggingDockWindow, _showDockPlacementWindow);
             _dockConstractureService = new DockConstractureService(_dockingMessageQueue);
 
-            var baseContent = new DockPanel(_dockingMessageQueue, null);
-            // _rootGrid = new DockPanelSingleContainer(baseContent);
+            _siteHost = new SiteHost(_dockingMessageQueue);
+            var baseContent = new DockPanel(_dockingMessageQueue, _siteHost);
             Content = new PanelContainer(baseContent);
         }
 

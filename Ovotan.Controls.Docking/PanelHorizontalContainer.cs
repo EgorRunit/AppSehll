@@ -4,7 +4,6 @@ using Ovotan.Controls.Docking.Settings;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Media;
 
 namespace Ovotan.Controls.Docking
 {
@@ -12,7 +11,7 @@ namespace Ovotan.Controls.Docking
     {
         public PanelHorizontalContainer(PanelSplittedType type, double addedSize, FrameworkElement previosContent, FrameworkElement addedContent)
         {
-            var panelSettings = FindResource("Ovotan_Control_DockPanel_Settings") as PanelSettings;
+            var panelSettings = FindResource("Ovotan_Controls_DockPanel_Settings") as PanelSettings;
             var bindigSplitterBackground = new Binding("SplitterBackground");
             bindigSplitterBackground.Source = panelSettings;
 

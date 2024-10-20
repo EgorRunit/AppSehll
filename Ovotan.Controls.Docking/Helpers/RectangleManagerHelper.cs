@@ -11,14 +11,12 @@ namespace System
     {
         public  double X, Y, X1, Y1;
         public FrameworkElement Owner;
-        public double Delta;
         public ElementRectangle(FrameworkElement owner,  double x, double y, double x1, double y1)
         {
             X = x;
             X1 = x1;
             Y = y;
             Y1 = y1;
-            Delta = (x1 - x) + (y1 - y);
             Owner = owner;
         }
     }
@@ -28,8 +26,7 @@ namespace System
         public static ElementRectangle FindElementFromPoint(this List<ElementRectangle> elements , Point point)
         {
 
-            ElementRectangle element = null;
-            foreach (ElementRectangle rectangle in elements.OrderBy(x => x.Delta))
+            foreach (ElementRectangle rectangle in elements)
             {
                 if(rectangle.X <= point.X &&  rectangle.Y <= point.Y && rectangle.X1>= point.X && rectangle.Y1 >= point.Y)
                 {

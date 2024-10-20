@@ -11,7 +11,7 @@ namespace Ovotan.Controls.Docking
 {
     public class DockPanel : Grid, IDockPanel
     {
-        //Экземпляр очереди сообщений элметов докинга
+        //Экземпляр очереди сообщений элметов докинга.
         IDockingMessageQueue _dockMessageQueue;
 
         Binding _bindingHeaderBackgroundBrush;
@@ -23,10 +23,6 @@ namespace Ovotan.Controls.Docking
         Grid _header;
 
         TextBlock _textBlockCaption;
-        Button _right;
-        Button _top;
-        Button _left;
-        Button _bottom;
 
         public bool IsActive { get; set; }
 
@@ -51,66 +47,67 @@ namespace Ovotan.Controls.Docking
             this.GotMouseCapture += (x, y) => ChangeFocusState(true);
             this.MouseDown += (x, y) => ChangeFocusState(true);
 
-            RowDefinitions.Add(new RowDefinition() { Height = new GridLength(0.0, GridUnitType.Auto) });
-            RowDefinitions.Add(new RowDefinition() { Height = new GridLength(100.0, GridUnitType.Star) });
-            RowDefinitions.Add(new RowDefinition() { Height = new GridLength(0.0, GridUnitType.Auto) });
-            ColumnDefinitions.Add(new ColumnDefinition());
-
-            var canvasButtonSettings = FindResource("Ovotan_Control_DockPanel_Settings") as PanelSettings;
-            _bindingHeaderBackgroundBrush = new Binding("HeaderBackground");
-            _bindingHeaderBackgroundBrush.Source = canvasButtonSettings;
-            _bindingHeaderActiveBackgroundBrush = new Binding("HeaderActiveBackground");
-            _bindingHeaderActiveBackgroundBrush.Source = canvasButtonSettings;
-            _bindigHeaderForeground = new Binding("HeaderForeground");
-            _bindigHeaderForeground.Source = canvasButtonSettings;
-            _bindigHeaderActiveForeground = new Binding("HeaderActiveForeground");
-            _bindigHeaderActiveForeground.Source = canvasButtonSettings;
-
-
-            _header = new Grid();
-            _header.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(100.0, GridUnitType.Star) });
-            _header.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(0, GridUnitType.Auto) });
-            _header.SetBinding(Grid.BackgroundProperty, _bindingHeaderBackgroundBrush);
-
-            _textBlockCaption = new TextBlock() { Text = "Window "};
-            _textBlockCaption.SetBinding(TextBlock.ForegroundProperty, _bindigHeaderForeground);
-            _textBlockCaption.Padding = new Thickness(5, 2, 0, 3);
-            _textBlockCaption.TextTrimming = TextTrimming.CharacterEllipsis;
-
-            var closeButtonIcon = FindResource("Ovotan_Control_DockPanel_Settings_ButtonIconClose") as Geometry;
-            var closeButton = new IconButton();
-            closeButton.Click += (x, y) => _panelClosed();
-            closeButton.Icon = closeButtonIcon;
-            closeButton.HorizontalAlignment = HorizontalAlignment.Right;
-            closeButton.Foreground = new SolidColorBrush(Colors.Black);
-            //closeButton.MouseMove += CloseButton_MouseMove;
-            closeButton.Margin = new Thickness(0, 0, 5, 0);
-            closeButton.SetValue(Grid.ColumnProperty, 1);
-
-            var pinButtonIcon = FindResource("Ovotan_Control_DockPanel_Settings_ButtonIconPin") as Geometry;
-            var pinButton = new IconButton();
-            //pinButton.Click += CloseButton_Click;
-            pinButton.Icon = pinButtonIcon; ;
-            pinButton.HorizontalAlignment = HorizontalAlignment.Right;
-            pinButton.Foreground = new SolidColorBrush(Colors.Black);
-            //pinButton.MouseMove += CloseButton_MouseMove;
-            pinButton.Margin = new Thickness(0, 0, 23, 0);
-            pinButton.SetValue(Grid.ColumnProperty, 1);
-
-            _header.Children.Add(_textBlockCaption);
-            _header.Children.Add(pinButton);
-            _header.Children.Add(closeButton);
-
-            
-
-
-            Children.Add(_header);
-            if (dockPanelContent != null)
+            if (!(dockPanelContent is ISiteHost))
             {
-                dockPanelContent.SetValue(Grid.RowProperty, 1);
+                RowDefinitions.Add(new RowDefinition() { Height = new GridLength(0.0, GridUnitType.Auto) });
+                RowDefinitions.Add(new RowDefinition() { Height = new GridLength(100.0, GridUnitType.Star) });
+                RowDefinitions.Add(new RowDefinition() { Height = new GridLength(0.0, GridUnitType.Auto) });
+                ColumnDefinitions.Add(new ColumnDefinition());
+
+                var canvasButtonSettings = FindResource("Ovotan_Controls_DockPanel_Settings") as PanelSettings;
+                _bindingHeaderBackgroundBrush = new Binding("HeaderBackground");
+                _bindingHeaderBackgroundBrush.Source = canvasButtonSettings;
+                _bindingHeaderActiveBackgroundBrush = new Binding("HeaderActiveBackground");
+                _bindingHeaderActiveBackgroundBrush.Source = canvasButtonSettings;
+                _bindigHeaderForeground = new Binding("HeaderForeground");
+                _bindigHeaderForeground.Source = canvasButtonSettings;
+                _bindigHeaderActiveForeground = new Binding("HeaderActiveForeground");
+                _bindigHeaderActiveForeground.Source = canvasButtonSettings;
+
+
+                _header = new Grid();
+                _header.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(100.0, GridUnitType.Star) });
+                _header.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(0, GridUnitType.Auto) });
+                _header.SetBinding(Grid.BackgroundProperty, _bindingHeaderBackgroundBrush);
+
+                _textBlockCaption = new TextBlock() { Text = "Window " };
+                _textBlockCaption.SetBinding(TextBlock.ForegroundProperty, _bindigHeaderForeground);
+                _textBlockCaption.Padding = new Thickness(5, 2, 0, 3);
+                _textBlockCaption.TextTrimming = TextTrimming.CharacterEllipsis;
+
+                var closeButtonIcon = FindResource("Ovotan_Controls_DockPanel_Settings_ButtonIconClose") as Geometry;
+                var closeButton = new IconButton();
+                closeButton.Click += (x, y) => _panelClosed();
+                closeButton.Icon = closeButtonIcon;
+                closeButton.HorizontalAlignment = HorizontalAlignment.Right;
+                closeButton.Foreground = new SolidColorBrush(Colors.Black);
+                closeButton.Margin = new Thickness(0, 0, 5, 0);
+                closeButton.SetValue(Grid.ColumnProperty, 1);
+
+                var pinButtonIcon = FindResource("Ovotan_Controls_DockPanel_Settings_ButtonIconPin") as Geometry;
+                var pinButton = new IconButton();
+                pinButton.Icon = pinButtonIcon; ;
+                pinButton.HorizontalAlignment = HorizontalAlignment.Right;
+                pinButton.Foreground = new SolidColorBrush(Colors.Black);
+                pinButton.Margin = new Thickness(0, 0, 23, 0);
+                pinButton.SetValue(Grid.ColumnProperty, 1);
+
+                _header.Children.Add(_textBlockCaption);
+                _header.Children.Add(pinButton);
+                _header.Children.Add(closeButton);
+                Children.Add(_header);
+                if (dockPanelContent != null)
+                {
+                    dockPanelContent.SetValue(Grid.RowProperty, 1);
+                    Children.Add(dockPanelContent);
+                }
+            }
+            else
+            {
+                RowDefinitions.Add(new RowDefinition() { Height = new GridLength(100.0, GridUnitType.Star) });
+                ColumnDefinitions.Add(new ColumnDefinition());
                 Children.Add(dockPanelContent);
             }
-
         }
 
         /// <summary>
@@ -119,18 +116,21 @@ namespace Ovotan.Controls.Docking
         /// <param name="focusable">True - Содержисое панели стало активным, false в противном случае.</param>
         public void ChangeFocusState(bool focusable)
         {
-            if (focusable && !IsActive)
+            if (_header != null)
             {
-                IsActive = true;
-                _header.SetBinding(Grid.BackgroundProperty, _bindingHeaderActiveBackgroundBrush);
-                _textBlockCaption.SetBinding(TextBlock.ForegroundProperty, _bindigHeaderActiveForeground);
-                _dockMessageQueue.Publish(DockingMessageType.PanelGotFocus, this);
-            }
-            if (!focusable && IsActive)
-            {
-                _header.SetBinding(Grid.BackgroundProperty, _bindingHeaderBackgroundBrush);
-                _textBlockCaption.SetBinding(TextBlock.ForegroundProperty, _bindigHeaderForeground);
-                IsActive = false;
+                if (focusable && !IsActive)
+                {
+                    IsActive = true;
+                    _header.SetBinding(Grid.BackgroundProperty, _bindingHeaderActiveBackgroundBrush);
+                    _textBlockCaption.SetBinding(TextBlock.ForegroundProperty, _bindigHeaderActiveForeground);
+                    _dockMessageQueue.Publish(DockingMessageType.PanelGotFocus, this);
+                }
+                if (!focusable && IsActive)
+                {
+                    _header.SetBinding(Grid.BackgroundProperty, _bindingHeaderBackgroundBrush);
+                    _textBlockCaption.SetBinding(TextBlock.ForegroundProperty, _bindigHeaderForeground);
+                    IsActive = false;
+                }
             }
         }
 

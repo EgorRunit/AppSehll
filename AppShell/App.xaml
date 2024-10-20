@@ -6,8 +6,9 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/Ovotan.Controls.Docking;component/Resources/CanvasButtonResourceDictionary.xaml"/>
-                <ResourceDictionary Source="pack://application:,,,/Ovotan.Controls.Docking;component/Resources/DockPanelResourceDictionary.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Ovotan.Controls.Docking;component/Resources/CanvasButtonResourcesDictionary.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Ovotan.Controls.Docking;component/Resources/DockPanelResourcesDictionary.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Ovotan.Controls.Docking;component/Resources/DockHositngSettingsResources.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
