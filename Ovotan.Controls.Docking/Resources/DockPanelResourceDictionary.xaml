@@ -22,6 +22,9 @@
         <local1:PanelSettings.IconBottonHoverForeground>
             <SolidColorBrush Color="#C0CAE9" />
         </local1:PanelSettings.IconBottonHoverForeground>
+        <local1:PanelSettings.SplitterBackground>
+            <SolidColorBrush Color="#5D6B99" />
+        </local1:PanelSettings.SplitterBackground>
     </local1:PanelSettings>
 
     <Geometry x:Key="Ovotan_Control_DockPanel_Settings_ButtonIconPin" >

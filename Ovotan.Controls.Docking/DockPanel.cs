@@ -27,7 +27,6 @@ namespace Ovotan.Controls.Docking
         Button _top;
         Button _left;
         Button _bottom;
-        static int index = 0;
 
         public bool IsActive { get; set; }
 
@@ -57,8 +56,6 @@ namespace Ovotan.Controls.Docking
             RowDefinitions.Add(new RowDefinition() { Height = new GridLength(0.0, GridUnitType.Auto) });
             ColumnDefinitions.Add(new ColumnDefinition());
 
-            index++;
-
             var canvasButtonSettings = FindResource("Ovotan_Control_DockPanel_Settings") as PanelSettings;
             _bindingHeaderBackgroundBrush = new Binding("HeaderBackground");
             _bindingHeaderBackgroundBrush.Source = canvasButtonSettings;
@@ -75,7 +72,7 @@ namespace Ovotan.Controls.Docking
             _header.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(0, GridUnitType.Auto) });
             _header.SetBinding(Grid.BackgroundProperty, _bindingHeaderBackgroundBrush);
 
-            _textBlockCaption = new TextBlock() { Text = "Window " + index };
+            _textBlockCaption = new TextBlock() { Text = "Window "};
             _textBlockCaption.SetBinding(TextBlock.ForegroundProperty, _bindigHeaderForeground);
             _textBlockCaption.Padding = new Thickness(5, 2, 0, 3);
             _textBlockCaption.TextTrimming = TextTrimming.CharacterEllipsis;
@@ -108,10 +105,6 @@ namespace Ovotan.Controls.Docking
 
 
             Children.Add(_header);
-            if (index > 1)
-            {
-                Background = new SolidColorBrush(Colors.Aqua);
-            }
             if (dockPanelContent != null)
             {
                 dockPanelContent.SetValue(Grid.RowProperty, 1);

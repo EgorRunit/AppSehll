@@ -22,6 +22,5 @@
             </MenuItem>
         </Menu>
         <controls:DockingHost x:Name="MainDockingManager" Grid.Row="1"></controls:DockingHost>
-
     </Grid>
 </Window>

@@ -9,30 +9,50 @@ namespace Ovotan.Controls.Docking.Settings
     public class PanelSettings :FrameworkElement
     {
         /// <summary>
-        /// Цвет фона заголовка панели.
+        /// Зависимое свойство. Цвет фона заголовка панели.
         /// </summary>
         public static readonly DependencyProperty HeaderBackgroundProperty;
         /// <summary>
-        /// Цвет текста заголовка панели.
+        /// Зависимое свойство. Цвет текста заголовка панели.
         /// </summary>
         public static readonly DependencyProperty HeaderForegroundProperty;
         /// <summary>
-        /// Цвет фона заголовка панели, кагда она становиться активной.
+        /// Зависимое свойство. Цвет фона заголовка панели, кагда она становиться активной.
         /// </summary>
         public static readonly DependencyProperty HeaderActiveBackgroundProperty;
         /// <summary>
-        /// Цвет текста заголовка панели, кагда она становиться активной.
+        /// Зависимое свойство. Цвет текста заголовка панели, кагда она становиться активной.
         /// </summary>
         public static readonly DependencyProperty HeaderActiveForegroundProperty;
         /// <summary>
-        /// Цвет текста для кнопок типа IconButton.
+        /// Зависимое свойство. Цвет текста для кнопок типа IconButton.
         /// </summary>
         public static readonly DependencyProperty IconButtonNormalForegroundProperty;
         /// <summary>
-        /// Цвет текста для кнопок типа IconButton при наведении мыши.
+        /// Зависимое свойство. Цвет текста для кнопок типа IconButton при наведении мыши.
         /// </summary>
         public static readonly DependencyProperty IconBottonHoverForegroundProperty;
+        /// <summary>
+        /// Зависимое свойство. Цвет фона разделителя панелей
+        /// </summary>
+        public static readonly DependencyProperty SplitterBackgroundProperty;
 
+
+        /// <summary>
+        /// Цвет фона заголовка панели.
+        /// </summary>
+        public SolidColorBrush SplitterBackground
+        {
+            get
+            {
+
+                return GetValue(SplitterBackgroundProperty) as SolidColorBrush;
+            }
+            set
+            {
+                SetValue(SplitterBackgroundProperty, value);
+            }
+        }
 
         /// <summary>
         /// Цвет фона заголовка панели.
@@ -149,6 +169,8 @@ namespace Ovotan.Controls.Docking.Settings
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
             IconBottonHoverForegroundProperty = DependencyProperty.Register("IconBottonHoverForeground", typeof(SolidColorBrush), typeof(PanelSettings),
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
+            SplitterBackgroundProperty = DependencyProperty.Register("SplitterBackgroundProperty", typeof(SolidColorBrush), typeof(PanelSettings),
+            new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
         }
 
     }
