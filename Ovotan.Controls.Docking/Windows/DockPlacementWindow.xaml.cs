@@ -1,8 +1,12 @@
 using Ovotan.Controls.Docking.Enums;
 using Ovotan.Controls.Docking.Interfaces;
 using Ovotan.Controls.Docking.Messages;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.Metrics;
+using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -44,18 +48,28 @@ namespace Ovotan.Controls.Docking.Windows
                 var el = _elementRectangles.FindElementFromPoint(new Point(x,y));
                 if (el != null && el.Owner != _oldElementUndexMouse)
                 {
-                    _oldElementUndexMouse?.SetValue(BackgroundProperty, new SolidColorBrush(Colors.White));
+                    MainGrid.Visibility = Visibility.Visible;
+                    Point relativeLocation = el.Owner.TranslatePoint(new Point(0, 0), this);
+                    var top = (el.Owner.ActualHeight - CentralArrow.ActualHeight) / 2 + relativeLocation.Y;
+                    var left = (el.Owner.ActualWidth  - CentralArrow.ActualWidth) / 2 + relativeLocation.X;
+
+                    CentralArrow.SetValue(Canvas.TopProperty, top);
+                    CentralArrow.SetValue(Canvas.LeftProperty, left);
                     _oldElementUndexMouse = el.Owner;
-                    Debug.WriteLine("Enter to panel " + el.Owner.Name);
+                    //Debug.WriteLine(relativeLocation);
+                    //Debug.WriteLine("Panel enter " + _oldElementUndexMouse.Name);
 
                 }
                 else if(_oldElementUndexMouse != null && (el == null || el.Owner != _oldElementUndexMouse))
                 {
-                    Debug.WriteLine("Exit to panel " + _oldElementUndexMouse.Name);
+                    Debug.WriteLine("Panel exit" + _oldElementUndexMouse.Name);
                     _oldElementUndexMouse = null;
+                    MainGrid.Visibility = Visibility.Hidden;
                 }
-
-
+                if (el != null)
+                {
+                    //Debug.WriteLine(el.Owner.ActualHeight + " - " + CentralArrow.ActualHeight);
+                }
 
 
                 _mouseMoveCallback(e);
@@ -65,15 +79,14 @@ namespace Ovotan.Controls.Docking.Windows
         private void DockPlacementWindow_MouseUp(object sender, MouseButtonEventArgs e)
         {
             _isMouseCaptured = false;
+            _oldElementUndexMouse = null;
+            MainGrid.Visibility = Visibility.Hidden;
             ReleaseMouseCapture();
             Hide();
         }
 
         private void _attachPanel(object sender, MouseButtonEventArgs e)
         {
-            _isMouseCaptured = false;
-            ReleaseMouseCapture();
-            Hide();
             var args = sender as CanvasButton;
             PanelAttachedType attachType = PanelAttachedType.Left;
             switch (args.CanvasButtonType)
@@ -96,9 +109,6 @@ namespace Ovotan.Controls.Docking.Windows
 
         private void _splitPanel(object sender, MouseButtonEventArgs e)
         {
-            _isMouseCaptured = false;
-            ReleaseMouseCapture();
-            Hide();
             var args = sender as CanvasButton;
             PanelSplittedType splitType = PanelSplittedType.Left;
             switch (args.CanvasButtonType)
@@ -113,7 +123,7 @@ namespace Ovotan.Controls.Docking.Windows
                     splitType = PanelSplittedType.Bottom;
                     break;
             }
-            var panelAttachedMessage = new PanelSplittedMessage() { PanelSplitted = null, SplitType = splitType };
+            var panelAttachedMessage = new PanelSplittedMessage() { PanelSplitted = _oldElementUndexMouse as DockPanel, SplitType = splitType };
             _dragginWindpow.Content = null;
             _dragginWindpow.Close();
             _dockingMessageQueue.Publish(DockingMessageType.PanelSplitted, panelAttachedMessage);
@@ -122,7 +132,6 @@ namespace Ovotan.Controls.Docking.Windows
 
         public void Show(DockPanelWindow dragginWindpow, Action<MouseEventArgs> mouseMoveCallback)
         {
-
             var startPoints = _dockingHost.PointToScreen(new Point());
             var ss = FindLogicalChildren<IDockPanel>(_dockingHost);
             _elementRectangles = new List<ElementRectangle>(ss.Count());
@@ -141,7 +150,9 @@ namespace Ovotan.Controls.Docking.Windows
             Left = startPoints.X;
             Height = _dockingHost.ActualHeight;
             Width = _dockingHost.ActualWidth;
+
             Show();
+            MainGrid.Visibility = Visibility.Hidden;
             Mouse.Capture(this, CaptureMode.SubTree);
         }
 
