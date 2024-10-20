@@ -23,7 +23,6 @@ namespace Ovotan.Controls.Docking
         Grid _header;
 
         TextBlock _textBlockCaption;
-        StackPanel _stackPanel;
         Button _right;
         Button _top;
         Button _left;
@@ -37,10 +36,7 @@ namespace Ovotan.Controls.Docking
             DefaultStyleKeyProperty.OverrideMetadata(typeof(DockPanel), new FrameworkPropertyMetadata(typeof(DockPanel)));
         }
 
-        public DockPanel()
-        {
 
-        }
 
         protected override void OnInitialized(EventArgs e)
         {
@@ -111,20 +107,15 @@ namespace Ovotan.Controls.Docking
             
 
 
-
-            _stackPanel = new StackPanel();
-            _stackPanel.SetValue(Grid.RowProperty, 1);
-            if (dockPanelContent != null)
-            {
-                _stackPanel.Children.Add(dockPanelContent);
-            }
-
-
             Children.Add(_header);
-            Children.Add(_stackPanel);
             if (index > 1)
             {
                 Background = new SolidColorBrush(Colors.Aqua);
+            }
+            if (dockPanelContent != null)
+            {
+                dockPanelContent.SetValue(Grid.RowProperty, 1);
+                Children.Add(dockPanelContent);
             }
 
         }

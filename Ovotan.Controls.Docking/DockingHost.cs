@@ -44,7 +44,7 @@ namespace Ovotan.Controls.Docking
         #region DockingManagerMessageQueue handlers
         void _panelAttached(PanelAttachedMessage message)
         {
-            _dockConstractureService.AttachPanel(message.Type, this, _rootGrid, message.DockPanelContent);
+            _dockConstractureService.AttachPanel(message.Type, this, message.DockPanelContent);
         }
 
         public void _showDockPanelWindow(DockPanelWindow window)

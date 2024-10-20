@@ -22,7 +22,7 @@ namespace Ovotan.Controls.Docking.Services
             _messageQueue = messageQueue;
         }
 
-        public void AttachPanel(PanelAttachedType type, DockingHost dockingHost, FrameworkElement root, FrameworkElement dockPanelContent)
+        public void AttachPanel(PanelAttachedType type, DockingHost dockingHost, FrameworkElement dockPanelContent)
         {
 
             var parent = dockingHost.Content as Grid;
@@ -40,10 +40,10 @@ namespace Ovotan.Controls.Docking.Services
                     newPanelContainer = new PanelHorizontalContainer(PanelSplittedType.Right, dockingHost.ActualWidth.GetPercent(percent), panel, added);
                     break;
                 case PanelAttachedType.Top:
-                    newPanelContainer = new PanelVerticalContainer(PanelSplittedType.Top, dockingHost.ActualWidth.GetPercent(percent), panel, added);
+                    newPanelContainer = new PanelVerticalContainer(PanelSplittedType.Top, dockingHost.ActualHeight.GetPercent(percent), panel, added);
                     break;
                 case PanelAttachedType.Bottom:
-                    newPanelContainer = new PanelVerticalContainer(PanelSplittedType.Bottom, dockingHost.ActualWidth.GetPercent(percent), panel, added);
+                    newPanelContainer = new PanelVerticalContainer(PanelSplittedType.Bottom, dockingHost.ActualHeight.GetPercent(percent), panel, added);
                     break;
             }
             parent.Children.Add(newPanelContainer);
@@ -66,7 +66,7 @@ namespace Ovotan.Controls.Docking.Services
             var parentRowIndex = (int)panel.GetValue(Grid.RowProperty);
             parent.Children.Remove(panel);
 
-            var added = new DockPanel(_messageQueue, null);
+            var added = new DockPanel(_messageQueue, args.DockPanelContent);
             switch (args.SplitType)
             {
                 case PanelSplittedType.Right:

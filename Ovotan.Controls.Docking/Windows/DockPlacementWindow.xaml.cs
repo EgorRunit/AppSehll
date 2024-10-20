@@ -123,7 +123,7 @@ namespace Ovotan.Controls.Docking.Windows
                     splitType = PanelSplittedType.Bottom;
                     break;
             }
-            var panelAttachedMessage = new PanelSplittedMessage() { PanelSplitted = _oldElementUndexMouse as DockPanel, SplitType = splitType };
+            var panelAttachedMessage = new PanelSplittedMessage() { DockPanelContent = _dragginWindpow.DockPanelContent, PanelSplitted = _oldElementUndexMouse as DockPanel, SplitType = splitType };
             _dragginWindpow.Content = null;
             _dragginWindpow.Close();
             _dockingMessageQueue.Publish(DockingMessageType.PanelSplitted, panelAttachedMessage);

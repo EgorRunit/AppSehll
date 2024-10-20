@@ -20,6 +20,6 @@ namespace Ovotan.Controls.Docking.Interfaces
         /// <param name="panel"></param>
         void RemovePanel(DockPanel panel);
 
-        void AttachPanel(PanelAttachedType type, DockingHost dockingHost, FrameworkElement root, FrameworkElement dockPanelContent);
+        void AttachPanel(PanelAttachedType type, DockingHost dockingHost, FrameworkElement dockPanelContent);
     }
 }

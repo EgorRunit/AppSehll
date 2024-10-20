@@ -1,4 +1,5 @@
 using Ovotan.Controls.Docking.Enums;
+using System.Windows;
 
 namespace Ovotan.Controls.Docking.Messages
 {
@@ -15,5 +16,9 @@ namespace Ovotan.Controls.Docking.Messages
         /// Тип разделения панели.
         /// </summary>
         public PanelSplittedType SplitType { get; set; }
+        /// <summary>
+        /// Содержимое вставляемой панели.
+        /// </summary>
+        public FrameworkElement DockPanelContent { get; set; }
     }
 }

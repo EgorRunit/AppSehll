@@ -29,7 +29,8 @@ namespace AppShell
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            var wnd = new DockPanelWindow(new Button() { Content="swdfewfrerew"});
+            
+            var wnd = new DockPanelWindow(new Button() { Content = "swdfewfrerew" });
             MainDockingManager._showDockPanelWindow(wnd);
         }
     }
