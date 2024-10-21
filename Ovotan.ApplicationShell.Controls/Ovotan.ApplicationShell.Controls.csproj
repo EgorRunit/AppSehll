@@ -4,11 +4,11 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Extensions\" />
-    <Folder Include="Resources\" />
+    <ProjectReference Include="..\Ovotan.Controls.Docking\Ovotan.Controls.Docking.csproj" />
   </ItemGroup>
 
 </Project>

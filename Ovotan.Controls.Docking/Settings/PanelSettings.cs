@@ -37,6 +37,47 @@ namespace Ovotan.Controls.Docking.Settings
         /// </summary>
         public static readonly DependencyProperty SplitterBackgroundProperty;
 
+        /// <summary>
+        /// Зависимое свойство. Цвет фона контента панели.
+        /// </summary>
+        public static readonly DependencyProperty ContentBackgroundProperty;
+        /// <summary>
+        /// Зависимое свойство. Цвет фона Toolbar панели.
+        /// </summary>
+        public static readonly DependencyProperty ContentToolbarBackgroundProperty;
+
+        /// <summary>
+        /// Цвет фона Toolbar панели.
+        /// </summary>
+        public SolidColorBrush ContentToolbarBackground
+        {
+            get
+            {
+
+                return GetValue(ContentToolbarBackgroundProperty) as SolidColorBrush;
+            }
+            set
+            {
+                SetValue(ContentToolbarBackgroundProperty, value);
+            }
+        }
+
+        /// <summary>
+        /// Цвет фона Цвет фона контента панели.
+        /// </summary>
+        public SolidColorBrush ContentBackground
+        {
+            get
+            {
+
+                return GetValue(ContentBackgroundProperty) as SolidColorBrush;
+            }
+            set
+            {
+                SetValue(ContentBackgroundProperty, value);
+            }
+        }
+
 
         /// <summary>
         /// Цвет фона заголовка панели.
@@ -170,8 +211,12 @@ namespace Ovotan.Controls.Docking.Settings
             IconBottonHoverForegroundProperty = DependencyProperty.Register("IconBottonHoverForeground", typeof(SolidColorBrush), typeof(PanelSettings),
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
             SplitterBackgroundProperty = DependencyProperty.Register("SplitterBackgroundProperty", typeof(SolidColorBrush), typeof(PanelSettings),
-            new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
-        }
+                new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
 
+            ContentBackgroundProperty = DependencyProperty.Register("ContentBackgroundProperty", typeof(SolidColorBrush), typeof(PanelSettings),
+                new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
+            ContentToolbarBackgroundProperty = DependencyProperty.Register("ContentToolbarBackgroundProperty", typeof(SolidColorBrush), typeof(PanelSettings),
+                new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
+        }
     }
 }

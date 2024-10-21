@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AppShell"
         xmlns:controls="clr-namespace:Ovotan.Controls.Docking;assembly=Ovotan.Controls.Docking"
+        xmlns:controls1="clr-namespace:Ovotan.ApplicationShell.Controls;assembly=Ovotan.ApplicationShell.Controls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+	xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -17,13 +19,12 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Menu>
-            <MenuItem Header="Shells">
+            <MenuItem Header="Shell">
                 <MenuItem Header="RabbitMQ" Click="MenuItem_Click"/>
             </MenuItem>
             <MenuItem Header="Tools">
-                <MenuItem Header="RabbitMQ" Click="MenuItem_Click"/>
             </MenuItem>
         </Menu>
         <controls:DockingHost x:Name="MainDockingManager" Grid.Row="1"></controls:DockingHost>
-    </Grid>
+	</Grid>
 </Window>

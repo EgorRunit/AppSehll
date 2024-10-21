@@ -11,6 +11,6 @@ namespace Ovotan.Controls.Docking.Interfaces
     public interface IDockPanelWindow
     {
         FrameworkElement DockPanelContent { get; }
-        void Initialize(DockPlacementWindow dockPlacementWindow, IDockingMessageQueue dockingMessageQueue);
+        void Initialize(IDockingMessageQueue dockingMessageQueue);
     }
 }

@@ -30,10 +30,10 @@ namespace Ovotan.Controls.Docking.Enums
         /// В качестве аргумента события передается DockPlacementWindow.
         /// </summary>
         StartDraggingDockWindow,
-        ///// <summary>
-        ///// Показать окно с панелью.
-        ///// В качестве аргумента события передается DockPanelWindow.
-        ///// </summary>
+        /// <summary>
+        /// Показать окно с панелью.
+        /// В качестве аргумента события передается FramworkElement.
+        /// </summary>
         ShowDockPanelWindow,
 
     }

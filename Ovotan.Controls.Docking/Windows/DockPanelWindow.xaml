@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Ovotan.Controls.Docking.Windows"
         Background="Transparent"
         mc:Ignorable="d"
+        Topmost="True"
 		WindowStyle="None"
 		AllowsTransparency="True"
 		Width="400" Height="300"

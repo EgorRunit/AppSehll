@@ -25,6 +25,12 @@
         <local1:PanelSettings.SplitterBackground>
             <SolidColorBrush Color="#5D6B99" />
         </local1:PanelSettings.SplitterBackground>
+        <local1:PanelSettings.ContentBackground>
+            <SolidColorBrush Color="#F7F9FE" />
+        </local1:PanelSettings.ContentBackground>
+        <local1:PanelSettings.ContentToolbarBackground>
+            <SolidColorBrush Color="#CCD5F0"/>
+        </local1:PanelSettings.ContentToolbarBackground>
     </local1:PanelSettings>
 
     <Geometry x:Key="Ovotan_Controls_DockPanel_Settings_ButtonIconPin" >
@@ -34,7 +40,7 @@
         F1M8.207,7.5l5.147,5.146-.708.708L7.5,8.207,2.354,13.354l-.708-.708L6.793,7.5,1.646,2.354l.708-.708L7.5,6.793l5.146-5.147.708.708Z
     </Geometry>
 
-    <Style TargetType="{x:Type local:IconButton}" BasedOn="{StaticResource {x:Type Button}}">
+    <Style TargetType="{x:Type local:IconButton}" BasedOn="{StaticResource {x:Type Button}}" >
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>

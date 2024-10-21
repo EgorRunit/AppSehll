@@ -5,7 +5,17 @@ VisualStudioVersion = 17.4.33103.184
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppShell", "AppShell\AppShell.csproj", "{61D82A60-09DA-490C-BDC5-FCC1F4DF7280}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ovotan.Controls.Docking", "Ovotan.Controls.Docking\Ovotan.Controls.Docking.csproj", "{8E69C001-BFA9-48DD-B20F-FA12B4AB6805}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ovotan.Controls.Docking", "Ovotan.Controls.Docking\Ovotan.Controls.Docking.csproj", "{8E69C001-BFA9-48DD-B20F-FA12B4AB6805}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ovotan.ApplicationShell.Controls", "Ovotan.ApplicationShell.Controls\Ovotan.ApplicationShell.Controls.csproj", "{A0988D34-08D1-450C-B6EB-C5FFD5F4A31A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shells", "Shells", "{8F938530-9030-4BF4-9C48-F7648F4BF4A2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ovotan.Shell.RabbitMQ", "Ovotan.Shell.RabbitMQ", "{EA1D9DA6-139F-4C45-B63F-BF571DB5263C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ovotan.Shell.RabbitMQ", "Shells\Ovotan.Shell.RabbitMQ\Ovotan.Shell.RabbitMQ.csproj", "{09091304-131D-4F83-9622-1BE768405EDB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ovotan.Shell.RabbitMQ.Controls", "Shells\Ovotan.Shell.RabbitMQ.Controls\Ovotan.Shell.RabbitMQ.Controls.csproj", "{B53824D3-0E1F-49FD-9DA9-02DF20CCB091}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,9 +31,26 @@ Global
 		{8E69C001-BFA9-48DD-B20F-FA12B4AB6805}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E69C001-BFA9-48DD-B20F-FA12B4AB6805}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E69C001-BFA9-48DD-B20F-FA12B4AB6805}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0988D34-08D1-450C-B6EB-C5FFD5F4A31A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0988D34-08D1-450C-B6EB-C5FFD5F4A31A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0988D34-08D1-450C-B6EB-C5FFD5F4A31A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0988D34-08D1-450C-B6EB-C5FFD5F4A31A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09091304-131D-4F83-9622-1BE768405EDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09091304-131D-4F83-9622-1BE768405EDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09091304-131D-4F83-9622-1BE768405EDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09091304-131D-4F83-9622-1BE768405EDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B53824D3-0E1F-49FD-9DA9-02DF20CCB091}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B53824D3-0E1F-49FD-9DA9-02DF20CCB091}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B53824D3-0E1F-49FD-9DA9-02DF20CCB091}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B53824D3-0E1F-49FD-9DA9-02DF20CCB091}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EA1D9DA6-139F-4C45-B63F-BF571DB5263C} = {8F938530-9030-4BF4-9C48-F7648F4BF4A2}
+		{09091304-131D-4F83-9622-1BE768405EDB} = {EA1D9DA6-139F-4C45-B63F-BF571DB5263C}
+		{B53824D3-0E1F-49FD-9DA9-02DF20CCB091} = {EA1D9DA6-139F-4C45-B63F-BF571DB5263C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {887B72EA-D581-4DEB-8F89-DA82E4B8BC13}

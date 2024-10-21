@@ -11,7 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Ovotan.ApplicationShell.Controls\Ovotan.ApplicationShell.Controls.csproj" />
     <ProjectReference Include="..\Ovotan.Controls.Docking\Ovotan.Controls.Docking.csproj" />
+    <ProjectReference Include="..\Shells\Ovotan.Shell.RabbitMQ.Controls\Ovotan.Shell.RabbitMQ.Controls.csproj" />
+    <ProjectReference Include="..\Shells\Ovotan.Shell.RabbitMQ\Ovotan.Shell.RabbitMQ.csproj" />
   </ItemGroup>
 
 </Project>

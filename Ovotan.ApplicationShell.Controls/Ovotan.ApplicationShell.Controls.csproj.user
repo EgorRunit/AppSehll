@@ -2,12 +2,15 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
-    <Compile Update="Windows\DockPlacementWindow.xaml.cs">
+    <Compile Update="Resources\TestUi.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Windows\DockPlacementWindow.xaml">
+    <Page Update="Resources\Dictionary1.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\TestUi.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

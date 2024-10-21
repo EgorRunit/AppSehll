@@ -30,7 +30,7 @@ namespace Ovotan.Controls.Docking
             _dockingMessageQueue.Register(DockingMessageType.PanelClosed, (x) => _dockConstractureService.RemovePanel(x as DockPanel));
             _dockingMessageQueue.Register(DockingMessageType.PanelSplitted, (x) => _dockConstractureService.SplitPanel(x as PanelSplittedMessage));
             _dockingMessageQueue.Register(DockingMessageType.PanelAttached, (x) => _panelAttached((PanelAttachedMessage)x));
-            _dockingMessageQueue.Register(DockingMessageType.ShowDockPanelWindow, (x) => _showDockPanelWindow(x as DockPanelWindow));
+            _dockingMessageQueue.Register(DockingMessageType.ShowDockPanelWindow, (x) => ShowDockPanelWindow(x as FrameworkElement));
             _dockingMessageQueue.Register(DockingMessageType.PanelGotFocus, _dockPanelFocused);
             _dockConstractureService = new DockConstractureService(_dockingMessageQueue);
 
@@ -46,10 +46,10 @@ namespace Ovotan.Controls.Docking
             _dockConstractureService.AttachPanel(message.Type, this, message.DockPanelContent);
         }
 
-        public void _showDockPanelWindow(DockPanelWindow window)
-        {
-            window.Initialize(_dockPlacementWindow, _dockingMessageQueue);
-            window.Topmost = true;
+        public void ShowDockPanelWindow(FrameworkElement frameworkElement)
+        { 
+            var window = new DockPanelWindow(_dockPlacementWindow, frameworkElement);
+            window.Initialize(_dockingMessageQueue);
             window.Show();
         }
 

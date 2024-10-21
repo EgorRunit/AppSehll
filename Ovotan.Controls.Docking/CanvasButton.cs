@@ -152,7 +152,7 @@ namespace Ovotan.Controls.Docking
 
         static CanvasButton()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(CanvasButton), new FrameworkPropertyMetadata(typeof(Canvas)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(CanvasButton), new FrameworkPropertyMetadata(typeof(CanvasButton)));
 
             CanvasButtonTypeProperty = DependencyProperty.Register("CanvasButtonType", typeof(CanvasButtonType), typeof(Canvas),
                 new PropertyMetadata(CanvasButtonType.WindowTopDock));

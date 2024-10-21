@@ -16,8 +16,9 @@ namespace Ovotan.Controls.Docking.Windows
 
         public FrameworkElement DockPanelContent { get; private set; }
 
-        public DockPanelWindow(FrameworkElement contentElement)
+        public DockPanelWindow(DockPlacementWindow dockPlacementWindow, FrameworkElement contentElement)
         {
+            _dockPlacementWindow = dockPlacementWindow;
             InitializeComponent();
             DockPanelContent = contentElement;
             DockPanelContent.SetValue(Grid.RowProperty, 1);
@@ -27,9 +28,8 @@ namespace Ovotan.Controls.Docking.Windows
             MainGrid.Children.Add(DockPanelContent);
         }
 
-        public void Initialize(DockPlacementWindow dockPlacementWindow, IDockingMessageQueue dockingMessageQueue)
+        public void Initialize(IDockingMessageQueue dockingMessageQueue)
         {
-            _dockPlacementWindow = dockPlacementWindow;
             _dockingMessageQueue = dockingMessageQueue;
         }
 
