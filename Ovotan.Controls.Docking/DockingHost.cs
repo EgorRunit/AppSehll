@@ -23,9 +23,9 @@ namespace Ovotan.Controls.Docking
         IDockPanel _previousActiveDockPanel;
         SiteHost _siteHost;
 
-        public DockingHost()
+        public DockingHost(IDockingMessageQueue dockingMessageQueue)
         {
-            _dockingMessageQueue = new DockingMessageQueue();
+            _dockingMessageQueue = dockingMessageQueue;
             _dockPlacementWindow = new DockPlacementWindow(this, _dockingMessageQueue);
             _dockingMessageQueue.Register(DockingMessageType.PanelClosed, (x) => _dockConstractureService.RemovePanel(x as DockPanel));
             _dockingMessageQueue.Register(DockingMessageType.PanelSplitted, (x) => _dockConstractureService.SplitPanel(x as PanelSplittedMessage));
@@ -46,9 +46,14 @@ namespace Ovotan.Controls.Docking
             _dockConstractureService.AttachPanel(message.Type, this, message.DockPanelContent);
         }
 
-        public void ShowDockPanelWindow(FrameworkElement frameworkElement)
+        public void AttachPanelDock(PanelAttachedType panelAttachedType, FrameworkElement dockPanelContent)
+        {
+            _dockConstractureService.AttachPanel(panelAttachedType, this, dockPanelContent);
+        }
+
+        public void ShowDockPanelWindow(FrameworkElement DockPanelContent)
         { 
-            var window = new DockPanelWindow(_dockPlacementWindow, frameworkElement);
+            var window = new DockPanelWindow(_dockPlacementWindow, DockPanelContent);
             window.Initialize(_dockingMessageQueue);
             window.Show();
         }

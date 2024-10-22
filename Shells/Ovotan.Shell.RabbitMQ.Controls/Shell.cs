@@ -11,6 +11,9 @@ using System.Net.Http.Headers;
 using System.Net;
 using RabbitMQ.Client.Events;
 using System.Threading.Channels;
+using Ovotan.Controls.Docking.Messages;
+using Ovotan.Controls.Docking.Enums;
+using Ovotan.ApplicationShell.Controls.ToolbarElements;
 
 namespace Ovotan.Shell.RabbitMQ.Controls
 {
@@ -34,10 +37,22 @@ namespace Ovotan.Shell.RabbitMQ.Controls
         int index = 0;
         public Shell()
         {
-            //_dockingMessageQueue = dockingMessageQueue;
             _shellDockPanelToolbarElements = new List <IShellToolbarElement> ();
-            _shellDockPanelToolbarElements.Add(new ShellToolbarElement(ShellToolbarElementType.Button, _createConnection));
+            _shellDockPanelToolbarElements.Add(new ToolbarElementBase() {Type = ShellToolbarElementType.Button, Text="+", Action=_createConnection });
+            _shellDockPanelToolbarElements.Add(new AddGroupFolder());
             ObjectBrowser = new ShellObjectBrowser(this);
+        }
+
+        public void Start(IDockingMessageQueue dockingMessageQueue)
+        {
+            _dockingMessageQueue = dockingMessageQueue;
+            var message = new PanelAttachedMessage()
+            {
+                DockPanelContent = ObjectBrowser,
+                Type = PanelAttachedType.Left
+            };
+            _dockingMessageQueue.Publish(DockingMessageType.PanelAttached, message);
+            
         }
 
 
@@ -46,7 +61,6 @@ namespace Ovotan.Shell.RabbitMQ.Controls
             var factory = new ConnectionFactory { HostName = "localhost" };
             using var connection = factory.CreateConnection();
            
-
 
             using var channel = connection.CreateModel();
             channel.QueueDeclare(

@@ -15,27 +15,17 @@ namespace Ovotan.ApplicationShell.Controls.Interfaces
 
     public interface IShellToolbarElement
     {
-        string Text { get; }
+        string Text { get; set; }
             
-        ShellToolbarElementType Type { get; }
+        ShellToolbarElementType Type { get; set; }
 
-        Action Callback { get; }
+        Action Action { get; set; }
 
     }
 
-    public class ShellToolbarElement : IShellToolbarElement
+    public enum ShellToolbarElementAvtionType
     {
-        public string Text => "+";
-
-        public ShellToolbarElementType Type { get; private set;}
-
-        public Action Callback  { get; private set; }
-
-        public ShellToolbarElement(ShellToolbarElementType type, Action callback)
-        {
-            Type = type;
-            Callback = callback;
-        }
+        Action,
+        GroupFolder
     }
-
 }

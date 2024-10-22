@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Linq;
+using Ovotan.Controls.Docking.Interfaces;
 
 namespace Ovotan.ApplicationShell.Controls.Interfaces
 {
@@ -14,5 +15,8 @@ namespace Ovotan.ApplicationShell.Controls.Interfaces
         IEnumerable<IShellToolbarElement> ObjectBrowserToolbarElements { get; }
 
         ShellObjectBrowser ObjectBrowser { get; }
+
+
+        void Start(IDockingMessageQueue dockingMessageQueue);
     }
 }

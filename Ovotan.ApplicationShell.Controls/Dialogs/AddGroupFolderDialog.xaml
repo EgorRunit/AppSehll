@@ -1,0 +1,22 @@
+<Window x:Class="Ovotan.ApplicationShell.Controls.Dialogs.AddGroupFolderDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Ovotan.ApplicationShell.Controls.Dialogs"
+        mc:Ignorable="d"
+        Title="Создание групповой папки" Height="115" Width="300" Margin="0" Padding="0">
+    <Grid Height="75" Margin="0" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Название папки" Margin="5,5,5,0"/>
+        <TextBox x:Name="GroupFolderName" Grid.Row="1" Margin="5,5,5,5" BorderBrush="Black" BorderThickness="1"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Height="Auto" HorizontalAlignment="Right">
+            <Button Content="Добавить" Margin="0,0,5,5" Click="Button_Click"/>
+            <Button Content="Отмена" Margin="0,0,5,5" IsCancel="True"/>
+        </StackPanel>
+    </Grid>
+</Window>
