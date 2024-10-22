@@ -15,7 +15,7 @@ using System.Xml.Serialization;
 
 namespace Ovotan.ApplicationShell.Controls
 {
-    public class ObjectBrowserNode : TreeViewItem
+    public class ObjectBrowserNodeaaaaaaa : TreeViewItem
     {
         public static readonly DependencyProperty TreeNodeProperty;
         public string Text { get; set; }
@@ -35,7 +35,7 @@ namespace Ovotan.ApplicationShell.Controls
 
 
 
-        public ObjectBrowserNode() 
+        public ObjectBrowserNodeaaaaaaa() 
         { 
             Children = new ObservableCollection<ObjectBrowserNode>();
         }
@@ -99,18 +99,18 @@ namespace Ovotan.ApplicationShell.Controls
         //    }
         //}
 
-        static ObjectBrowserNode()
-        {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(ObjectBrowserNode), new FrameworkPropertyMetadata(typeof(ObjectBrowserNode)));
-            //TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(ObjectBrowserNode),
-            //    new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
-            //ChildrenProperty = DependencyProperty.Register("Children", typeof(ObservableCollection<ObjectBrowserNode>), typeof(ObjectBrowserNode),
-            //    new FrameworkPropertyMetadata(new ObservableCollection<ObjectBrowserNode>(), FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
-            HasItemsProperty = DependencyProperty.Register("HasItems", typeof(bool), typeof(ObjectBrowserNode),
-                new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
-            TreeNodeProperty = DependencyProperty.Register("TreeNode", typeof(object), typeof(ObjectBrowserNode),
-                new FrameworkPropertyMetadata(new object(), FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
-        }
+        //static ObjectBrowserNode()
+        //{
+        //    DefaultStyleKeyProperty.OverrideMetadata(typeof(ObjectBrowserNode), new FrameworkPropertyMetadata(typeof(ObjectBrowserNode)));
+        //    //TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(ObjectBrowserNode),
+        //    //    new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
+        //    //ChildrenProperty = DependencyProperty.Register("Children", typeof(ObservableCollection<ObjectBrowserNode>), typeof(ObjectBrowserNode),
+        //    //    new FrameworkPropertyMetadata(new ObservableCollection<ObjectBrowserNode>(), FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
+        //    HasItemsProperty = DependencyProperty.Register("HasItems", typeof(bool), typeof(ObjectBrowserNode),
+        //        new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
+        //    TreeNodeProperty = DependencyProperty.Register("TreeNode", typeof(object), typeof(ObjectBrowserNode),
+        //        new FrameworkPropertyMetadata(new object(), FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
+        //}
 
     }
 
@@ -195,19 +195,19 @@ namespace Ovotan.ApplicationShell.Controls
             _treeView = Template.FindName("TreeView", this) as TreeView;
 
 
-            Children.Add(new ObjectBrowserNode() { Text = "werewrew 1", HasItems = true});
-            Children.Add(new ObjectBrowserNode() { Text = "werewrew 2"});
-            Children.Add(new ObjectBrowserNode() { Text = "werewrew 2" });
-            Children.Add(new ObjectBrowserNode() { Text = "werewrew 2" });
-            Children.Add(new ObjectBrowserNode() { Text = "werewrew 2", HasItems = true });
-            Children.Add(new ObjectBrowserNode() { Text = "werewrew 2" });
+            Children.Add(new ObjectBrowserNode() { Header = "werewrew 1"});
+            Children.Add(new ObjectBrowserNode() { Header = "werewrew 2"});
+            Children.Add(new ObjectBrowserNode() { Header = "werewrew 2" });
+            Children.Add(new ObjectBrowserNode() { Header = "werewrew 2" });
+            Children.Add(new ObjectBrowserNode() { Header = "werewrew 2"});
+            Children.Add(new ObjectBrowserNode() { Header = "werewrew 2" });
             //Children[0].Items.Add(new ObjectBrowserNode() { Text = "dasfkds;lfk;dlsfk;lsdkf;lds" });
             //(Children[0] as TreeViewItem).Items[0].Add(new ObjectBrowserNode() { Text = "33333" });
 
 
-            Children[0].Children.Add(new ObjectBrowserNode() { Text="childred"});
-            Children[0].Children[0].Children.Add(new ObjectBrowserNode() { Text = "childred" });
-            Children[3].Children.Add(new ObjectBrowserNode() { Text = "childred" });
+            Children[0].Items.Add(new ObjectBrowserNode() { Header="childred"});
+            (Children[0].Items[0] as TreeViewItem) .Items.Add(new ObjectBrowserNode() { Header = "childred" });
+            Children[3].Items.Add(new ObjectBrowserNode() { Header = "childred" });
             //           .Childred.Add(new ObjectBrowserNode() { Text = "xsfsdfsdfds" });
 
             //var node1 = new TreeViewItem() { Header = "1111111" };
@@ -217,7 +217,7 @@ namespace Ovotan.ApplicationShell.Controls
             //binding.Source = this;
             //_treeView.SetBinding(TreeView.ItemsSourceProperty, binding);
 
-            _treeView.SetValue(TreeView.ItemsSourceProperty, Children);
+            //_treeView.SetValue(TreeView.ItemsSourceProperty, Children);
             //_treeView.ItemsSource = Children;
             //var ss = Application.Current.Resources["EEE"] as DataTemplate;
             //_treeView.ItemTemplate = ss;

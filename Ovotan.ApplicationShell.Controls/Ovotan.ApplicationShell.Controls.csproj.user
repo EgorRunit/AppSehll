@@ -5,9 +5,6 @@
     <Compile Update="Dialogs\AddGroupFolderDialog.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Resources\TestUi.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Dialogs\AddGroupFolderDialog.xaml">
@@ -16,7 +13,7 @@
     <Page Update="Resources\Dictionary1.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Resources\TestUi.xaml">
+    <Page Update="Resources\ObjectBrowserResource.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
