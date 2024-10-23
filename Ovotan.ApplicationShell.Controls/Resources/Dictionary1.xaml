@@ -46,11 +46,11 @@
 
                         <TreeView  x:Name="TreeView" Grid.Row="1"
                             Background="{Binding Source={StaticResource Ovotan_Controls_DockPanel_Settings}, Path=ContentBackground}">
-                            <TreeView.ItemTemplate>
+                            <!--<TreeView.ItemTemplate>
                                 <HierarchicalDataTemplate 
                                     ItemTemplateSelector="{x:Null}"
                                     DataType="{x:Type local:ObjectBrowserNode}" ItemsSource="{Binding Children, RelativeSource={RelativeSource TemplatedParent}}"/>
-                            </TreeView.ItemTemplate>
+                            </TreeView.ItemTemplate>-->
                         </TreeView>
                     </Grid>
                 </ControlTemplate>

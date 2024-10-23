@@ -11,6 +11,7 @@
                 <ResourceDictionary Source="pack://application:,,,/Ovotan.Controls.Docking;component/Resources/DockHositngSettingsResources.xaml"/>
 
                 <ResourceDictionary Source="pack://application:,,,/Ovotan.ApplicationShell.Controls;component/Resources/Dictionary1.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Ovotan.ApplicationShell.Controls;component/Resources/ObjectBrowserResource.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

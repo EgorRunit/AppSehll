@@ -12,9 +12,6 @@
 	xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
 
     <Window.Resources>
-        <Style TargetType="{x:Type controls2:OTree}">
-            <Setter Property="Background" Value="AliceBlue"/>
-        </Style>
     </Window.Resources>
 
     <Grid x:Name="MainGrid">
@@ -26,41 +23,12 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        
-        <controls2:OTree Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-            <controls1:ObjectBrowserNode Header="Emplowerewr wer wer ewr we rwerew yee1">
-                <TreeViewItem Header="Jesper Aaberg"/>
-            </controls1:ObjectBrowserNode>
-            <TreeViewItem Header="Employee1" IsSelected="True">
-                <TreeViewItem Header="Jesper Aaberg"/>
-                <TreeViewItem Header="Employee Number">
-                    <TreeViewItem Header="12345"/>
-                </TreeViewItem>
-                <TreeViewItem Header="Work Days">
-                    <TreeViewItem Header="Monday"/>
-                    <TreeViewItem Header="Tuesday"/>
-                    <TreeViewItem Header="Thursday"/>
-                </TreeViewItem>
-            </TreeViewItem>
-            <TreeViewItem Header="Employee2">
-                <TreeViewItem Header="Dominik Paiha"/>
-                <TreeViewItem Header="Employee Number">
-                    <TreeViewItem Header="98765"/>
-                </TreeViewItem>
-                <TreeViewItem Header="Work Days">
-                    <TreeViewItem Header="Tuesday"/>
-                    <TreeViewItem Header="Wednesday"/>
-                    <TreeViewItem Header="Friday"/>
-                </TreeViewItem>
-            </TreeViewItem>
-        </controls2:OTree>
-        
-        <!--<controls1:ShellManagement x:Name="MainShallManagement" Grid.Row="1">
+        <controls1:ShellManagement x:Name="MainShallManagement" Grid.Row="1">
             <controls1:ShellManagement.HeadMenuItems>
                 <MenuItem Header="Sheel"></MenuItem>
                 <MenuItem Header="Tools"></MenuItem>
             </controls1:ShellManagement.HeadMenuItems>
-         </controls1:ShellManagement>-->
+         </controls1:ShellManagement>
 
         <!--<TreeView x:Name="TreeView" Grid.Row="1"
                             Background="{Binding Source={StaticResource Ovotan_Controls_DockPanel_Settings}, Path=ContentBackground}">

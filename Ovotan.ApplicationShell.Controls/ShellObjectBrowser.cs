@@ -175,6 +175,7 @@ namespace Ovotan.ApplicationShell.Controls
                 dialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 if (dialog.ShowDialog() == true)
                 {
+                    Children.Add(new ObjectBrowserNode() {Header = dialog.GroupFolderName.Text });
                     var sss = dialog.GroupFolderName.Text;
                 }
             }
@@ -182,8 +183,8 @@ namespace Ovotan.ApplicationShell.Controls
             {
                 //Children[0].ExpandSubtree();
 
-                //Children.Add(new ObjectBrowserNode() { Text = "sdfsdfsd" });
-                //  element.Action();
+                //Children.Add(new ObjectBrowserNode() { Header = "sdfsdfsd" });
+                element.Action();
             }
         }
 
@@ -193,32 +194,8 @@ namespace Ovotan.ApplicationShell.Controls
             _toolBar = Template.FindName("Toolbar", this) as ToolBar;
             _toolBar.ItemsSource = _toolbarElements;
             _treeView = Template.FindName("TreeView", this) as TreeView;
-
-
-            Children.Add(new ObjectBrowserNode() { Header = "werewrew 1"});
-            Children.Add(new ObjectBrowserNode() { Header = "werewrew 2"});
-            Children.Add(new ObjectBrowserNode() { Header = "werewrew 2" });
-            Children.Add(new ObjectBrowserNode() { Header = "werewrew 2" });
-            Children.Add(new ObjectBrowserNode() { Header = "werewrew 2"});
-            Children.Add(new ObjectBrowserNode() { Header = "werewrew 2" });
-            //Children[0].Items.Add(new ObjectBrowserNode() { Text = "dasfkds;lfk;dlsfk;lsdkf;lds" });
-            //(Children[0] as TreeViewItem).Items[0].Add(new ObjectBrowserNode() { Text = "33333" });
-
-
-            Children[0].Items.Add(new ObjectBrowserNode() { Header="childred"});
-            (Children[0].Items[0] as TreeViewItem) .Items.Add(new ObjectBrowserNode() { Header = "childred" });
-            Children[3].Items.Add(new ObjectBrowserNode() { Header = "childred" });
-            //           .Childred.Add(new ObjectBrowserNode() { Text = "xsfsdfsdfds" });
-
-            //var node1 = new TreeViewItem() { Header = "1111111" };
-            //node1.Items.Add(new TreeViewItem() { Header = "222222" });
-            //_treeView.Items.Add(node1);
-            //var binding = new Binding("Nodes");
-            //binding.Source = this;
-            //_treeView.SetBinding(TreeView.ItemsSourceProperty, binding);
-
             //_treeView.SetValue(TreeView.ItemsSourceProperty, Children);
-            //_treeView.ItemsSource = Children;
+            _treeView.ItemsSource = Children;
             //var ss = Application.Current.Resources["EEE"] as DataTemplate;
             //_treeView.ItemTemplate = ss;
             //ItemsSource="{Binding Nodes, RelativeSource={RelativeSource TemplatedParent}}"
