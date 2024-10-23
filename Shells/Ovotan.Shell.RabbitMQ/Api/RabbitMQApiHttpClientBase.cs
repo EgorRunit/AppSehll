@@ -22,7 +22,7 @@ namespace Ovotan.Shell.RabbitMQ.Api
 
         protected internal async Task<T> GetData<T>(string api) where T : class
         {
-            var httpResponseMessage = await client.GetAsync(api);
+            var httpResponseMessage = await client.GetAsync(api).ConfigureAwait(false);
             if (httpResponseMessage.StatusCode != HttpStatusCode.OK)
             {
                 throw new Exception("e");

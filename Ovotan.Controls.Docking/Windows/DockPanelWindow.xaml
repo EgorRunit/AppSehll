@@ -9,12 +9,19 @@
         Topmost="True"
 		WindowStyle="None"
 		AllowsTransparency="True"
-		Width="400" Height="300"
+		Width="300" Height="400"
+        Padding="55"
+        BorderThickness="1" BorderBrush="Black"
         Title="DockPlacementWindow">
     <WindowChrome.WindowChrome >
         <WindowChrome CaptionHeight="0" ResizeBorderThickness="1"  />
     </WindowChrome.WindowChrome>
-    <Grid x:Name="MainGrid">
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Margin" Value="0,5,5,5"/>
+        </Style>
+    </Window.Resources>
+    <Grid x:Name="MainGrid" Background="AliceBlue">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -24,7 +31,11 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Foreground="{Binding Source={StaticResource Ovotan_Controls_DockPanel_Settings}, Path=HeaderForeground}" Text="RabbitMQ Exployer"/>
+            <TextBlock Margin="5,2,5,2" Foreground="{Binding Source={StaticResource Ovotan_Controls_DockPanel_Settings}, Path=HeaderForeground}" Text="RabbitMQ Exployer"/>
+            
+            
+            
+            
         </Grid>
     </Grid>
 </Window>

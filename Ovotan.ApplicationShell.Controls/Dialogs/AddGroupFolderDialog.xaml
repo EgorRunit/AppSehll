@@ -13,7 +13,8 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBlock Text="Название папки" Margin="5,5,5,0"/>
-        <TextBox x:Name="GroupFolderName" Grid.Row="1" Margin="5,5,5,5" BorderBrush="Black" BorderThickness="1"/>
+        <TextBox Focusable="True" x:Name="GroupFolderName" Grid.Row="1" Margin="5,5,5,5" BorderBrush="Black" BorderThickness="1" 
+                 FocusManager.FocusedElement="{Binding RelativeSource={RelativeSource Self}}"/>
         <StackPanel Orientation="Horizontal" Grid.Row="2" Height="Auto" HorizontalAlignment="Right">
             <Button Content="Добавить" Margin="0,0,5,5" Click="Button_Click"/>
             <Button Content="Отмена" Margin="0,0,5,5" IsCancel="True"/>

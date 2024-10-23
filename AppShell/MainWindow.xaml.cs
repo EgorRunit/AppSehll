@@ -33,13 +33,13 @@ namespace AppShell
  
             try
             {
-                RabbitMQApiHttpClient rabbitHttpClient = null;
-                var task =  Task.Run(async () =>
-                {
-                    rabbitHttpClient = await RabbitMQApiHttpClient.Connect("guest", "guest", "http://localhost:15672");
-                    var ssfdf = await rabbitHttpClient.ConnectionApi.GetConnections();
-                });
-                task.Wait();
+                //RabbitMQApiHttpClient rabbitHttpClient = null;
+                //var task =  Task.Run(async () =>
+                //{
+                //    rabbitHttpClient = await RabbitMQApiHttpClient.Connect("guest", "guest", "http://localhost:15672");
+                //    var ssfdf = await rabbitHttpClient.ConnectionApi.GetConnections();
+                //});
+                //task.Wait();
 
 
                 //// Set MQ server credentials

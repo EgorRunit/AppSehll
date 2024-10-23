@@ -15,104 +15,6 @@ using System.Xml.Serialization;
 
 namespace Ovotan.ApplicationShell.Controls
 {
-    public class ObjectBrowserNodeaaaaaaa : TreeViewItem
-    {
-        public static readonly DependencyProperty TreeNodeProperty;
-        public string Text { get; set; }
-        public ObservableCollection<ObjectBrowserNode> Children { get; set; }
-
-        public object TreeNode
-        {
-            get
-            {
-                return GetValue(TreeNodeProperty);
-            }
-            set
-            {
-                SetValue(TreeNodeProperty, value);
-            }
-        }
-
-
-
-        public ObjectBrowserNodeaaaaaaa() 
-        { 
-            Children = new ObservableCollection<ObjectBrowserNode>();
-        }
-
-        //public static DependencyProperty TextProperty;
-        //public static DependencyProperty ChildrenProperty;
-        public static DependencyProperty HasItemsProperty;
-        public static DependencyProperty HasHeaderProperty;
-
-        //public TreeNodeType NodeType { get; set; }
-        //public bool IsExpanded { get; set; }
-        public bool HasHeader
-        {
-            get
-            {
-                return true;
-                //new TreeViewItem().has
-                //return (bool)GetValue(HasItemsProperty);
-            }
-            set
-            {
-                SetValue(HasItemsProperty, value);
-            }
-        }
-
-        public bool HasItems
-        {
-            get
-            {
-                //new TreeViewItem().has
-                return (bool)GetValue(HasItemsProperty);
-            }
-            set
-            {
-                SetValue(HasItemsProperty, value);
-            }
-        }
-
-
-        //public string Text 
-        //{  
-        //    get
-        //    {
-        //        return GetValue(TextProperty) as string;
-        //    }
-        //    set 
-        //    { 
-        //        SetValue(TextProperty, value); 
-        //    }
-        //}
-
-        //public ObservableCollection<ObjectBrowserNode> Childred
-        //{
-        //    get
-        //    {
-        //        return GetValue(ChildrenProperty) as ObservableCollection<ObjectBrowserNode>;
-        //    }
-        //    set
-        //    {
-        //        SetValue (ChildrenProperty, value);
-        //    }
-        //}
-
-        //static ObjectBrowserNode()
-        //{
-        //    DefaultStyleKeyProperty.OverrideMetadata(typeof(ObjectBrowserNode), new FrameworkPropertyMetadata(typeof(ObjectBrowserNode)));
-        //    //TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(ObjectBrowserNode),
-        //    //    new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
-        //    //ChildrenProperty = DependencyProperty.Register("Children", typeof(ObservableCollection<ObjectBrowserNode>), typeof(ObjectBrowserNode),
-        //    //    new FrameworkPropertyMetadata(new ObservableCollection<ObjectBrowserNode>(), FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
-        //    HasItemsProperty = DependencyProperty.Register("HasItems", typeof(bool), typeof(ObjectBrowserNode),
-        //        new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
-        //    TreeNodeProperty = DependencyProperty.Register("TreeNode", typeof(object), typeof(ObjectBrowserNode),
-        //        new FrameworkPropertyMetadata(new object(), FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
-        //}
-
-    }
 
     public class ShellObjectBrowser : ContentControl
     {
@@ -168,23 +70,44 @@ namespace Ovotan.ApplicationShell.Controls
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var element = (sender as FrameworkElement).Tag as ToolbarElementBase;
-            if(element is AddGroupFolder)
+            if (element is AddGroupFolder)
             {
                 var dialog = new AddGroupFolderDialog();
                 dialog.Owner = Application.Current.MainWindow;
                 dialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 if (dialog.ShowDialog() == true)
                 {
-                    Children.Add(new ObjectBrowserNode() {Header = dialog.GroupFolderName.Text });
-                    var sss = dialog.GroupFolderName.Text;
+                    var selectedNode = _treeView.SelectedItem as ObjectBrowserNode;
+                    var newNode = new ObjectBrowserNode() { Header = dialog.GroupFolderName.Text };
+                    if (selectedNode != null)
+                    {
+                        selectedNode.Items.Add(newNode);
+                        selectedNode.ExpandSubtree();
+                    }
+                    else
+                    {
+                        Children.Add(newNode);
+                    }
                 }
             }
             else
             {
+                //var wnd = new ConnectionManagement();// ("localhost");
+
+                ////wnd.Owner = Application.Current.MainWindow;
+                //wnd.Visibility = Visibility.Visible;
+                //wnd.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                ////var wnd = new ConnectDialog();
+                //wnd.Show();
+
+                element.Action();
+
                 //Children[0].ExpandSubtree();
 
                 //Children.Add(new ObjectBrowserNode() { Header = "sdfsdfsd" });
-                element.Action();
+                //Dispatcher.BeginInvoke(() => { element.Action(); } , System.Windows.Threading.DispatcherPriority.Render);
+
+
             }
         }
 

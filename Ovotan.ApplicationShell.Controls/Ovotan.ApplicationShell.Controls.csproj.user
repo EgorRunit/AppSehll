@@ -2,11 +2,17 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
+    <Compile Update="CircularProgressBar.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Dialogs\AddGroupFolderDialog.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="CircularProgressBar.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Dialogs\AddGroupFolderDialog.xaml">
       <SubType>Designer</SubType>
     </Page>

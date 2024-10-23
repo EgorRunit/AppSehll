@@ -5,6 +5,7 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Ovotan.Shell.RabbitMQ.Api
@@ -38,7 +39,9 @@ namespace Ovotan.Shell.RabbitMQ.Api
             // Get the response from the API endpoint.
             try
             {
-                HttpResponseMessage httpResponseMessage = await httpClient.GetAsync("api/whoami");
+                var cancellationTokenSource = new CancellationTokenSource(new TimeSpan(0, 0, 5));
+
+                HttpResponseMessage httpResponseMessage = await httpClient.GetAsync("api/whoami", cancellationTokenSource.Token).ConfigureAwait(false);
                 if (httpResponseMessage.StatusCode != HttpStatusCode.Unauthorized)
                 {
 

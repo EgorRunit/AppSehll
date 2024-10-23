@@ -6,7 +6,7 @@ using System.Windows.Input;
 namespace Ovotan.Controls.Docking.Windows
 {
     /// <summary>
-    /// Interaction logic for DockPanelWindow.xaml
+    /// Окно ператскавания DockPanelCntent
     /// </summary>
     public partial class DockPanelWindow : Window, IDockPanelWindow
     {
@@ -33,11 +33,11 @@ namespace Ovotan.Controls.Docking.Windows
             _dockingMessageQueue = dockingMessageQueue;
         }
 
-        private void DockPanelWindow_MouseMove(MouseEventArgs e)
+        void DockPanelWindow_MouseMove(MouseEventArgs e)
         {
             Point mousePosition = e.GetPosition(this);
-            this.Left = this.Left + (mousePosition.X - _location.X);
-            this.Top = this.Top + (mousePosition.Y - _location.Y);
+            Left =Left + (mousePosition.X - _location.X);
+            Top = Top + (mousePosition.Y - _location.Y);
         }
 
         void _grid_MouseDown(object sender, MouseButtonEventArgs e)

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,17 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Ovotan.Shell.RabbitMQ.Controls.Dialogs
+namespace WpfControlLibrary1
 {
     /// <summary>
-    /// Interaction logic for ConnectDialog.xaml
+    /// Interaction logic for UserControl1.xaml
     /// </summary>
-    public partial class ConnectDialog : Window
+    public partial class UserControl1 : UserControl
     {
-
-        public ConnectDialog()
+        public UserControl1()
         {
             InitializeComponent();
         }

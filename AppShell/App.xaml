@@ -12,6 +12,8 @@
 
                 <ResourceDictionary Source="pack://application:,,,/Ovotan.ApplicationShell.Controls;component/Resources/Dictionary1.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/Ovotan.ApplicationShell.Controls;component/Resources/ObjectBrowserResource.xaml"/>
+
+                <ResourceDictionary Source="pack://application:,,,/Ovotan.Shell.RabbitMQ.Controls;component/Resources/RabbitMQResource.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
