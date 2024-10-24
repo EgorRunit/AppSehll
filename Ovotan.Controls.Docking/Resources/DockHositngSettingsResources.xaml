@@ -9,17 +9,5 @@
         </settings:DockHositngSettings.SiteHostBackground>
     </settings:DockHositngSettings>
 
-    <Style TargetType="{x:Type local:SiteHost}" BasedOn="{StaticResource {x:Type ContentControl}}">
-        <Setter Property="VerticalAlignment" Value="Stretch"/>
-        <Setter Property="HorizontalAlignment" Value="Stretch"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate>
-                    <Grid Background="{Binding Source={StaticResource Ovotan_Controls_DockingHost_Settings}, Path=SiteHostBackground}">
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
 </ResourceDictionary>
      

@@ -29,7 +29,7 @@ namespace AppShell
         {
             InitializeComponent();
 
-            MainShallManagement.AutoStartShell = new Shell();
+            //MainShallManagement.AutoStartShell = new Shell();
  
             try
             {

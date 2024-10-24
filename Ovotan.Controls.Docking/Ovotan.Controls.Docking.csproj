@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Ovotan.Windows.Common\Ovotan.Windows.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Windows\DockPlacementWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

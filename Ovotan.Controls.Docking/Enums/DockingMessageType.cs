@@ -21,11 +21,6 @@ namespace Ovotan.Controls.Docking.Enums
         /// </summary>
         PanelClosed,
         /// <summary>
-        /// Содержимое панели палучило фокус.
-        /// В качестве аргумента события передается DockPanelAttachedType.
-        /// </summary>
-        PanelGotFocus,
-        /// <summary>
         /// Стартовало перетаскивания окна с панелью.
         /// В качестве аргумента события передается DockPlacementWindow.
         /// </summary>

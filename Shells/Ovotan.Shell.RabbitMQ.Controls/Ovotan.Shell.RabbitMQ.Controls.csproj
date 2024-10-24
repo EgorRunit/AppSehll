@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Ovotan.ApplicationShell.Controls\Ovotan.ApplicationShell.Controls.csproj" />
+    <ProjectReference Include="..\..\Ovotan.Windows.Common\Ovotan.Windows.Common.csproj" />
     <ProjectReference Include="..\Ovotan.Shell.RabbitMQ\Ovotan.Shell.RabbitMQ.csproj" />
   </ItemGroup>
 

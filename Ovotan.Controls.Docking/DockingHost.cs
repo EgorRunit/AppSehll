@@ -5,7 +5,7 @@ using Ovotan.Controls.Docking.Services;
 using Ovotan.Controls.Docking.Windows;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Ovotan.Controls.Docking
 {
@@ -20,7 +20,6 @@ namespace Ovotan.Controls.Docking
         /// Экземпляр сервиса очереди сообщений для DockingManager.
         /// </summary>
         public IDockingMessageQueue _dockingMessageQueue;
-        IDockPanel _previousActiveDockPanel;
         SiteHost _siteHost;
 
         public DockingHost(IDockingMessageQueue dockingMessageQueue)
@@ -31,12 +30,13 @@ namespace Ovotan.Controls.Docking
             _dockingMessageQueue.Register(DockingMessageType.PanelSplitted, (x) => _dockConstractureService.SplitPanel(x as PanelSplittedMessage));
             _dockingMessageQueue.Register(DockingMessageType.PanelAttached, (x) => _panelAttached((PanelAttachedMessage)x));
             _dockingMessageQueue.Register(DockingMessageType.ShowDockPanelWindow, (x) => ShowDockPanelWindow(x as FrameworkElement));
-            _dockingMessageQueue.Register(DockingMessageType.PanelGotFocus, _dockPanelFocused);
             _dockConstractureService = new DockConstractureService(_dockingMessageQueue);
 
             _siteHost = new SiteHost(_dockingMessageQueue);
             var baseContent = new DockPanel(_dockingMessageQueue, _siteHost);
             Content = new PanelContainer(baseContent);
+            Padding = new Thickness(5);
+            Background = new SolidColorBrush(Colors.Red);
         }
 
 
@@ -56,24 +56,6 @@ namespace Ovotan.Controls.Docking
             var window = new DockPanelWindow(_dockPlacementWindow, DockPanelContent);
             window.Initialize(_dockingMessageQueue);
             window.Show();
-        }
-
-        //void _showDockPlacementWindow(object args)
-        //{
-        //    var startPoints = this.PointToScreen(new Point());
-        //    _dockPlacementWindow.Top = startPoints.Y;
-        //    _dockPlacementWindow.Left = startPoints.X;
-        //    _dockPlacementWindow.Height = ActualHeight;
-        //    _dockPlacementWindow.Width = ActualWidth;
-        //    _dockPlacementWindow.Show();
-
-        //}
-
-
-        void _dockPanelFocused(object args)
-        {
-            _previousActiveDockPanel?.ChangeFocusState(false);
-            _previousActiveDockPanel = args as IDockPanel;
         }
         #endregion
     }

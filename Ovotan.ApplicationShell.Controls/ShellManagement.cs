@@ -62,7 +62,10 @@ namespace Ovotan.ApplicationShell.Controls
 
         private void _dockingHost_Loaded(object sender, RoutedEventArgs e)
         {
-            StartShell(AutoStartShell.GetType());
+            if (AutoStartShell != null)
+            {
+                StartShell(AutoStartShell.GetType());
+            }
         }
 
         public void AddHeadMenuItem(string title, Guid itemId)

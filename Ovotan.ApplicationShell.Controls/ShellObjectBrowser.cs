@@ -22,7 +22,6 @@ namespace Ovotan.ApplicationShell.Controls
         ToolBar _toolBar;
         TreeView _treeView; 
         List<FrameworkElement> _toolbarElements;
-        static DependencyProperty ChildrenProperty;
 
 
         public ObservableCollection<ObjectBrowserNode> Children { get; set; }
