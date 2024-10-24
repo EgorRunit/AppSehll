@@ -25,7 +25,7 @@
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type controls:RabbitMQEndPoint}" BasedOn="{StaticResource {x:Type endpoint:EndPoint}}">
+    <Style TargetType="{x:Type controls:RabbitMQEndPoint}" BasedOn="{StaticResource {x:Type endpoint:EndPointManager}}">
         
     </Style>
 

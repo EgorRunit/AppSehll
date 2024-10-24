@@ -46,7 +46,7 @@ namespace Ovotan.ApplicationShell.Controls
         }
 
 
-        public ObjectBrowser(EndPoint shell)
+        public ObjectBrowser(EndPointManager shell)
         {
             ////new TreeViewItem().HasItems
             //Children = new ObservableCollection<ObjectBrowserNode>();
@@ -66,49 +66,6 @@ namespace Ovotan.ApplicationShell.Controls
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            var element = (sender as FrameworkElement).Tag as ToolbarElementBase;
-            if (element is AddGroupFolder)
-            {
-                var dialog = new AddGroupFolderDialog();
-                dialog.Owner = Application.Current.MainWindow;
-                dialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-                if (dialog.ShowDialog() == true)
-                {
-                    var selectedNode = _treeView.SelectedItem as ObjectBrowserNode;
-                    var newNode = new ObjectBrowserNode() { Header = dialog.GroupFolderName.Text };
-                    if (selectedNode != null)
-                    {
-                        selectedNode.Items.Add(newNode);
-                        selectedNode.ExpandSubtree();
-                    }
-                    else
-                    {
-                        Children.Add(newNode);
-                    }
-                }
-            }
-            else
-            {
-                //var wnd = new ConnectionManagement();// ("localhost");
-
-                ////wnd.Owner = Application.Current.MainWindow;
-                //wnd.Visibility = Visibility.Visible;
-                //wnd.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-                ////var wnd = new ConnectDialog();
-                //wnd.Show();
-
-                element.Action();
-
-                //Children[0].ExpandSubtree();
-
-                //Children.Add(new ObjectBrowserNode() { Header = "sdfsdfsd" });
-                //Dispatcher.BeginInvoke(() => { element.Action(); } , System.Windows.Threading.DispatcherPriority.Render);
-
-
-            }
-        }
 
         public override void OnApplyTemplate()
         {

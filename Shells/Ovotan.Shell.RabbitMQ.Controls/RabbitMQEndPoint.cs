@@ -7,41 +7,34 @@ using Ovotan.Controls.Docking.Enums;
 using Ovotan.ApplicationShell.Controls.ToolbarElements;
 using Ovotan.Shell.RabbitMQ.Controls.DockPanels;
 using System.Windows.Input;
+using Ovotan.Windows.Common.Controls;
+using Ovotan.ApplicationShell.Controls.Dialogs;
+using System.Windows.Controls;
 
 namespace Ovotan.Shell.RabbitMQ.Controls
 {
    
 
-    public class RabbitMQEndPoint : EndPoint
+    public class RabbitMQEndPoint : EndPointManager
     {
-        IObjectBrowser _objectBrowser;
-        List<IShellToolbarElement> _shellDockPanelToolbarElements;
         IDockingMessageQueue _dockingMessageQueue;
-
-        public IEnumerable<IShellToolbarElement> ObjectBrowserToolbarElements
-        {
-            get
-            {
-                return _shellDockPanelToolbarElements;
-            }
-        }
-
-        public string Header => "RabbitMQ Management";
 
         static RabbitMQEndPoint()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(RabbitMQEndPoint), new FrameworkPropertyMetadata(typeof(EndPoint)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(RabbitMQEndPoint), new FrameworkPropertyMetadata(typeof(EndPointManager)));
         }
 
-        //public ShellObjectBrowser ObjectBrowser { get; private set; }
-
-        int index = 0;
-        public RabbitMQEndPoint()
+        public RabbitMQEndPoint() :base()
         {
-            _shellDockPanelToolbarElements = new List<IShellToolbarElement>();
-            _shellDockPanelToolbarElements.Add(new ToolbarElementBase() { Type = ShellToolbarElementType.Button, Text = "+", Action = _createConnection });
-            _shellDockPanelToolbarElements.Add(new AddGroupFolder());
-            //ObjectBrowser = new ShellObjectBrowser(this);
+            Header = "RabbitMQ Обозреватель";
+            var cmd = new ButtonCommand<object>((x) =>
+            {
+                var ss = 5;
+            });
+            ToolbarActions.Add(new ToolbarButton() { Text = "+", Type = ShellToolbarElementType.Button, 
+                Command = cmd});
+            ToolbarActions.Add(new ToolbarButton() { Text = "++", Type = ShellToolbarElementType.Button, 
+                Command = new  ButtonCommand<object>(_ => _addGroupFolder())});
         }
 
 
@@ -57,21 +50,23 @@ namespace Ovotan.Shell.RabbitMQ.Controls
             _dockingMessageQueue.Publish(DockingMessageType.PanelAttached, message);
         }
 
-        //public void Start(IDockingMessageQueue dockingMessageQueue)
-        //{
-        //    _dockingMessageQueue = dockingMessageQueue;
-        //    var message = new PanelAttachedMessage()
-        //    {
-        //        DockPanelContent = this,
-        //        Type = PanelAttachedType.Left
-        //    };
-        //    _dockingMessageQueue.Publish(DockingMessageType.PanelAttached, message);
 
-        //}
-
-        public override void OnApplyTemplate()
+        void _addGroupFolder()
         {
-            base.OnApplyTemplate();
+            showDialog<string>(DialogManagerType.AddGroupFolder, (folderName) =>
+            {
+                var selectedNode = treeView.SelectedItem as ObjectBrowserNode;
+                var newNode = new ObjectBrowserNode() { Header = folderName };
+                if (selectedNode != null)
+                {
+                    selectedNode.Items.Add(newNode);
+                    selectedNode.ExpandSubtree();
+                }
+                else
+                {
+                    treeView.Items.Add(newNode);
+                }
+            });
         }
 
         void _createConnection()

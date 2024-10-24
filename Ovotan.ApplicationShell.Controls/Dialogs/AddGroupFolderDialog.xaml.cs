@@ -21,8 +21,8 @@ namespace Ovotan.ApplicationShell.Controls.Dialogs
             }
             else
             {
-                GroupFolderName.Text = name;
                 DialogResult = true;
+                Content = name;
                 Close();
             }
         }

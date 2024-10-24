@@ -31,6 +31,7 @@ namespace AppShell
 
             MainShallManagement.AutoStartShell = new RabbitMQEndPoint();
  
+            var dd = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             try
             {
                 //RabbitMQApiHttpClient rabbitHttpClient = null;

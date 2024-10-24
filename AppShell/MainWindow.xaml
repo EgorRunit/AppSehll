@@ -85,12 +85,12 @@
             </Rectangle>
         </Viewbox>-->
 
-        <controls1:ShellManagement x:Name="MainShallManagement" Grid.Row="1">
-            <controls1:ShellManagement.HeadMenuItems>
+        <controls1:EndPointManagement x:Name="MainShallManagement" Grid.Row="1">
+            <controls1:EndPointManagement.HeadMenuItems>
                 <MenuItem Header="Sheel"></MenuItem>
                 <MenuItem Header="Tools"></MenuItem>
-            </controls1:ShellManagement.HeadMenuItems>
-         </controls1:ShellManagement>
+            </controls1:EndPointManagement.HeadMenuItems>
+         </controls1:EndPointManagement>
 
         <!--<TreeView x:Name="TreeView" Grid.Row="1"
                             Background="{Binding Source={StaticResource Ovotan_Controls_DockPanel_Settings}, Path=ContentBackground}">

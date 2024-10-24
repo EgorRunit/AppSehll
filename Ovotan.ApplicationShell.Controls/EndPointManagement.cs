@@ -13,7 +13,7 @@ namespace Ovotan.ApplicationShell.Controls
 {
 
 
-    public class ShellManagement : ContentControl
+    public class EndPointManagement : ContentControl
     {
         public static readonly DependencyProperty HeadMenuItemsProperty;
 
@@ -22,7 +22,7 @@ namespace Ovotan.ApplicationShell.Controls
         Menu _mainMenu;
 
         IDockingMessageQueue _dockingMessageQueue;
-        Dictionary<Type, EndPoint> _shells;
+        Dictionary<Type, EndPointManager> _shells;
         DockingHost _dockingHost;
         ObservableCollection<MenuItem> _headMenuItems;
 
@@ -40,20 +40,20 @@ namespace Ovotan.ApplicationShell.Controls
 
 
 
-        static ShellManagement()
+        static EndPointManagement()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(ShellManagement), new FrameworkPropertyMetadata(typeof(ShellManagement)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(EndPointManagement), new FrameworkPropertyMetadata(typeof(EndPointManagement)));
 
-            HeadMenuItemsProperty = DependencyProperty.Register("Icon", typeof(ObservableCollection<MenuItem>), typeof(ShellManagement),
+            HeadMenuItemsProperty = DependencyProperty.Register("Icon", typeof(ObservableCollection<MenuItem>), typeof(EndPointManagement),
                 new FrameworkPropertyMetadata(new ObservableCollection<MenuItem>(), FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
         }
 
-        public ShellManagement() 
+        public EndPointManagement() 
         {
 
             _dockingMessageQueue = new DockingMessageQueue();
             _headMenuItems = new ObservableCollection<MenuItem>();
-            _shells = new Dictionary<Type, EndPoint>();
+            _shells = new Dictionary<Type, EndPointManager>();
             _dockingHost = new DockingHost(_dockingMessageQueue);
             _dockingHost.SetValue(Grid.RowProperty, 1);
             _dockingHost.Loaded += _dockingHost_Loaded;
@@ -75,14 +75,14 @@ namespace Ovotan.ApplicationShell.Controls
 
         public void StartShell(Type shellType)
         {
-            EndPoint endPoint = null;
+            EndPointManager endPoint = null;
             if (_shells.ContainsKey(shellType))
             {
                  endPoint = _shells [shellType];
             }
             else
             {
-                endPoint = Activator.CreateInstance(shellType) as EndPoint;
+                endPoint = Activator.CreateInstance(shellType) as EndPointManager;
             }
             endPoint.Start(_dockingMessageQueue);
         }
@@ -106,7 +106,7 @@ namespace Ovotan.ApplicationShell.Controls
 
 
 
-        public EndPoint AutoStartShell { get; set; }
+        public EndPointManager AutoStartShell { get; set; }
 
     }
 }
