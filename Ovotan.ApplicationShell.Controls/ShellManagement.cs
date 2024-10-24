@@ -22,7 +22,7 @@ namespace Ovotan.ApplicationShell.Controls
         Menu _mainMenu;
 
         IDockingMessageQueue _dockingMessageQueue;
-        Dictionary<Type, IShell> _shells;
+        Dictionary<Type, EndPoint> _shells;
         DockingHost _dockingHost;
         ObservableCollection<MenuItem> _headMenuItems;
 
@@ -53,7 +53,7 @@ namespace Ovotan.ApplicationShell.Controls
 
             _dockingMessageQueue = new DockingMessageQueue();
             _headMenuItems = new ObservableCollection<MenuItem>();
-            _shells = new Dictionary<Type, IShell>();
+            _shells = new Dictionary<Type, EndPoint>();
             _dockingHost = new DockingHost(_dockingMessageQueue);
             _dockingHost.SetValue(Grid.RowProperty, 1);
             _dockingHost.Loaded += _dockingHost_Loaded;
@@ -75,16 +75,16 @@ namespace Ovotan.ApplicationShell.Controls
 
         public void StartShell(Type shellType)
         {
-            IShell shell = null;
+            EndPoint endPoint = null;
             if (_shells.ContainsKey(shellType))
             {
-                 shell = _shells [shellType];
+                 endPoint = _shells [shellType];
             }
             else
             {
-                shell = Activator.CreateInstance(shellType) as IShell;
+                endPoint = Activator.CreateInstance(shellType) as EndPoint;
             }
-            shell.Start(_dockingMessageQueue);
+            endPoint.Start(_dockingMessageQueue);
         }
 
         protected override void OnInitialized(EventArgs e)
@@ -106,7 +106,7 @@ namespace Ovotan.ApplicationShell.Controls
 
 
 
-        public IShell AutoStartShell { get; set; }
+        public EndPoint AutoStartShell { get; set; }
 
     }
 }

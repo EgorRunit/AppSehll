@@ -1,5 +1,7 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:panels="clr-namespace:Ovotan.Shell.RabbitMQ.Controls.DockPanels"
+                    xmlns:controls="clr-namespace:Ovotan.Shell.RabbitMQ.Controls"
+                    xmlns:endpoint="clr-namespace:Ovotan.ApplicationShell.Controls;assembly=Ovotan.ApplicationShell.Controls"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 
@@ -21,6 +23,10 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type controls:RabbitMQEndPoint}" BasedOn="{StaticResource {x:Type endpoint:EndPoint}}">
+        
     </Style>
 
 </ResourceDictionary>

@@ -8,7 +8,7 @@ namespace Ovotan.Controls.Docking
     /// <summary>
     /// Контрол для отображения открытых документов.
     /// </summary>
-    public class SiteHost : ContentControl
+    public class SiteHost : ContentControl, ISiteHost
     {
         //Экземпляр очереди сообщений элметов докинга.
         IDockingMessageQueue _dockingMessageQueue;
@@ -22,20 +22,16 @@ namespace Ovotan.Controls.Docking
         public SiteHost(IDockingMessageQueue dockingMessageQueue)
         {
             _dockingMessageQueue = dockingMessageQueue;
-            _tabControl = new TabControl();
-            _tabControl.Items.Add(new TabItem() { Header = "234534534" });
-            Background = new SolidColorBrush(Colors.Red);
-            _tabControl.Background = new SolidColorBrush(Colors.Red);
-            //Content = new TextBox();
-            //AddChild(_tabControl);
-//            Template = _dockingMessageQueue;
+        }
+
+        public void AddDocument(ISiteHostDocument document)
+        {
         }
 
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            var eertre = Template.FindName("RRRR", this);
-            var ss = Template.FindName("TabControl", this);
+            _tabControl = Template.FindName("TabControl", this) as TabControl;
         }
     }
 }

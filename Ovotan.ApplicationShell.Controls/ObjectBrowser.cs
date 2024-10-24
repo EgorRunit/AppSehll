@@ -16,9 +16,9 @@ using System.Xml.Serialization;
 namespace Ovotan.ApplicationShell.Controls
 {
 
-    public class ShellObjectBrowser : ContentControl
+    public class ObjectBrowser : ContentControl
     {
-        IShell _shell;
+        //IEndPoint _shell;
         ToolBar _toolBar;
         TreeView _treeView; 
         List<FrameworkElement> _toolbarElements;
@@ -36,33 +36,33 @@ namespace Ovotan.ApplicationShell.Controls
             //}
         //}
 
-        static ShellObjectBrowser()
+        static ObjectBrowser()
         {
             
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(ShellObjectBrowser), new FrameworkPropertyMetadata(typeof(ShellObjectBrowser)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(ObjectBrowser), new FrameworkPropertyMetadata(typeof(ObjectBrowser)));
             //ChildrenProperty = DependencyProperty.Register("Children", typeof(ObservableCollection<ObjectBrowserNode>), typeof(ShellObjectBrowser),
             //    new FrameworkPropertyMetadata(new ObservableCollection<ObjectBrowserNode>(), FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
 
         }
 
 
-        public ShellObjectBrowser(IShell shell)
+        public ObjectBrowser(EndPoint shell)
         {
-            //new TreeViewItem().HasItems
-            Children = new ObservableCollection<ObjectBrowserNode>();
-            _toolbarElements = new List<FrameworkElement>();
-            _shell = shell;
-            foreach (var element in _shell.ObjectBrowserToolbarElements)
-            {
-                switch (element.Type)
-                {
-                    case ShellToolbarElementType.Button:
-                        var button =  new Button() { Content = element.Text, Tag = element };
-                        button.Click += Button_Click;
-                        _toolbarElements.Add(button);
-                        break;
-                }
-            }
+            ////new TreeViewItem().HasItems
+            //Children = new ObservableCollection<ObjectBrowserNode>();
+            //_toolbarElements = new List<FrameworkElement>();
+            //_shell = shell;
+            //foreach (var element in _shell.ObjectBrowserToolbarElements)
+            //{
+            //    switch (element.Type)
+            //    {
+            //        case ShellToolbarElementType.Button:
+            //            var button =  new Button() { Content = element.Text, Tag = element };
+            //            button.Click += Button_Click;
+            //            _toolbarElements.Add(button);
+            //            break;
+            //    }
+            //}
 
         }
 

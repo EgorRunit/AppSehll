@@ -3,66 +3,7 @@
                     xmlns:settings="clr-namespace:Ovotan.ApplicationShell.Controls.Settings"
                     xmlns:local="clr-namespace:Ovotan.ApplicationShell.Controls">
     
-    <!--
-            ссалка на стиль Microsoft
-            https://learn.microsoft.com/ru-ru/dotnet/desktop/wpf/controls/treeview-styles-and-templates?view=netframeworkdesktop-4.8
-    -->
-
-    <!--<PathGeometry x:Key="TreeArrow" Figures="M0,0 L0,6 L6,0 z"/>
-    <SolidColorBrush x:Key="Ovotan.ApplicationShell.Control.ObjectBrowser.TreeViewItem.TreeArrow.Static.Checked.Fill" Color="#FF595959"/>    
-    <SolidColorBrush x:Key="Ovotan.ApplicationShell.Control.ObjectBrowser.TreeViewItem.TreeArrow.Static.Checked.Stroke" Color="#FF262626"/>
-    <SolidColorBrush x:Key="Ovotan.ApplicationShell.Control.ObjectBrowser.TreeViewItem.TreeArrow.MouseOver.Checked.Stroke" Color="#FF1CC4F7"/>
-    <SolidColorBrush x:Key="Ovotan.ApplicationShell.Control.ObjectBrowser.TreeViewItem.TreeArrow.MouseOver.Checked.Fill" Color="#FF82DFFB"/>
-    <SolidColorBrush x:Key="Ovotan.ApplicationShell.Control.ObjectBrowser.TreeViewItem.TreeArrow.MouseOver.Stroke" Color="#FF27C7F7"/>
-    <SolidColorBrush x:Key="Ovotan.ApplicationShell.Control.ObjectBrowser.TreeViewItem.TreeArrow.MouseOver.Fill" Color="#FFCCEEFB"/>
-
-    <SolidColorBrush x:Key="Ovotan.ApplicationShell.Control.ObjectBrowser.TreeViewItem.TreeArrow.Static.Fill" Color="#FFFFFFFF"/>
-    <SolidColorBrush x:Key="Ovotan.ApplicationShell.Control.ObjectBrowser.TreeViewItem.TreeArrow.Static.Stroke" Color="#FF818181"/>
-    <SolidColorBrush x:Key="Ovotan.ApplicationShell.Control.ObjectBrowser.TreeViewItem.SelectedBackgroundColor" Color="#FFC4D5FF"/>-->
-
-    <settings:ObjectBrowserSettings x:Key="Ovotan.ApplicationShell.Control.ObjectBrowserSettins">
-
-        <settings:ObjectBrowserSettings.TreeArrowStaticCheckedFill>
-            <SolidColorBrush Color="#FF595959"/>
-        </settings:ObjectBrowserSettings.TreeArrowStaticCheckedFill>
-        <settings:ObjectBrowserSettings.TreeArrowStaticCheckedStroke>
-            <SolidColorBrush Color="#FF262626"/>
-        </settings:ObjectBrowserSettings.TreeArrowStaticCheckedStroke>
-        
-        <settings:ObjectBrowserSettings.TreeArrowMouseOverCheckedStroke>
-            <SolidColorBrush Color="#006CBE"/>
-        </settings:ObjectBrowserSettings.TreeArrowMouseOverCheckedStroke>
-        <settings:ObjectBrowserSettings.TreeArrowMouseOverCheckedFill>
-            <SolidColorBrush Color="Black"/>
-        </settings:ObjectBrowserSettings.TreeArrowMouseOverCheckedFill>
-        
-        <settings:ObjectBrowserSettings.TreeArrowMouseOverStroke>
-            <SolidColorBrush Color="#006CBE"/>
-        </settings:ObjectBrowserSettings.TreeArrowMouseOverStroke>
-        <settings:ObjectBrowserSettings.TreeArrowMouseOverFill>
-            <SolidColorBrush Color="White"/>
-        </settings:ObjectBrowserSettings.TreeArrowMouseOverFill>
-        
-        
-        <settings:ObjectBrowserSettings.TreeArrowStaticFill>
-            <SolidColorBrush Color="#FFFFFFFF"/>
-        </settings:ObjectBrowserSettings.TreeArrowStaticFill>
-
-        <settings:ObjectBrowserSettings.TreeArrowStaticStroke>
-            <SolidColorBrush Color="Black"/>
-        </settings:ObjectBrowserSettings.TreeArrowStaticStroke>
-        <settings:ObjectBrowserSettings.SelectedBackgroundColor>
-            <SolidColorBrush Color="#FFC4D5FF"/>
-        </settings:ObjectBrowserSettings.SelectedBackgroundColor>
-
-        <settings:ObjectBrowserSettings.SelectedBackground>
-            <Color>#C4D5FF</Color>
-        </settings:ObjectBrowserSettings.SelectedBackground>
-        <settings:ObjectBrowserSettings.SelectedUnfocusedColor>
-            <Color>#E6E7EF</Color>
-        </settings:ObjectBrowserSettings.SelectedUnfocusedColor>
-    </settings:ObjectBrowserSettings>
-    
+ 
     
     <DataTemplate x:Key="Ovotan.ApplicationShell.Control.ObjectBrowser.TreeViewItem.ObjectBrowserIconFolder">
         <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform" Height="16" Width="16">

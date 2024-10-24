@@ -6,11 +6,15 @@ using Ovotan.Controls.Docking.Messages;
 using Ovotan.Controls.Docking.Enums;
 using Ovotan.ApplicationShell.Controls.ToolbarElements;
 using Ovotan.Shell.RabbitMQ.Controls.DockPanels;
+using System.Windows.Input;
 
 namespace Ovotan.Shell.RabbitMQ.Controls
 {
-    public class Shell : IShell
+   
+
+    public class RabbitMQEndPoint : EndPoint
     {
+        IObjectBrowser _objectBrowser;
         List<IShellToolbarElement> _shellDockPanelToolbarElements;
         IDockingMessageQueue _dockingMessageQueue;
 
@@ -24,29 +28,51 @@ namespace Ovotan.Shell.RabbitMQ.Controls
 
         public string Header => "RabbitMQ Management";
 
-        public ShellObjectBrowser ObjectBrowser { get; private set; }
+        static RabbitMQEndPoint()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(RabbitMQEndPoint), new FrameworkPropertyMetadata(typeof(EndPoint)));
+        }
+
+        //public ShellObjectBrowser ObjectBrowser { get; private set; }
 
         int index = 0;
-        public Shell()
+        public RabbitMQEndPoint()
         {
             _shellDockPanelToolbarElements = new List<IShellToolbarElement>();
             _shellDockPanelToolbarElements.Add(new ToolbarElementBase() { Type = ShellToolbarElementType.Button, Text = "+", Action = _createConnection });
             _shellDockPanelToolbarElements.Add(new AddGroupFolder());
-            ObjectBrowser = new ShellObjectBrowser(this);
+            //ObjectBrowser = new ShellObjectBrowser(this);
         }
 
-        public void Start(IDockingMessageQueue dockingMessageQueue)
+
+        public override void Start(IDockingMessageQueue dockingMessageQueue)
         {
+            base.Start(dockingMessageQueue);
             _dockingMessageQueue = dockingMessageQueue;
             var message = new PanelAttachedMessage()
             {
-                DockPanelContent = ObjectBrowser,
+                DockPanelContent = this,
                 Type = PanelAttachedType.Left
             };
             _dockingMessageQueue.Publish(DockingMessageType.PanelAttached, message);
-
         }
 
+        //public void Start(IDockingMessageQueue dockingMessageQueue)
+        //{
+        //    _dockingMessageQueue = dockingMessageQueue;
+        //    var message = new PanelAttachedMessage()
+        //    {
+        //        DockPanelContent = this,
+        //        Type = PanelAttachedType.Left
+        //    };
+        //    _dockingMessageQueue.Publish(DockingMessageType.PanelAttached, message);
+
+        //}
+
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+        }
 
         void _createConnection()
         {

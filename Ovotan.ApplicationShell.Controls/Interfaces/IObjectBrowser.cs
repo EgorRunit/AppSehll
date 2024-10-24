@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ovotan.ApplicationShell.Controls.Interfaces
 {
-    internal class IShellObjectBrowser
+    public class IObjectBrowser
     {
 
     }

@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ovotan.Controls.Docking.Interfaces
 {
-    public interface ISiteHost
+    public class ISiteHostDocument
     {
-        void AddDocument(ISiteHostDocument document);
     }
 }
