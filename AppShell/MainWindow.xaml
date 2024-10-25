@@ -7,14 +7,29 @@
         xmlns:controls="clr-namespace:Ovotan.Controls.Docking;assembly=Ovotan.Controls.Docking"
         xmlns:controls1="clr-namespace:Ovotan.ApplicationShell.Controls;assembly=Ovotan.ApplicationShell.Controls"
         xmlns:controls2="clr-namespace:AppShell"
+        xmlns:configuration="clr-namespace:Ovotan.ApplicationShell.Controls.Configurations;assembly=Ovotan.ApplicationShell.Controls"
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
 	xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
 
-    <Window.Resources>
-    </Window.Resources>
+    
 
     <Grid x:Name="MainGrid">
+        <Grid.Resources>
+            <ObjectDataProvider x:Key="CinfigurationContructor" ObjectType="{x:Type configuration:EndPointConfigurations}">
+                <ObjectDataProvider.ConstructorParameters>
+                    <System:String>EndPoint Manager</System:String>
+                </ObjectDataProvider.ConstructorParameters>
+            </ObjectDataProvider>
+
+            <ObjectDataProvider x:Key="EndPointManagementConstructor" ObjectType="{x:Type controls1:EndPointManagement}">
+                <ObjectDataProvider.ConstructorParameters>
+                    <StaticResource ResourceKey="CinfigurationContructor"/>
+                </ObjectDataProvider.ConstructorParameters>
+            </ObjectDataProvider>
+
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -85,7 +100,10 @@
             </Rectangle>
         </Viewbox>-->
 
-        <controls1:EndPointManagement x:Name="MainShallManagement" Grid.Row="1">
+
+            
+            
+         <controls1:EndPointManagement x:Name="MainShallManagement" Grid.Row="1">
             <controls1:EndPointManagement.HeadMenuItems>
                 <MenuItem Header="Sheel"></MenuItem>
                 <MenuItem Header="Tools"></MenuItem>

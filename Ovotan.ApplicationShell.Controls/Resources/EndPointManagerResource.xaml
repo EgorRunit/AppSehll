@@ -119,11 +119,11 @@
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type local:ObjectBrowserNode}">
+    <Style TargetType="{x:Type local:EndPointObjectBrowserTreeItem}">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:ObjectBrowserNode}">
+                <ControlTemplate TargetType="{x:Type local:EndPointObjectBrowserTreeItem}">
                     <Grid Background="Transparent">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition MinWidth="19" Width="Auto"/>
@@ -279,9 +279,9 @@
                             ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ToolbarActions}"
                             Background="{Binding Source={StaticResource Ovotan_Controls_DockPanel_Settings}, Path=ContentToolbarBackground}">
                         </ToolBar>
-                        <TreeView  x:Name="TreeView" Grid.Row="1"
+                        <local:EndPointObjectTree  x:Name="TreeView" Grid.Row="1"
                             Background="{Binding Source={StaticResource Ovotan_Controls_DockPanel_Settings}, Path=ContentBackground}">
-                        </TreeView>
+                        </local:EndPointObjectTree>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

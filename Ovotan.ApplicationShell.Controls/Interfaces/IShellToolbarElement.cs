@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace Ovotan.ApplicationShell.Controls.Interfaces
 {
@@ -19,7 +20,7 @@ namespace Ovotan.ApplicationShell.Controls.Interfaces
             
         ShellToolbarElementType Type { get; set; }
 
-        Action Action { get; set; }
+        ICommand Command { get; set; }
 
     }
 

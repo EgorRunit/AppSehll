@@ -14,11 +14,11 @@ namespace Ovotan.Controls.Docking
         IDockingMessageQueue _dockMessageQueue;
         //Экзямпляр грида структуры в шаблоне.
         Grid _panelGrid;
+
+
         //Экземпляр вставляемого содержимого панели.
-        FrameworkElement _dockPanelContent;
-
+        public FrameworkElement DockPanelContent;
         public string Header { get; private set; }
-
         public ICommand CloseCommand { get; set; }
         public ICommand PinButton { get;set; }
 
@@ -38,25 +38,21 @@ namespace Ovotan.Controls.Docking
                 Focus();
             };
 
-            if (!(_dockPanelContent is ISiteHost))
+            if (!(DockPanelContent is ISiteHost))
             {
-                if (_dockPanelContent != null)
+                if (DockPanelContent != null)
                 {
-                    _dockPanelContent.SetValue(Grid.RowProperty, 1);
-                    _panelGrid.Children.Add(_dockPanelContent);
+                    DockPanelContent.SetValue(Grid.RowProperty, 1);
+                    _panelGrid.Children.Add(DockPanelContent);
                 }
             }
             else
             {
-                _dockPanelContent.SetValue(Grid.RowProperty, 0);
+                DockPanelContent.SetValue(Grid.RowProperty, 0);
                 _panelGrid.RowDefinitions.Clear();
                 _panelGrid.Children.Clear();
-                //_panelGrid.RowDefinitions.RemoveAt(1);
-                //_panelGrid.RowDefinitions.RemoveAt(1);
-
                 _panelGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(100.0, GridUnitType.Star) });
-                //_panelGrid.RowDefinitions.Add(new RowDefinition());
-                _panelGrid.Children.Add(_dockPanelContent);
+                _panelGrid.Children.Add(DockPanelContent);
             }
 
         }
@@ -64,7 +60,7 @@ namespace Ovotan.Controls.Docking
         internal DockPanel(IDockingMessageQueue dockMessageQueue, FrameworkElement dockPanelContent)
         {
             Header = "Object browser";
-            _dockPanelContent = dockPanelContent;
+            DockPanelContent = dockPanelContent;
             _dockMessageQueue = dockMessageQueue;
             CloseCommand = new ButtonCommand<object>(_ => _dockMessageQueue.Publish(DockingMessageType.PanelClosed, this));
         }

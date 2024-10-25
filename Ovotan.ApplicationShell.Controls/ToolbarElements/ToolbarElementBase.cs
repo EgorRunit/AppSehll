@@ -8,7 +8,6 @@ namespace Ovotan.ApplicationShell.Controls.ToolbarElements
     {
         public string Text { get; set; }
         public ShellToolbarElementType Type { get; set; }
-        public Action Action { get; set; }
         public ICommand Command { get; set; }
     }
 }

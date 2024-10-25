@@ -28,10 +28,10 @@ namespace AppShell
         public MainWindow()
         {
             InitializeComponent();
-
             MainShallManagement.AutoStartShell = new RabbitMQEndPoint();
  
             var dd = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+//            var sss= Application.Current.
             try
             {
                 //RabbitMQApiHttpClient rabbitHttpClient = null;

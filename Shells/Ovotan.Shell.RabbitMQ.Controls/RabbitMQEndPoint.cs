@@ -6,57 +6,99 @@ using Ovotan.Controls.Docking.Messages;
 using Ovotan.Controls.Docking.Enums;
 using Ovotan.ApplicationShell.Controls.ToolbarElements;
 using Ovotan.Shell.RabbitMQ.Controls.DockPanels;
-using System.Windows.Input;
 using Ovotan.Windows.Common.Controls;
-using Ovotan.ApplicationShell.Controls.Dialogs;
-using System.Windows.Controls;
+using Ovotan.ApplicationShell.Controls.Configurations;
+using Ovotan.Shell.RabbitMQ.Controls.Configurations;
+using Ovotan.ApplicationShell.Controls.Enums;
+using Ovotan.Shell.RabbitMQ.Controls.Doalogs;
+using Ovotan.Shell.RabbitMQ.Controls.Models;
 
 namespace Ovotan.Shell.RabbitMQ.Controls
 {
-   
-
     public class RabbitMQEndPoint : EndPointManager
     {
-        IDockingMessageQueue _dockingMessageQueue;
-
         static RabbitMQEndPoint()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(RabbitMQEndPoint), new FrameworkPropertyMetadata(typeof(EndPointManager)));
         }
 
-        public RabbitMQEndPoint() :base()
+        public RabbitMQEndPoint() : base()
         {
+
             Header = "RabbitMQ Обозреватель";
-            var cmd = new ButtonCommand<object>((x) =>
-            {
-                var ss = 5;
+            ToolbarActions.Add(new ToolbarButton() { 
+                Text = "+", 
+                Type = ShellToolbarElementType.Button,
+                Command = new ButtonCommand<object>(_ => _addGroupFolder())
             });
-            ToolbarActions.Add(new ToolbarButton() { Text = "+", Type = ShellToolbarElementType.Button, 
-                Command = cmd});
-            ToolbarActions.Add(new ToolbarButton() { Text = "++", Type = ShellToolbarElementType.Button, 
-                Command = new  ButtonCommand<object>(_ => _addGroupFolder())});
+            ToolbarActions.Add(new ToolbarButton()
+            {
+                Text = "++",
+                Type = ShellToolbarElementType.Button,
+                Command = new ButtonCommand<object>(_ => _addCreateConnection())
+            });
         }
 
 
-        public override void Start(IDockingMessageQueue dockingMessageQueue)
+        public override void Start(EndPointConfigurations endPointConfigurations, IDockingMessageQueue dockingMessageQueue)
         {
-            base.Start(dockingMessageQueue);
-            _dockingMessageQueue = dockingMessageQueue;
+            base.Start(endPointConfigurations, dockingMessageQueue);
             var message = new PanelAttachedMessage()
             {
                 DockPanelContent = this,
                 Type = PanelAttachedType.Left
             };
-            _dockingMessageQueue.Publish(DockingMessageType.PanelAttached, message);
+            dockingMessageQueue.Publish(DockingMessageType.PanelAttached, message);
         }
 
+        public override void SaveConfiguration()
+        {
+            base.SaveConfiguration();
+            var settings = new RabbitMQEndPointConfiguration();
+            settings.ObjectBrowserTree = treeView.GetConfigurationNodes();
+            endPointConfigurations.SaveEndPoint<RabbitMQEndPointConfiguration>("RabbitMQ", settings);
+        }
+
+        public override void LoadConfiguration()
+        {
+            base.LoadConfiguration();
+            treeView.AddDataType(typeof(EndPointConnection));
+            var settings = endPointConfigurations.LoadEndPoint<RabbitMQEndPointConfiguration>("RabbitMQ");
+            treeView.LoadCoonfigurationNodes(settings.ObjectBrowserTree);
+        }
+
+        void _addCreateConnection()
+        {
+            var wnd = new CreateConnectionDialog();
+            if (wnd.ShowDialog() == true)
+            {
+                var connection = wnd.Tag as EndPointConnection;
+                var selectedNode = treeView.SelectedItem as EndPointObjectBrowserTreeItem;
+                var newNode = new EndPointObjectBrowserTreeItem() 
+                { 
+                    Header = connection.Name, 
+                    Data = connection,
+                    Type = EndPointObjectBrowserTreeItemType.Configuration
+                };
+                if (selectedNode != null)
+                {
+                    selectedNode.Items.Add(newNode);
+                    selectedNode.ExpandSubtree();
+                }
+                else
+                {
+                    treeView.Items.Add(newNode);
+                }
+            }
+           
+        }
 
         void _addGroupFolder()
         {
             showDialog<string>(DialogManagerType.AddGroupFolder, (folderName) =>
             {
-                var selectedNode = treeView.SelectedItem as ObjectBrowserNode;
-                var newNode = new ObjectBrowserNode() { Header = folderName };
+                var selectedNode = treeView.SelectedItem as EndPointObjectBrowserTreeItem;
+                var newNode = new EndPointObjectBrowserTreeItem() { Header = folderName, Type = EndPointObjectBrowserTreeItemType.Configuration };
                 if (selectedNode != null)
                 {
                     selectedNode.Items.Add(newNode);
@@ -71,7 +113,7 @@ namespace Ovotan.Shell.RabbitMQ.Controls
 
         void _createConnection()
         {
-            _dockingMessageQueue.Publish(DockingMessageType.ShowDockPanelWindow, new ConnectionManagement());
+            dockingMessageQueue.Publish(DockingMessageType.ShowDockPanelWindow, new ConnectionManagement());
 
             //var wnd = new ConnectionManagement();// ("localhost");
 

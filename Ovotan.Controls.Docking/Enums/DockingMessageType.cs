@@ -17,7 +17,7 @@ namespace Ovotan.Controls.Docking.Enums
         PanelSplitted,
         /// <summary>
         /// Панель была закрыта.
-        /// В качестве аргумента события передается DockPanelAttachedType.
+        /// В качестве аргумента события передается DockPanel.
         /// </summary>
         PanelClosed,
         /// <summary>
@@ -30,6 +30,5 @@ namespace Ovotan.Controls.Docking.Enums
         /// В качестве аргумента события передается FramworkElement.
         /// </summary>
         ShowDockPanelWindow,
-
     }
 }
