@@ -279,7 +279,7 @@
                             ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ToolbarActions}"
                             Background="{Binding Source={StaticResource Ovotan_Controls_DockPanel_Settings}, Path=ContentToolbarBackground}">
                         </ToolBar>
-                        <local:EndPointObjectTree  x:Name="TreeView" Grid.Row="1"
+                        <local:EndPointObjectTree x:Name="TreeView" Grid.Row="1"
                             Background="{Binding Source={StaticResource Ovotan_Controls_DockPanel_Settings}, Path=ContentBackground}">
                         </local:EndPointObjectTree>
                     </Grid>

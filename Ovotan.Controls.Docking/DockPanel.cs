@@ -2,18 +2,40 @@ using Ovotan.Controls.Docking.Enums;
 using Ovotan.Controls.Docking.Interfaces;
 using Ovotan.Controls.Docking.Messages;
 using Ovotan.Windows.Common.Controls;
+using System.Diagnostics;
+using System.Reflection.PortableExecutable;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Ovotan.Controls.Docking
 {
     public class DockPanel : ContentControl, IDockPanel
     {
+        public static DependencyProperty IsPanelFocusedProperty;
+
         //Экземпляр очереди сообщений элметов докинга.
         IDockingMessageQueue _dockMessageQueue;
         //Экзямпляр грида структуры в шаблоне.
         Grid _panelGrid;
+
+        public bool IsPanelFocused
+        {
+            get
+            {
+                return (bool)GetValue(IsPanelFocusedProperty);
+            }
+            set
+            {
+                //Нужно сделать передачу фокуса в содержимое
+                if(DockPanelContent is IDockPanelContent)
+                {
+                    (DockPanelContent as IDockPanelContent).ContentFocus();
+                }
+                SetValue(IsPanelFocusedProperty, value);
+            }
+        }
 
 
         //Экземпляр вставляемого содержимого панели.
@@ -25,6 +47,14 @@ namespace Ovotan.Controls.Docking
         static DockPanel()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(DockPanel), new FrameworkPropertyMetadata(typeof(DockPanel)));
+            IsPanelFocusedProperty = DependencyProperty.Register("IsPanelFocused", typeof(bool), typeof(DockPanel),
+                new PropertyMetadata(false));
+
+
+
+            //IsPanelFocusedProperty = DependencyProperty.Register("IsPanelFocused", typeof(bool), typeof(DockPanel),
+            //    new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
+
         }
 
         public override void OnApplyTemplate()
@@ -32,11 +62,6 @@ namespace Ovotan.Controls.Docking
             base.OnApplyTemplate();
             var header = Template.FindName("Header", this) as Grid;
             _panelGrid = Template.FindName("Panel", this) as Grid;
-            _panelGrid.MouseDown += (x, x1) =>
-            {
-                FocusManager.SetFocusedElement(this,header);
-                Focus();
-            };
 
             if (!(DockPanelContent is ISiteHost))
             {

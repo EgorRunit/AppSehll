@@ -5,6 +5,7 @@ using Ovotan.Controls.Docking.Services;
 using Ovotan.Controls.Docking.Windows;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Ovotan.Controls.Docking
@@ -37,7 +38,20 @@ namespace Ovotan.Controls.Docking
             Content = new PanelContainer(baseContent);
             Padding = new Thickness(5);
             Background = new SolidColorBrush(Colors.Red);
+            Mouse.AddPreviewMouseDownHandler(this, (x, y) =>
+            {
+                if(_oldPanelFocused != null)
+                {
+                    _oldPanelFocused.IsPanelFocused = false;
+                }
+                _oldPanelFocused = y.Source as DockPanel;
+                _oldPanelFocused.IsPanelFocused = true;
+
+            });
+
         }
+
+        DockPanel _oldPanelFocused;
 
 
         #region DockingManagerMessageQueue handlers

@@ -6,13 +6,14 @@ using Ovotan.Controls.Docking.Interfaces;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Ovotan.ApplicationShell.Controls
 {
     /// <summary>
     /// Базовый класс для менеджера конечной точки.
     /// </summary>
-    public class EndPointManager : ContentControl
+    public class EndPointManager : ContentControl, IDockPanelContent
     {
         /// <summary>
         /// Очередь сообщений докинга.
@@ -57,9 +58,17 @@ namespace Ovotan.ApplicationShell.Controls
             ToolbarActions = new ObservableCollection<ToolbarElementBase>();
         }
 
-        /// <summary>
-        /// Применение шаблона и стилей для элемента EndPointManager.
-        /// </summary>
+        public void ContentFocus()
+        {
+            FocusManager.SetFocusedElement(this, treeView);
+            if (treeView.SelectedItem != null)
+            {
+                
+                var treeViewItem = treeView.SelectedItem as TreeViewItem;
+                treeViewItem.Focus();
+            }
+        }
+
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();

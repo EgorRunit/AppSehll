@@ -1,12 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Ovotan.Controls.Docking.Interfaces
 {
+    /// <summary>
+    /// Интерфейс описывает внутпенний элемент контента докинг панели.
+    /// </summary>
     public interface IDockPanelContent
     {
+        /// <summary>
+        /// Выставить фокус в главный элемент контента докинг панели.
+        /// </summary>
+        void ContentFocus();
     }
 }
