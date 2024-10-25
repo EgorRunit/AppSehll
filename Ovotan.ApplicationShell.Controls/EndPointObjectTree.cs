@@ -58,9 +58,10 @@ namespace Ovotan.ApplicationShell.Controls
                 {
                     Header = node.Header,
                     Data = data,
-                    IsLazyLoading = node.IsLazyLoading,
-                    
+                    AllowLazyLoading = node.AllowLazyLoading,
+                    Type = EndPointObjectBrowserTreeItemType.Configuration
                 };
+                item.IsLazyLoading = item.AllowLazyLoading;
                 itemCollection.Add(item);
                 if(node.Childen != null)
                 {
@@ -92,7 +93,7 @@ namespace Ovotan.ApplicationShell.Controls
                     {
                         Header = node.Header.ToString(),
                         Data = node.Data,
-                        IsLazyLoading = node.IsLazyLoading,
+                        AllowLazyLoading = node.AllowLazyLoading,
                         Childen = children.Count > 0 ? children : null,
                     });
                     

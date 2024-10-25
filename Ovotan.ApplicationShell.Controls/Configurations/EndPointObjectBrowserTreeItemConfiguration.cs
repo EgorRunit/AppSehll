@@ -16,14 +16,14 @@ namespace Ovotan.Shell.RabbitMQ.Controls.Configurations
         public object Data { get; set; }
 
         /// <summary>
-        /// get,set - Поддерживает ли узел ленивую загрузку дочерних узлов.
-        /// </summary>
-        public bool IsLazyLoading { get; set; }
-
-        /// <summary>
         /// get,set - Список дочерних узлов
         /// </summary>
         public List<EndPointObjectBrowserTreeItemConfiguration> Childen { get; set; }
+
+        /// <summary>
+        /// get,set - Разрешена ли для узла отложенная загрузка
+        /// </summary>
+        public bool AllowLazyLoading { get; set; }
 
         /// <summary>
         /// Конструктор.

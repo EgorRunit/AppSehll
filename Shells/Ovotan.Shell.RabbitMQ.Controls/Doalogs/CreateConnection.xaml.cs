@@ -32,8 +32,8 @@ namespace Ovotan.Shell.RabbitMQ.Controls.Doalogs
         {
             InitializeComponent();
             Name = "";
-            Login = "";
-            Password = "";
+            Login = "guest";
+            Password = "guest";
             Port = 15672;
             Host = "localhost";
             DataContext = this;

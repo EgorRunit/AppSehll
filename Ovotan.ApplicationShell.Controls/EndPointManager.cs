@@ -1,6 +1,7 @@
 using Ovotan.ApplicationShell.Controls.Configurations;
 using Ovotan.ApplicationShell.Controls.Dialogs;
 using Ovotan.ApplicationShell.Controls.Enums;
+using Ovotan.ApplicationShell.Controls.Models;
 using Ovotan.ApplicationShell.Controls.ToolbarElements;
 using Ovotan.Controls.Docking.Interfaces;
 using System.Collections.ObjectModel;
@@ -108,8 +109,9 @@ namespace Ovotan.ApplicationShell.Controls
         /// </summary>
         /// <param name="node"></param>
         /// <returns></returns>
-        public virtual async Task TryExpandNode(EndPointObjectBrowserTreeItem node)
+        public virtual async Task<List<EndPointObjectBrowserTreeViewChidlTreeItem>> TryExpandNode(EndPointObjectBrowserTreeItem node)
         {
+            return new List<EndPointObjectBrowserTreeViewChidlTreeItem>();
         }
 
         /// <summary>
@@ -146,11 +148,32 @@ namespace Ovotan.ApplicationShell.Controls
         void _onExpandNode(object sender, RoutedEventArgs e)
         {
             var treeViewItem = e.Source as EndPointObjectBrowserTreeItem;
-            Mouse.SetCursor(Cursors.Wait);
-            var task = Task.Run(async () => {
-                await TryExpandNode(treeViewItem);
-            });
-            task.Wait();
+            if (treeViewItem.IsLazyLoading)
+            {
+                Mouse.SetCursor(Cursors.Wait);
+                var task = Task.Run(async () =>
+                {
+                    return await TryExpandNode(treeViewItem);
+                });
+                task.Wait();
+                if (task.Result.Count > 0)
+                {
+                    foreach (var node in task.Result)
+                    {
+                        treeViewItem.Items.Add(new EndPointObjectBrowserTreeItem()
+                        {
+                            Type = node.Type,
+                            IsLazyLoading = node.IsLazyLoading,
+                            Header = node.Header,
+                            Data = node.Data,
+                        });
+                    }
+                }
+                else
+                {
+                    treeViewItem.IsLazyLoading = false;
+                }
+            }
         }
     }
 }

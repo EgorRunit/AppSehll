@@ -12,6 +12,8 @@ using Ovotan.Shell.RabbitMQ.Controls.Configurations;
 using Ovotan.ApplicationShell.Controls.Enums;
 using Ovotan.Shell.RabbitMQ.Controls.Doalogs;
 using Ovotan.Shell.RabbitMQ.Controls.Models;
+using System.Windows.Markup;
+using Ovotan.ApplicationShell.Controls.Models;
 
 namespace Ovotan.Shell.RabbitMQ.Controls
 {
@@ -70,9 +72,42 @@ namespace Ovotan.Shell.RabbitMQ.Controls
             }
         }
 
-        public async override Task TryExpandNode(EndPointObjectBrowserTreeItem node)
+        public async override Task<List<EndPointObjectBrowserTreeViewChidlTreeItem>> TryExpandNode(EndPointObjectBrowserTreeItem node)
         {
-            
+            var result = new List<EndPointObjectBrowserTreeViewChidlTreeItem>
+            {
+                   new EndPointObjectBrowserTreeViewChidlTreeItem
+                   {
+                       Type = EndPointObjectBrowserTreeItemType.Dynamic,
+                       Header = "Соеденения",
+                       Data = "Connections"
+                   },
+                   new EndPointObjectBrowserTreeViewChidlTreeItem
+                   {
+                        Type = EndPointObjectBrowserTreeItemType.Dynamic,
+                        Header = "Каналы",
+                        Data = "Chanels"
+                   },
+                   new EndPointObjectBrowserTreeViewChidlTreeItem
+                   {
+                        Type = EndPointObjectBrowserTreeItemType.Dynamic,
+                        Header = "Обменники",
+                        Data = "Echanges"
+                   },
+                   new EndPointObjectBrowserTreeViewChidlTreeItem
+                   {
+                        Type = EndPointObjectBrowserTreeItemType.Dynamic,
+                        Header = "Очереди",
+                        Data = "Queues"
+                   },
+                   new EndPointObjectBrowserTreeViewChidlTreeItem
+                   {
+                        Type = EndPointObjectBrowserTreeItemType.Dynamic,
+                        Header = "Стримы",
+                        Data = "Streams"
+                   }
+            };
+            return result;
         }
 
         void _addCreateConnection()
@@ -88,6 +123,7 @@ namespace Ovotan.Shell.RabbitMQ.Controls
                     Data = connection,
                     Type = EndPointObjectBrowserTreeItemType.Configuration,
                     IsLazyLoading = true,
+                    AllowLazyLoading = true,
                 };
                 if (selectedNode != null)
                 {

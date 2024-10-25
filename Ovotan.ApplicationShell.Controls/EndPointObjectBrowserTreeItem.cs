@@ -20,6 +20,11 @@ namespace Ovotan.ApplicationShell.Controls
         public EndPointObjectBrowserTreeItemType Type { get; set; }
 
         /// <summary>
+        /// get,set - Разрешена ли для узла отложенная загрузка
+        /// </summary>
+        public bool AllowLazyLoading { get; set; }
+
+        /// <summary>
         /// Пользовательские данные узла.
         /// </summary>
         public object Data { get; set; }
