@@ -1,27 +1,25 @@
-using Ovotan.ApplicationShell.Controls.Interfaces;
 using System.Windows;
 using Ovotan.Controls.Docking.Interfaces;
-using Ovotan.ApplicationShell.Controls;
 using Ovotan.Controls.Docking.Messages;
 using Ovotan.Controls.Docking.Enums;
-using Ovotan.ApplicationShell.Controls.ToolbarElements;
 using Ovotan.Shell.RabbitMQ.Controls.DockPanels;
-using Ovotan.Windows.Common.Controls;
-using Ovotan.ApplicationShell.Controls.Configurations;
 using Ovotan.Shell.RabbitMQ.Controls.Configurations;
 using Ovotan.Shell.RabbitMQ.Controls.Doalogs;
 using Ovotan.Shell.RabbitMQ.Controls.Models;
-using System.Windows.Markup;
 using Ovotan.ApplicationShell.Controls.Models;
-using Ovotan.Windows.EndPointManagement.Enums;
+using Ovotan.Windows.Controls.Controls;
+using Ovotan.Windows.Controls.EndPointManagement.Enums;
+using Ovotan.Windows.Controls.EndPointManagement;
+using Ovotan.Windows.Controls.EndPointManagements.Interfaces;
+using Ovotan.Windows.Controls.EndPointManagement.Configurations;
 
 namespace Ovotan.Shell.RabbitMQ.Controls
 {
-    public class RabbitMQEndPoint : EndPointManager
+    public class RabbitMQEndPoint : Manager
     {
         static RabbitMQEndPoint()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(RabbitMQEndPoint), new FrameworkPropertyMetadata(typeof(EndPointManager)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(RabbitMQEndPoint), new FrameworkPropertyMetadata(typeof(Manager)));
         }
 
         public RabbitMQEndPoint() : base()
@@ -30,13 +28,13 @@ namespace Ovotan.Shell.RabbitMQ.Controls
             Header = "RabbitMQ Обозреватель";
             ToolbarActions.Add(new ToolbarButton() { 
                 Text = "+", 
-                Type = ShellToolbarElementType.Button,
+                Type = ToolbarElementType.Button,
                 Command = new ButtonCommand<object>(_ => _addGroupFolder())
             });
             ToolbarActions.Add(new ToolbarButton()
             {
                 Text = "++",
-                Type = ShellToolbarElementType.Button,
+                Type = ToolbarElementType.Button,
                 Command = new ButtonCommand<object>(_ => _addCreateConnection())
             });
         }
@@ -72,37 +70,37 @@ namespace Ovotan.Shell.RabbitMQ.Controls
             }
         }
 
-        public async override Task<List<EndPointObjectBrowserTreeViewChidlTreeItem>> TryExpandNode(EndPointObjectBrowserTreeItem node)
+        public async override Task<List<TreeItemModel>> TryExpandNode(TreeItem node)
         {
-            var result = new List<EndPointObjectBrowserTreeViewChidlTreeItem>
+            var result = new List<TreeItemModel>
             {
-                   new EndPointObjectBrowserTreeViewChidlTreeItem
+                   new TreeItemModel
                    {
-                       Type = EndPointObjectBrowserTreeItemType.Dynamic,
+                       Type = TreeItemType.Dynamic,
                        Header = "Соеденения",
                        Data = "Connections"
                    },
-                   new EndPointObjectBrowserTreeViewChidlTreeItem
+                   new TreeItemModel
                    {
-                        Type = EndPointObjectBrowserTreeItemType.Dynamic,
+                        Type = TreeItemType.Dynamic,
                         Header = "Каналы",
                         Data = "Chanels"
                    },
-                   new EndPointObjectBrowserTreeViewChidlTreeItem
+                   new TreeItemModel
                    {
-                        Type = EndPointObjectBrowserTreeItemType.Dynamic,
+                        Type = TreeItemType.Dynamic,
                         Header = "Обменники",
                         Data = "Echanges"
                    },
-                   new EndPointObjectBrowserTreeViewChidlTreeItem
+                   new TreeItemModel
                    {
-                        Type = EndPointObjectBrowserTreeItemType.Dynamic,
+                        Type = TreeItemType.Dynamic,
                         Header = "Очереди",
                         Data = "Queues"
                    },
-                   new EndPointObjectBrowserTreeViewChidlTreeItem
+                   new TreeItemModel
                    {
-                        Type = EndPointObjectBrowserTreeItemType.Dynamic,
+                        Type = TreeItemType.Dynamic,
                         Header = "Стримы",
                         Data = "Streams"
                    }
@@ -116,12 +114,12 @@ namespace Ovotan.Shell.RabbitMQ.Controls
             if (wnd.ShowDialog() == true)
             {
                 var connection = wnd.Tag as EndPointConnection;
-                var selectedNode = treeView.SelectedItem as EndPointObjectBrowserTreeItem;
-                var newNode = new EndPointObjectBrowserTreeItem() 
+                var selectedNode = treeView.SelectedItem as TreeItem;
+                var newNode = new TreeItem() 
                 { 
                     Header = connection.Name, 
                     Data = connection,
-                    Type = EndPointObjectBrowserTreeItemType.Configuration,
+                    Type = TreeItemType.Configuration,
                     IsLazyLoading = true,
                     AllowLazyLoading = true,
                 };
@@ -142,8 +140,8 @@ namespace Ovotan.Shell.RabbitMQ.Controls
         {
             showDialog<string>(DialogManagerType.AddGroupFolder, (folderName) =>
             {
-                var selectedNode = treeView.SelectedItem as EndPointObjectBrowserTreeItem;
-                var newNode = new EndPointObjectBrowserTreeItem() { Header = folderName, Type = EndPointObjectBrowserTreeItemType.Configuration };
+                var selectedNode = treeView.SelectedItem as TreeItem;
+                var newNode = new TreeItem() { Header = folderName, Type = TreeItemType.Configuration };
                 if (selectedNode != null)
                 {
                     selectedNode.Items.Add(newNode);

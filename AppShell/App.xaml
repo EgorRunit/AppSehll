@@ -10,8 +10,8 @@
                 <ResourceDictionary Source="pack://application:,,,/Ovotan.Controls.Docking;component/Resources/DockPanelResourcesDictionary.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/Ovotan.Controls.Docking;component/Resources/DockHositngSettingsResources.xaml"/>
 
-                <ResourceDictionary Source="pack://application:,,,/Ovotan.ApplicationShell.Controls;component/Resources/EndPointManagement.xaml"/>
-                <ResourceDictionary Source="pack://application:,,,/Ovotan.ApplicationShell.Controls;component/Resources/EndPointManagerResource.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Ovotan.Windows.Controls.EndPointManagement;component/Resources/Management.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Ovotan.Windows.Controls.EndPointManagement;component/Resources/TreeResources.xaml"/>
 
                 <ResourceDictionary Source="pack://application:,,,/Ovotan.Shell.RabbitMQ.Controls;component/Resources/RabbitMQEndPointResource.xaml"/>
             </ResourceDictionary.MergedDictionaries>

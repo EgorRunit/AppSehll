@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AppShell"
         xmlns:controls="clr-namespace:Ovotan.Controls.Docking;assembly=Ovotan.Controls.Docking"
-        xmlns:controls1="clr-namespace:Ovotan.ApplicationShell.Controls;assembly=Ovotan.ApplicationShell.Controls"
+        xmlns:controls1="clr-namespace:Ovotan.Windows.Controls.EndPointManagement;assembly=Ovotan.Windows.Controls.EndPointManagement"
         xmlns:controls2="clr-namespace:AppShell"
-        xmlns:configuration="clr-namespace:Ovotan.ApplicationShell.Controls.Configurations;assembly=Ovotan.ApplicationShell.Controls"
+        xmlns:configuration="clr-namespace:Ovotan.Windows.Controls.EndPointManagement.Configurations;assembly=Ovotan.Windows.Controls.EndPointManagement"
         xmlns:System="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
@@ -23,7 +23,7 @@
                 </ObjectDataProvider.ConstructorParameters>
             </ObjectDataProvider>
 
-            <ObjectDataProvider x:Key="EndPointManagementConstructor" ObjectType="{x:Type controls1:EndPointManagement}">
+            <ObjectDataProvider x:Key="EndPointManagementConstructor" ObjectType="{x:Type controls1:Management}">
                 <ObjectDataProvider.ConstructorParameters>
                     <StaticResource ResourceKey="CinfigurationContructor"/>
                 </ObjectDataProvider.ConstructorParameters>
@@ -103,12 +103,12 @@
 
             
             
-         <controls1:EndPointManagement x:Name="MainShallManagement" Grid.Row="1">
-            <controls1:EndPointManagement.HeadMenuItems>
+         <controls1:Management x:Name="MainShallManagement" Grid.Row="1">
+            <controls1:Management.HeadMenuItems>
                 <MenuItem Header="Sheel"></MenuItem>
                 <MenuItem Header="Tools"></MenuItem>
-            </controls1:EndPointManagement.HeadMenuItems>
-         </controls1:EndPointManagement>
+            </controls1:Management.HeadMenuItems>
+         </controls1:Management>
 
         <!--<TreeView x:Name="TreeView" Grid.Row="1"
                             Background="{Binding Source={StaticResource Ovotan_Controls_DockPanel_Settings}, Path=ContentBackground}">

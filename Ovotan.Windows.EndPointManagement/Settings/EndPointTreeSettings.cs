@@ -1,9 +1,9 @@
 using System.Windows;
 using System.Windows.Media;
 
-namespace Ovotan.ApplicationShell.Controls.Settings
+namespace Ovotan.Windows.EndPointManagement.Settings
 {
-    public class EndPointSettings : DependencyObject
+    public class EndPointTreeSettings : DependencyObject
     {
         public static DependencyProperty SelectedBackgroundProperty;
         public static DependencyProperty SelectedUnfocusedColorProperty;
@@ -163,30 +163,29 @@ namespace Ovotan.ApplicationShell.Controls.Settings
         }
         #endregion
 
-        static EndPointSettings()
+        static EndPointTreeSettings()
         {
-            TreeArrowStaticCheckedFillProperty = DependencyProperty.Register("TreeArrowStaticCheckedFill", typeof(SolidColorBrush), typeof(EndPointSettings),
+            TreeArrowStaticCheckedFillProperty = DependencyProperty.Register("TreeArrowStaticCheckedFill", typeof(SolidColorBrush), typeof(EndPointTreeSettings),
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
-            TreeArrowStaticCheckedStrokeProperty = DependencyProperty.Register("TreeArrowStaticCheckedStroke", typeof(SolidColorBrush), typeof(EndPointSettings),
+            TreeArrowStaticCheckedStrokeProperty = DependencyProperty.Register("TreeArrowStaticCheckedStroke", typeof(SolidColorBrush), typeof(EndPointTreeSettings),
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
-            TreeArrowMouseOverCheckedStrokeProperty = DependencyProperty.Register("TreeArrowMouseOverCheckedStroke", typeof(SolidColorBrush), typeof(EndPointSettings),
+            TreeArrowMouseOverCheckedStrokeProperty = DependencyProperty.Register("TreeArrowMouseOverCheckedStroke", typeof(SolidColorBrush), typeof(EndPointTreeSettings),
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
-            TreeArrowMouseOverCheckedFillProperty = DependencyProperty.Register("TreeArrowMouseOverCheckedFill", typeof(SolidColorBrush), typeof(EndPointSettings),
+            TreeArrowMouseOverCheckedFillProperty = DependencyProperty.Register("TreeArrowMouseOverCheckedFill", typeof(SolidColorBrush), typeof(EndPointTreeSettings),
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
-            TreeArrowMouseOverStrokeProperty = DependencyProperty.Register("TreeArrowMouseOverStroke", typeof(SolidColorBrush), typeof(EndPointSettings),
+            TreeArrowMouseOverStrokeProperty = DependencyProperty.Register("TreeArrowMouseOverStroke", typeof(SolidColorBrush), typeof(EndPointTreeSettings),
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
-            TreeArrowMouseOverFillProperty = DependencyProperty.Register("TreeArrowMouseOverFill", typeof(SolidColorBrush), typeof(EndPointSettings),
+            TreeArrowMouseOverFillProperty = DependencyProperty.Register("TreeArrowMouseOverFill", typeof(SolidColorBrush), typeof(EndPointTreeSettings),
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
-            TreeArrowStaticFillProperty = DependencyProperty.Register("TreeArrowStaticFill", typeof(SolidColorBrush), typeof(EndPointSettings),
+            TreeArrowStaticFillProperty = DependencyProperty.Register("TreeArrowStaticFill", typeof(SolidColorBrush), typeof(EndPointTreeSettings),
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
-            TreeArrowStaticStrokeProperty = DependencyProperty.Register("TreeArrowStaticStroke", typeof(SolidColorBrush), typeof(EndPointSettings),
+            TreeArrowStaticStrokeProperty = DependencyProperty.Register("TreeArrowStaticStroke", typeof(SolidColorBrush), typeof(EndPointTreeSettings),
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
-            SelectedBackgroundColorProperty = DependencyProperty.Register("SelectedBackgroundColor", typeof(SolidColorBrush), typeof(EndPointSettings),
+            SelectedBackgroundColorProperty = DependencyProperty.Register("SelectedBackgroundColor", typeof(SolidColorBrush), typeof(EndPointTreeSettings),
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
-
-            SelectedUnfocusedColorProperty = DependencyProperty.Register("SelectedUnfocusedColor", typeof(Color), typeof(EndPointSettings),
+            SelectedUnfocusedColorProperty = DependencyProperty.Register("SelectedUnfocusedColor", typeof(Color), typeof(EndPointTreeSettings),
                 new FrameworkPropertyMetadata(Color.FromRgb(0,0,0), FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
-            SelectedBackgroundProperty = DependencyProperty.Register("SelectedBackground", typeof(Color), typeof(EndPointSettings),
+            SelectedBackgroundProperty = DependencyProperty.Register("SelectedBackground", typeof(Color), typeof(EndPointTreeSettings),
                 new FrameworkPropertyMetadata(Color.FromRgb(0, 0, 0), FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
 
         }

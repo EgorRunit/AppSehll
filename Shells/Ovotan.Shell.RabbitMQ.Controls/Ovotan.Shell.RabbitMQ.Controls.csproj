@@ -11,9 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Ovotan.ApplicationShell.Controls\Ovotan.ApplicationShell.Controls.csproj" />
-    <ProjectReference Include="..\..\Ovotan.Windows.Common\Ovotan.Windows.Common.csproj" />
-    <ProjectReference Include="..\..\Ovotan.Windows.EndPointManagement\Ovotan.Windows.EndPointManagement.csproj" />
+    <ProjectReference Include="..\..\Ovotan.Windows.Controls.EndPointManagement\Ovotan.Windows.Controls.EndPointManagement.csproj" />
+    <ProjectReference Include="..\..\Ovotan.Windows.Controls\Ovotan.Windows.Controls.csproj" />
     <ProjectReference Include="..\Ovotan.Shell.RabbitMQ\Ovotan.Shell.RabbitMQ.csproj" />
   </ItemGroup>
 

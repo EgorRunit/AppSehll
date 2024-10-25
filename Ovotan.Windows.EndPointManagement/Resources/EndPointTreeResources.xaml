@@ -1,0 +1,68 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:settings="clr-namespace:Ovotan.Windows.EndPointManagement.Settings"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--
+        Цветовые настройки дерева обозревателя объектов конечной точки.
+    -->
+    <settings:EndPointTreeSettings x:Key="Ovotan.Windows.EndPointManagement.Settings">
+        <settings:EndPointTreeSettings.TreeArrowStaticCheckedFill>
+            <SolidColorBrush Color="#FF595959"/>
+        </settings:EndPointTreeSettings.TreeArrowStaticCheckedFill>
+        <settings:EndPointTreeSettings.TreeArrowStaticCheckedStroke>
+            <SolidColorBrush Color="#FF262626"/>
+        </settings:EndPointTreeSettings.TreeArrowStaticCheckedStroke>
+        <settings:EndPointTreeSettings.TreeArrowMouseOverCheckedStroke>
+            <SolidColorBrush Color="#006CBE"/>
+        </settings:EndPointTreeSettings.TreeArrowMouseOverCheckedStroke>
+        <settings:EndPointTreeSettings.TreeArrowMouseOverCheckedFill>
+            <SolidColorBrush Color="Black"/>
+        </settings:EndPointTreeSettings.TreeArrowMouseOverCheckedFill>
+        <settings:EndPointTreeSettings.TreeArrowMouseOverStroke>
+            <SolidColorBrush Color="#006CBE"/>
+        </settings:EndPointTreeSettings.TreeArrowMouseOverStroke>
+        <settings:EndPointTreeSettings.TreeArrowMouseOverFill>
+            <SolidColorBrush Color="White"/>
+        </settings:EndPointTreeSettings.TreeArrowMouseOverFill>
+        <settings:EndPointTreeSettings.TreeArrowStaticFill>
+            <SolidColorBrush Color="#FFFFFFFF"/>
+        </settings:EndPointTreeSettings.TreeArrowStaticFill>
+        <settings:EndPointTreeSettings.TreeArrowStaticStroke>
+            <SolidColorBrush Color="Black"/>
+        </settings:EndPointTreeSettings.TreeArrowStaticStroke>
+        <settings:EndPointTreeSettings.SelectedBackgroundColor>
+            <SolidColorBrush Color="#FFC4D5FF"/>
+        </settings:EndPointTreeSettings.SelectedBackgroundColor>
+        <settings:EndPointTreeSettings.SelectedBackground>
+            <Color>#C4D5FF</Color>
+        </settings:EndPointTreeSettings.SelectedBackground>
+        <settings:EndPointTreeSettings.SelectedUnfocusedColor>
+            <Color>#E6E7EF</Color>
+        </settings:EndPointTreeSettings.SelectedUnfocusedColor>
+    </settings:EndPointTreeSettings>
+
+    <DataTemplate x:Key="Ovotan.Windows.EndPointManagementIcons.IconFolder">
+        <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform" Height="16" Width="16">
+            <Canvas Name="svg60" Width="48" Height="48">
+                <Canvas.RenderTransform>
+                    <TranslateTransform X="0" Y="0"/>
+                </Canvas.RenderTransform>
+                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path56" Fill="#968770">
+                    <Path.Data>
+                        <PathGeometry Figures="M40 12H22l-4-4H8c-2.2 0-4 1.8-4 4v8h40v-4C44 13.8 42.2 12 40 12z" FillRule="NonZero"/>
+                    </Path.Data>
+                </Path>
+                <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path58" Fill="#DCB679">
+                    <Path.Data>
+                        <PathGeometry Figures="M40 12H8c-2.2 0-4 1.8-4 4v20c0 2.2 1.8 4 4 4h32c2.2 0 4-1.8 4-4V16C44 13.8 42.2 12 40 12z" FillRule="NonZero"/>
+                    </Path.Data>
+                </Path>
+            </Canvas>
+        </Viewbox>
+    </DataTemplate>
+
+    <local:ObjectBrowserStyleSelector x:Key="Ovotan.Windows.EndPointManagement.IconStyleSelector"  
+            Folder ="{StaticResource Ovotan.ApplicationShell.Controls.Icons.IconFolder}"
+            />
+
+</ResourceDictionary>

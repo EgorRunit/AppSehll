@@ -1,24 +1,21 @@
 using System.Windows.Controls;
 using System.Windows;
-using Ovotan.Shell.RabbitMQ.Controls.Configurations;
-using Ovotan.ApplicationShell.Controls.Configurations;
 using System.Text.Json;
-using System.Linq;
-using System.Windows.Input;
-using Ovotan.Windows.Common.Controls;
+using Ovotan.Windows.Controls.EndPointManagement.Enums;
+using Ovotan.Shell.RabbitMQ.Controls.Configurations;
 
-namespace Ovotan.ApplicationShell.Controls
+namespace Ovotan.Windows.Controls.EndPointManagement
 {
-    public class EndPointObjectTree : TreeView
+    public class Tree : TreeView
     {
         Dictionary<string, Type> _types;
 
-        static EndPointObjectTree()
+        static Tree()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(EndPointObjectTree), new FrameworkPropertyMetadata(typeof(TreeView)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(Tree), new FrameworkPropertyMetadata(typeof(TreeView)));
         }
 
-        public EndPointObjectTree()
+        public Tree()
         {
             _types = new Dictionary<string, Type>();
         }
@@ -28,18 +25,18 @@ namespace Ovotan.ApplicationShell.Controls
             _types.Add(dataType.FullName, dataType);
         }
 
-        public List<EndPointObjectBrowserTreeItemConfiguration> GetConfigurationNodes()
+        public List<TreeItemConfiguration> GetConfigurationNodes()
         {
-            var result = new List<EndPointObjectBrowserTreeItemConfiguration>();
+            var result = new List<TreeItemConfiguration>();
             return _getConfigurationNodes(Items);
         }
 
-        public void LoadCoonfigurationNodes(List<EndPointObjectBrowserTreeItemConfiguration> nodes)
+        public void LoadCoonfigurationNodes(List<TreeItemConfiguration> nodes)
         {
             _loadCoonfigurationNodes(nodes, Items);
         }
 
-        void _loadCoonfigurationNodes(List<EndPointObjectBrowserTreeItemConfiguration> nodes, ItemCollection itemCollection)
+        void _loadCoonfigurationNodes(List<TreeItemConfiguration> nodes, ItemCollection itemCollection)
         {
             foreach (var node in nodes)
             {
@@ -54,12 +51,12 @@ namespace Ovotan.ApplicationShell.Controls
                     var type = _types[tmp[0]];
                     data = JsonSerializer.Deserialize(tmp[1], type);
                 }
-                var item = new EndPointObjectBrowserTreeItem()
+                var item = new TreeItem()
                 {
                     Header = node.Header,
                     Data = data,
                     AllowLazyLoading = node.AllowLazyLoading,
-                    Type = EndPointObjectBrowserTreeItemType.Configuration
+                    Type = TreeItemType.Configuration
                 };
                 item.IsLazyLoading = item.AllowLazyLoading;
                 itemCollection.Add(item);
@@ -70,14 +67,14 @@ namespace Ovotan.ApplicationShell.Controls
             }
         }
 
-        List<EndPointObjectBrowserTreeItemConfiguration> _getConfigurationNodes(ItemCollection itemCollection)
+        List<TreeItemConfiguration> _getConfigurationNodes(ItemCollection itemCollection)
         {
-            var nodes = new List<EndPointObjectBrowserTreeItemConfiguration>();
+            var nodes = new List<TreeItemConfiguration>();
 
             foreach (var item in itemCollection)
             {
-                var node = item as EndPointObjectBrowserTreeItem;
-                if (node.Type == EndPointObjectBrowserTreeItemType.Configuration)
+                var node = item as TreeItem;
+                if (node.Type == TreeItemType.Configuration)
                 {
                     var children = _getConfigurationNodes(node.Items);
 
@@ -89,7 +86,7 @@ namespace Ovotan.ApplicationShell.Controls
                         node.Data = data;
                     }
 
-                    nodes.Add(new EndPointObjectBrowserTreeItemConfiguration()
+                    nodes.Add(new TreeItemConfiguration()
                     {
                         Header = node.Header.ToString(),
                         Data = node.Data,

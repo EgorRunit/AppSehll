@@ -1,20 +1,19 @@
-using Ovotan.ApplicationShell.Controls.Configurations;
 using Ovotan.ApplicationShell.Controls.Models;
-using Ovotan.ApplicationShell.Controls.ToolbarElements;
 using Ovotan.Controls.Docking.Interfaces;
-using Ovotan.Windows.EndPointManagement.Dialogs;
-using Ovotan.Windows.EndPointManagement.Enums;
+using Ovotan.Windows.Controls.EndPointManagement.Configurations;
+using Ovotan.Windows.Controls.EndPointManagement.Dialogs;
+using Ovotan.Windows.Controls.EndPointManagement.Enums;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace Ovotan.ApplicationShell.Controls
+namespace Ovotan.Windows.Controls.EndPointManagement
 {
     /// <summary>
     /// Базовый класс для менеджера конечной точки.
     /// </summary>
-    public class EndPointManager : ContentControl, IDockPanelContent
+    public class Manager : ContentControl, IDockPanelContent
     {
         /// <summary>
         /// Очередь сообщений докинга.
@@ -31,7 +30,7 @@ namespace Ovotan.ApplicationShell.Controls
         /// <summary>
         /// Экземпляр дерева иерархии конечной точки.
         /// </summary>
-        protected EndPointObjectTree treeView;
+        protected Tree treeView;
 
         /// <summary>
         /// Название конечной точки.
@@ -46,15 +45,15 @@ namespace Ovotan.ApplicationShell.Controls
         /// <summary>
         /// Коснтруктор.
         /// </summary>
-        static EndPointManager()
+        static Manager()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(EndPointManager), new FrameworkPropertyMetadata(typeof(EndPointManager)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(Manager), new FrameworkPropertyMetadata(typeof(Manager)));
         }
 
         /// <summary>
         /// Конструктор.
         /// </summary>
-        public EndPointManager()
+        public Manager()
         {
             ToolbarActions = new ObservableCollection<ToolbarElementBase>();
         }
@@ -74,7 +73,7 @@ namespace Ovotan.ApplicationShell.Controls
         {
             base.OnApplyTemplate();
             toolBar = Template.FindName("Toolbar", this) as ToolBar;
-            treeView = Template.FindName("TreeView", this) as EndPointObjectTree;
+            treeView = Template.FindName("TreeView", this) as Tree;
             treeView.AddHandler(TreeViewItem.ExpandedEvent, (RoutedEventHandler)_onExpandNode);
             LoadConfiguration();
         }
@@ -109,9 +108,9 @@ namespace Ovotan.ApplicationShell.Controls
         /// </summary>
         /// <param name="node"></param>
         /// <returns></returns>
-        public virtual async Task<List<EndPointObjectBrowserTreeViewChidlTreeItem>> TryExpandNode(EndPointObjectBrowserTreeItem node)
+        public virtual async Task<List<TreeItemModel>> TryExpandNode(TreeItem node)
         {
-            return new List<EndPointObjectBrowserTreeViewChidlTreeItem>();
+            return new List<TreeItemModel>();
         }
 
         /// <summary>
@@ -147,7 +146,7 @@ namespace Ovotan.ApplicationShell.Controls
         /// </summary>
         void _onExpandNode(object sender, RoutedEventArgs e)
         {
-            var treeViewItem = e.Source as EndPointObjectBrowserTreeItem;
+            var treeViewItem = e.Source as TreeItem;
             if (treeViewItem.IsLazyLoading)
             {
                 Mouse.SetCursor(Cursors.Wait);
@@ -160,7 +159,7 @@ namespace Ovotan.ApplicationShell.Controls
                 {
                     foreach (var node in task.Result)
                     {
-                        treeViewItem.Items.Add(new EndPointObjectBrowserTreeItem()
+                        treeViewItem.Items.Add(new TreeItem()
                         {
                             Type = node.Type,
                             IsLazyLoading = node.IsLazyLoading,

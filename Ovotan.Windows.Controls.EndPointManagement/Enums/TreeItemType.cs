@@ -1,9 +1,9 @@
-namespace Ovotan.ApplicationShell.Controls.Configurations
+namespace Ovotan.Windows.Controls.EndPointManagement.Enums
 {
     /// <summary>
     /// Перичесление описывает типы узлов дерева обозревателя конечной точки.
     /// </summary>
-    public enum EndPointObjectBrowserTreeItemType
+    public enum TreeItemType
     {
         /// <summary>
         /// Узел создается динамически от контекста.

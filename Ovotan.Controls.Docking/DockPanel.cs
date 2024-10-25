@@ -1,13 +1,10 @@
 using Ovotan.Controls.Docking.Enums;
 using Ovotan.Controls.Docking.Interfaces;
 using Ovotan.Controls.Docking.Messages;
-using Ovotan.Windows.Common.Controls;
-using System.Diagnostics;
-using System.Reflection.PortableExecutable;
+using Ovotan.Windows.Controls.Controls;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace Ovotan.Controls.Docking
 {

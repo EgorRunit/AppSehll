@@ -1,13 +1,13 @@
-using Ovotan.ApplicationShell.Controls.Configurations;
+using Ovotan.Windows.Controls.EndPointManagement.Enums;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Ovotan.ApplicationShell.Controls
+namespace Ovotan.Windows.Controls.EndPointManagement
 {
     /// <summary>
-    /// Класс описывает узел дерева ObjectBrowser
+    /// Класс описывает узел дерева конечной точки.
     /// </summary>
-    public class EndPointObjectBrowserTreeItem : TreeViewItem
+    public class TreeItem : TreeViewItem
     {
         /// <summary>
         /// Зависимое свойство. Поддерживает ли узел ленивую загрузку дочерних узлов.
@@ -17,7 +17,7 @@ namespace Ovotan.ApplicationShell.Controls
         /// <summary>
         /// get,set - Тип узла.
         /// </summary>
-        public EndPointObjectBrowserTreeItemType Type { get; set; }
+        public TreeItemType Type { get; set; }
 
         /// <summary>
         /// get,set - Разрешена ли для узла отложенная загрузка
@@ -47,12 +47,11 @@ namespace Ovotan.ApplicationShell.Controls
         /// <summary>
         /// Конструкторю
         /// </summary>
-        static EndPointObjectBrowserTreeItem()
+        static TreeItem()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(EndPointObjectBrowserTreeItem), new FrameworkPropertyMetadata(typeof(TreeViewItem)));
-            IsLazyLoadingProperty = DependencyProperty.Register("IsLazyLoading", typeof(bool), typeof(EndPointObjectBrowserTreeItem),
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(TreeItem), new FrameworkPropertyMetadata(typeof(TreeViewItem)));
+            IsLazyLoadingProperty = DependencyProperty.Register("IsLazyLoading", typeof(bool), typeof(TreeItem),
                 new PropertyMetadata(false));
-
         }
     }
 }

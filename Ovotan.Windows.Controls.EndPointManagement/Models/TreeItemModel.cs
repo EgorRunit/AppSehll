@@ -2,7 +2,7 @@ using Ovotan.Windows.Controls.EndPointManagement.Enums;
 
 namespace Ovotan.ApplicationShell.Controls.Models
 {
-    public class EndPointObjectBrowserTreeViewChidlTreeItem
+    public class TreeItemModel
     {
         /// <summary>
         /// get,set - Название узла.

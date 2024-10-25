@@ -7,18 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Text.Json" Version="8.0.5" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Ovotan.Controls.Docking\Ovotan.Controls.Docking.csproj" />
-    <ProjectReference Include="..\Ovotan.Windows.Controls.EndPointManagement\Ovotan.Windows.Controls.EndPointManagement.csproj" />
     <ProjectReference Include="..\Ovotan.Windows.Controls\Ovotan.Windows.Controls.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Dialogs\" />
-    <Folder Include="Settings\" />
+    <Compile Update="Dialogs\AddGroupFolderDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
 </Project>

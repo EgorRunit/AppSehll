@@ -1,24 +1,17 @@
-using Ovotan.ApplicationShell.Controls.Configurations;
-using Ovotan.ApplicationShell.Controls.Interfaces;
 using Ovotan.Controls.Docking;
 using Ovotan.Controls.Docking.Enums;
 using Ovotan.Controls.Docking.Interfaces;
+using Ovotan.Windows.Controls.EndPointManagement.Configurations;
 using System.Collections.ObjectModel;
-using System.Configuration;
-using System.Net;
-using System.Net.WebSockets;
-using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
 
-namespace Ovotan.ApplicationShell.Controls
+namespace Ovotan.Windows.Controls.EndPointManagement
 {
 
 
-    public class EndPointManagement : ContentControl
+    public class Management : ContentControl
     {
         public static readonly DependencyProperty HeadMenuItemsProperty;
 
@@ -27,7 +20,7 @@ namespace Ovotan.ApplicationShell.Controls
         Menu _mainMenu;
 
         IDockingMessageQueue _dockingMessageQueue;
-        Dictionary<Type, EndPointManager> _endPoints;
+        Dictionary<Type, Manager> _endPoints;
         DockingHost _dockingHost;
         EndPointConfigurations _configurationManager;
         ObservableCollection<MenuItem> _headMenuItems;
@@ -46,24 +39,24 @@ namespace Ovotan.ApplicationShell.Controls
 
 
 
-        static EndPointManagement()
+        static Management()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(EndPointManagement), new FrameworkPropertyMetadata(typeof(EndPointManagement)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(Management), new FrameworkPropertyMetadata(typeof(Management)));
 
-            HeadMenuItemsProperty = DependencyProperty.Register("Icon", typeof(ObservableCollection<MenuItem>), typeof(EndPointManagement),
+            HeadMenuItemsProperty = DependencyProperty.Register("Icon", typeof(ObservableCollection<MenuItem>), typeof(Management),
                 new FrameworkPropertyMetadata(new ObservableCollection<MenuItem>(), FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
         }
 
-        public EndPointManagement() : this(new EndPointConfigurations("EndPoint Management"))
+        public Management() : this(new EndPointConfigurations("EndPoint Management"))
         {
         }
 
-        public EndPointManagement(EndPointConfigurations configurationManager) 
+        public Management(EndPointConfigurations configurationManager) 
         {
             _configurationManager = configurationManager;
             _dockingMessageQueue = new DockingMessageQueue();
             _headMenuItems = new ObservableCollection<MenuItem>();
-            _endPoints = new Dictionary<Type, EndPointManager>();
+            _endPoints = new Dictionary<Type, Manager>();
             _dockingHost = new DockingHost(_dockingMessageQueue);
             _dockingHost.SetValue(Grid.RowProperty, 1);
             _dockingHost.Loaded += _dockingHost_Loaded;
@@ -73,7 +66,7 @@ namespace Ovotan.ApplicationShell.Controls
 
         void _panelClosed(Ovotan.Controls.Docking.DockPanel message)
         {
-            var endPoint = message.DockPanelContent as EndPointManager;
+            var endPoint = message.DockPanelContent as Manager;
             if(endPoint != null)
             {
                 if(_endPoints.ContainsKey(endPoint.GetType()))
@@ -100,14 +93,14 @@ namespace Ovotan.ApplicationShell.Controls
 
         public void StartShell(Type shellType)
         {
-            EndPointManager endPoint = null;
+            Manager endPoint = null;
             if (_endPoints.ContainsKey(shellType))
             {
                  endPoint = _endPoints [shellType];
             }
             else
             {
-                endPoint = Activator.CreateInstance(shellType) as EndPointManager;
+                endPoint = Activator.CreateInstance(shellType) as Manager;
                 _endPoints.Add(shellType, endPoint);
             }
             endPoint.Start(_configurationManager, _dockingMessageQueue);
@@ -132,7 +125,7 @@ namespace Ovotan.ApplicationShell.Controls
 
 
 
-        public EndPointManager AutoStartShell { get; set; }
+        public Manager AutoStartShell { get; set; }
 
     }
 }
