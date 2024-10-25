@@ -1,6 +1,6 @@
 using System.Windows;
 
-namespace Ovotan.ApplicationShell.Controls.Dialogs
+namespace Ovotan.Windows.EndPointManagement.Dialogs
 {
     /// <summary>
     /// Interaction logic for AddGroupFolderDialog.xaml

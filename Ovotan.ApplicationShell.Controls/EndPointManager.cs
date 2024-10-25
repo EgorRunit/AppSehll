@@ -1,9 +1,9 @@
 using Ovotan.ApplicationShell.Controls.Configurations;
-using Ovotan.ApplicationShell.Controls.Dialogs;
-using Ovotan.ApplicationShell.Controls.Enums;
 using Ovotan.ApplicationShell.Controls.Models;
 using Ovotan.ApplicationShell.Controls.ToolbarElements;
 using Ovotan.Controls.Docking.Interfaces;
+using Ovotan.Windows.EndPointManagement.Dialogs;
+using Ovotan.Windows.EndPointManagement.Enums;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;

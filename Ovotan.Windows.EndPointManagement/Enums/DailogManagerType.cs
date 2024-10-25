@@ -1,4 +1,4 @@
-namespace Ovotan.ApplicationShell.Controls.Enums
+namespace Ovotan.Windows.EndPointManagement.Enums
 {
     /// <summary>
     /// Перечисление описывает стандартные диалоги EndPointManagement.

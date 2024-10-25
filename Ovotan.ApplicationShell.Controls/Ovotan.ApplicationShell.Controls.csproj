@@ -12,6 +12,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Ovotan.Controls.Docking\Ovotan.Controls.Docking.csproj" />
+    <ProjectReference Include="..\Ovotan.Windows.EndPointManagement\Ovotan.Windows.EndPointManagement.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Dialogs\" />
   </ItemGroup>
 
 </Project>

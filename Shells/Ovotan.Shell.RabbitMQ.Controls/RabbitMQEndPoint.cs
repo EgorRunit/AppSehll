@@ -9,11 +9,11 @@ using Ovotan.Shell.RabbitMQ.Controls.DockPanels;
 using Ovotan.Windows.Common.Controls;
 using Ovotan.ApplicationShell.Controls.Configurations;
 using Ovotan.Shell.RabbitMQ.Controls.Configurations;
-using Ovotan.ApplicationShell.Controls.Enums;
 using Ovotan.Shell.RabbitMQ.Controls.Doalogs;
 using Ovotan.Shell.RabbitMQ.Controls.Models;
 using System.Windows.Markup;
 using Ovotan.ApplicationShell.Controls.Models;
+using Ovotan.Windows.EndPointManagement.Enums;
 
 namespace Ovotan.Shell.RabbitMQ.Controls
 {
