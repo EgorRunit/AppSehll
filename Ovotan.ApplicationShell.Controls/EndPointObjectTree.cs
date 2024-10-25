@@ -54,9 +54,10 @@ namespace Ovotan.ApplicationShell.Controls
                 }
                 var item = new EndPointObjectBrowserTreeItem()
                 {
-                    Type = EndPointObjectBrowserTreeItemType.Configuration,
                     Header = node.Header,
-                    Data = data
+                    Data = data,
+                    IsLazyLoading = node.IsLazyLoading,
+                    
                 };
                 itemCollection.Add(item);
                 if(node.Childen != null)
@@ -89,6 +90,7 @@ namespace Ovotan.ApplicationShell.Controls
                     {
                         Header = node.Header.ToString(),
                         Data = node.Data,
+                        IsLazyLoading = node.IsLazyLoading,
                         Childen = children.Count > 0 ? children : null,
                     });
                     

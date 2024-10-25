@@ -64,7 +64,10 @@ namespace Ovotan.Shell.RabbitMQ.Controls
             base.LoadConfiguration();
             treeView.AddDataType(typeof(EndPointConnection));
             var settings = endPointConfigurations.LoadEndPoint<RabbitMQEndPointConfiguration>("RabbitMQ");
-            treeView.LoadCoonfigurationNodes(settings.ObjectBrowserTree);
+            if (settings != null)
+            {
+                treeView.LoadCoonfigurationNodes(settings.ObjectBrowserTree);
+            }
         }
 
         void _addCreateConnection()
@@ -78,7 +81,8 @@ namespace Ovotan.Shell.RabbitMQ.Controls
                 { 
                     Header = connection.Name, 
                     Data = connection,
-                    Type = EndPointObjectBrowserTreeItemType.Configuration
+                    Type = EndPointObjectBrowserTreeItemType.Configuration,
+                    IsLazyLoading = true,
                 };
                 if (selectedNode != null)
                 {

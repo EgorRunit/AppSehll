@@ -205,9 +205,18 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <!--Toogle button-->
-                        <Trigger Property="HasItems" Value="false">
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="HasItems" Value="false"/>
+                                <Condition Property="IsLazyLoading" Value="false"/>
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter TargetName="Expander" Property="Visibility" Value="Hidden" />
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+                        <!--<Trigger Property="HasItems" Value="false">
                             <Setter TargetName="Expander" Property="Visibility" Value="Hidden" />
-                        </Trigger>
+                        </Trigger>-->
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="HasHeader" Value="false" />
