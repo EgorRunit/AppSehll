@@ -70,6 +70,11 @@ namespace Ovotan.Shell.RabbitMQ.Controls
             }
         }
 
+        public async override Task TryExpandNode(EndPointObjectBrowserTreeItem node)
+        {
+            
+        }
+
         void _addCreateConnection()
         {
             var wnd = new CreateConnectionDialog();

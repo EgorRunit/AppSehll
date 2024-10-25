@@ -74,6 +74,7 @@ namespace Ovotan.ApplicationShell.Controls
             base.OnApplyTemplate();
             toolBar = Template.FindName("Toolbar", this) as ToolBar;
             treeView = Template.FindName("TreeView", this) as EndPointObjectTree;
+            treeView.AddHandler(TreeViewItem.ExpandedEvent, (RoutedEventHandler)_onExpandNode);
             LoadConfiguration();
         }
 
@@ -88,11 +89,26 @@ namespace Ovotan.ApplicationShell.Controls
             this.endPointConfigurations = endPointConfigurations;
         }
 
+        /// <summary>
+        /// Сохранение конфигурации конечной точки.
+        /// </summary>
         public virtual void SaveConfiguration()
         {
         }
 
+        /// <summary>
+        /// Загрузка конфигурации конечной точки.
+        /// </summary>
         public virtual void LoadConfiguration()
+        {
+        }
+
+        /// <summary>
+        /// Попытка раскрыть узел, у которого в свойствах установлена отложенная загрузка потомков.
+        /// </summary>
+        /// <param name="node"></param>
+        /// <returns></returns>
+        public virtual async Task TryExpandNode(EndPointObjectBrowserTreeItem node)
         {
         }
 
@@ -121,6 +137,20 @@ namespace Ovotan.ApplicationShell.Controls
             {
                 callbac((T)wnd.Content);
             }
+        }
+
+
+        /// <summary>
+        /// Обратчик события раскрытия узла дерева.
+        /// </summary>
+        void _onExpandNode(object sender, RoutedEventArgs e)
+        {
+            var treeViewItem = e.Source as EndPointObjectBrowserTreeItem;
+            Mouse.SetCursor(Cursors.Wait);
+            var task = Task.Run(async () => {
+                await TryExpandNode(treeViewItem);
+            });
+            task.Wait();
         }
     }
 }

@@ -4,6 +4,8 @@ using Ovotan.Shell.RabbitMQ.Controls.Configurations;
 using Ovotan.ApplicationShell.Controls.Configurations;
 using System.Text.Json;
 using System.Linq;
+using System.Windows.Input;
+using Ovotan.Windows.Common.Controls;
 
 namespace Ovotan.ApplicationShell.Controls
 {
