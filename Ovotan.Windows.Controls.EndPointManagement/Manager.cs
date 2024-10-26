@@ -1,5 +1,7 @@
 using Ovotan.ApplicationShell.Controls.Models;
+using Ovotan.Controls.Docking.Enums;
 using Ovotan.Controls.Docking.Interfaces;
+using Ovotan.Controls.Docking.Messages;
 using Ovotan.Windows.Controls.EndPointManagement.Configurations;
 using Ovotan.Windows.Controls.EndPointManagement.Dialogs;
 using Ovotan.Windows.Controls.EndPointManagement.Enums;
@@ -83,10 +85,16 @@ namespace Ovotan.Windows.Controls.EndPointManagement
         /// </summary>
         /// <param name="endPointConfigurations">Экземпляр сервиса конфигурации.</param>
         /// <param name="dockingMessageQueue">Очередь сообщений докинга.</param>
-        public virtual void Start(EndPointConfigurations endPointConfigurations, IDockingMessageQueue dockingMessageQueue)
+        public void Start(EndPointConfigurations endPointConfigurations, IDockingMessageQueue dockingMessageQueue)
         {
             this.dockingMessageQueue = dockingMessageQueue;
             this.endPointConfigurations = endPointConfigurations;
+            var message = new PanelAttachedMessage()
+            {
+                DockPanelContent = this,
+                Type = PanelAttachedType.Left
+            };
+            dockingMessageQueue.Publish(DockingMessageType.PanelAttached, message);
         }
 
         /// <summary>

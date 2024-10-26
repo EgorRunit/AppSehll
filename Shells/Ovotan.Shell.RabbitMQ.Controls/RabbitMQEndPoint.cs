@@ -1,6 +1,4 @@
 using System.Windows;
-using Ovotan.Controls.Docking.Interfaces;
-using Ovotan.Controls.Docking.Messages;
 using Ovotan.Controls.Docking.Enums;
 using Ovotan.Shell.RabbitMQ.Controls.DockPanels;
 using Ovotan.Shell.RabbitMQ.Controls.Configurations;
@@ -11,7 +9,6 @@ using Ovotan.Windows.Controls.Controls;
 using Ovotan.Windows.Controls.EndPointManagement.Enums;
 using Ovotan.Windows.Controls.EndPointManagement;
 using Ovotan.Windows.Controls.EndPointManagements.Interfaces;
-using Ovotan.Windows.Controls.EndPointManagement.Configurations;
 
 namespace Ovotan.Shell.RabbitMQ.Controls
 {
@@ -39,17 +36,6 @@ namespace Ovotan.Shell.RabbitMQ.Controls
             });
         }
 
-
-        public override void Start(EndPointConfigurations endPointConfigurations, IDockingMessageQueue dockingMessageQueue)
-        {
-            base.Start(endPointConfigurations, dockingMessageQueue);
-            var message = new PanelAttachedMessage()
-            {
-                DockPanelContent = this,
-                Type = PanelAttachedType.Left
-            };
-            dockingMessageQueue.Publish(DockingMessageType.PanelAttached, message);
-        }
 
         public override void SaveConfiguration()
         {
