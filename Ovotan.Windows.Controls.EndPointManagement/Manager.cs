@@ -1,7 +1,7 @@
 using Ovotan.ApplicationShell.Controls.Models;
-using Ovotan.Controls.Docking.Enums;
-using Ovotan.Controls.Docking.Interfaces;
-using Ovotan.Controls.Docking.Messages;
+using Ovotan.Windows.Controls.Docking.Enums;
+using Ovotan.Windows.Controls.Docking.Interfaces;
+using Ovotan.Windows.Controls.Docking.Messages;
 using Ovotan.Windows.Controls.EndPointManagement.Configurations;
 using Ovotan.Windows.Controls.EndPointManagement.Dialogs;
 using Ovotan.Windows.Controls.EndPointManagement.Enums;

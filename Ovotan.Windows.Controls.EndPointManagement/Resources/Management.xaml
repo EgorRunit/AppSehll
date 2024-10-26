@@ -46,10 +46,10 @@
                         </Grid.RowDefinitions>
                         <ToolBar x:Name="Toolbar"
                             ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ToolbarActions}"
-                            Background="{Binding Source={StaticResource Ovotan_Controls_DockPanel_Settings}, Path=ContentToolbarBackground}">
+                            Background="{Binding Source={StaticResource Ovotan.Windows.Controls.Docking.Settings.PanelSettings}, Path=ContentToolbarBackground}">
                         </ToolBar>
                         <local:Tree x:Name="TreeView" Grid.Row="1"
-                            Background="{Binding Source={StaticResource Ovotan_Controls_DockPanel_Settings}, Path=ContentBackground}">
+                            Background="{Binding Source={StaticResource Ovotan.Windows.Controls.Docking.Settings.PanelSettings}, Path=ContentBackground}">
                         </local:Tree>
                     </Grid>
                 </ControlTemplate>

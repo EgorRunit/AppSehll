@@ -1,11 +1,12 @@
-using Ovotan.Controls.Docking;
-using Ovotan.Controls.Docking.Enums;
-using Ovotan.Controls.Docking.Interfaces;
+using doc = Ovotan.Windows.Controls.Docking;
+using Ovotan.Windows.Controls.Docking.Interfaces;
 using Ovotan.Windows.Controls.EndPointManagement.Configurations;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using Ovotan.Windows.Controls.Docking;
+using Ovotan.Windows.Controls.Docking.Enums;
 
 namespace Ovotan.Windows.Controls.EndPointManagement
 {
@@ -61,10 +62,10 @@ namespace Ovotan.Windows.Controls.EndPointManagement
             _dockingHost.SetValue(Grid.RowProperty, 1);
             _dockingHost.Loaded += _dockingHost_Loaded;
 
-            _dockingMessageQueue.Register(DockingMessageType.PanelClosed, (x) => _panelClosed(x as Ovotan.Controls.Docking.DockPanel));
+            _dockingMessageQueue.Register(DockingMessageType.PanelClosed, (x) => _panelClosed(x as doc.DockPanel));
         }
 
-        void _panelClosed(Ovotan.Controls.Docking.DockPanel message)
+        void _panelClosed(doc.DockPanel message)
         {
             var endPoint = message.DockPanelContent as Manager;
             if(endPoint != null)

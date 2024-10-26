@@ -1,0 +1,44 @@
+<Window x:Class="Ovotan.Windows.Controls.Docking.Windows.DockPlacementWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Ovotan.Windows.Controls.Docking.Windows"
+        xmlns:controls="clr-namespace:Ovotan.Windows.Controls.Docking"
+        Background="Transparent"
+        mc:Ignorable="d"
+        ShowInTaskbar="False"
+		WindowStyle="None"
+		AllowsTransparency="True"
+		Topmost="True"
+        Title="DockPlacementWindow" Width="500" Height="400">
+    <WindowChrome.WindowChrome >
+        <WindowChrome CaptionHeight="0" ResizeBorderThickness="1"  />
+    </WindowChrome.WindowChrome>
+    <Grid x:Name="MainGrid" Visibility="Hidden">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <controls:CanvasButton CanvasButtonType="WindowTopDock" Width="30" Height="30" Grid.Column="1" MouseUp="_attachPanel"/>
+        <controls:CanvasButton CanvasButtonType="WindowBottomDock" Width="30" Height="30" Grid.Column="1" Grid.Row="2" MouseUp="_attachPanel"/>
+        <controls:CanvasButton CanvasButtonType="WindowRightDock" Width="30" Height="30" Grid.Column="2" Grid.Row="1"  MouseUp="_attachPanel"/>
+        <controls:CanvasButton  CanvasButtonType="WindowLeftDock" Width="30" Height="30" Grid.Column="0" Grid.Row="1"  MouseUp="_attachPanel"/>
+        <Canvas Grid.ColumnSpan="2" Grid.RowSpan="2"  >
+            <Canvas Height="90" Width="90" x:Name="CentralArrow">
+
+                <controls:CanvasButton Canvas.Left="0" Canvas.Top="30" CanvasButtonType="WindowLeftDock" Width="30" Height="30" MouseUp="_splitPanel"/>
+                <controls:CanvasButton Canvas.Left="30" Canvas.Top="0" CanvasButtonType="WindowTopDock" Width="30" Height="30" MouseUp="_splitPanel"/>
+                <controls:CanvasButton Canvas.Left="60" Canvas.Top="30" CanvasButtonType="WindowRightDock" Width="30" Height="30" MouseUp="_splitPanel"/>
+                <controls:CanvasButton Canvas.Left="30" Canvas.Top="60" CanvasButtonType="WindowBottomDock" Width="30" Height="30" MouseUp="_splitPanel"/>
+            </Canvas>
+
+        </Canvas>
+    </Grid>
+</Window>

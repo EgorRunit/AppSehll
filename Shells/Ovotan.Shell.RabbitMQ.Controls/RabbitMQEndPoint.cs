@@ -1,5 +1,4 @@
 using System.Windows;
-using Ovotan.Controls.Docking.Enums;
 using Ovotan.Shell.RabbitMQ.Controls.DockPanels;
 using Ovotan.Shell.RabbitMQ.Controls.Configurations;
 using Ovotan.Shell.RabbitMQ.Controls.Doalogs;
@@ -9,6 +8,7 @@ using Ovotan.Windows.Controls.Controls;
 using Ovotan.Windows.Controls.EndPointManagement.Enums;
 using Ovotan.Windows.Controls.EndPointManagement;
 using Ovotan.Windows.Controls.EndPointManagements.Interfaces;
+using Ovotan.Windows.Controls.Docking.Enums;
 
 namespace Ovotan.Shell.RabbitMQ.Controls
 {

@@ -1,22 +1,6 @@
-using Ovotan.ApplicationShell.Controls;
-using Ovotan.Controls.Docking.Enums;
-using Ovotan.Controls.Docking.Windows;
 using Ovotan.Shell.RabbitMQ.Controls;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Net.Http;
-using System.Net;
-using System.Text;
-using System.Threading;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using System.Threading.Tasks;
-using Ovotan.Shell.RabbitMQ.Api;
-using Ovotan.Controls.Docking;
-using System.Collections.ObjectModel;
-using System.Xml.Linq;
 
 namespace AppShell
 {

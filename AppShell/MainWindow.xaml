@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AppShell"
-        xmlns:controls="clr-namespace:Ovotan.Controls.Docking;assembly=Ovotan.Controls.Docking"
+        xmlns:controls="clr-namespace:Ovotan.Windows.Controls.Docking;assembly=Ovotan.Windows.Controls.Docking"
         xmlns:controls1="clr-namespace:Ovotan.Windows.Controls.EndPointManagement;assembly=Ovotan.Windows.Controls.EndPointManagement"
         xmlns:controls2="clr-namespace:AppShell"
         xmlns:configuration="clr-namespace:Ovotan.Windows.Controls.EndPointManagement.Configurations;assembly=Ovotan.Windows.Controls.EndPointManagement"
@@ -105,7 +105,7 @@
             
          <controls1:Management x:Name="MainShallManagement" Grid.Row="1">
             <controls1:Management.HeadMenuItems>
-                <MenuItem Header="Sheel"></MenuItem>
+                <MenuItem Header="EndPoint"></MenuItem>
                 <MenuItem Header="Tools"></MenuItem>
             </controls1:Management.HeadMenuItems>
          </controls1:Management>

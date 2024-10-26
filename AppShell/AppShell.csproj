@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Ovotan.Controls.Docking\Ovotan.Controls.Docking.csproj" />
+    <ProjectReference Include="..\Ovotan.Windows.Controls.Docking\Ovotan.Windows.Controls.Docking.csproj" />
     <ProjectReference Include="..\Ovotan.Windows.Controls.EndPointManagement\Ovotan.Windows.Controls.EndPointManagement.csproj" />
     <ProjectReference Include="..\Ovotan.Windows.Controls\Ovotan.Windows.Controls.csproj" />
     <ProjectReference Include="..\Shells\Ovotan.Shell.RabbitMQ.Controls\Ovotan.Shell.RabbitMQ.Controls.csproj" />

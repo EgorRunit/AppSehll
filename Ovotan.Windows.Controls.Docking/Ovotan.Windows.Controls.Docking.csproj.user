@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <Page Update="Resources\CanvasButtonResourcesDictionary.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\DockHositngSettingsResources.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Resources\DockPanelResourcesDictionary.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\DockPanelWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\DockPlacementWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>
