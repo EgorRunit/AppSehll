@@ -1,21 +1,20 @@
 using System.Collections.Generic;
-using System.Net.Http;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Ovotan.Shell.RabbitMQ.Api
 {
-    public class QueueApi : RabbitMQApiHttpClientBase
+    public class QueueApi
     {
-        public QueueApi(HttpClient client) 
-            : base(client)
-        {
+        RabbitMQApiHttpClient _client;
 
+        public QueueApi(RabbitMQApiHttpClient client) 
+        {
+            _client = client;
         }
 
-        public async Task<List<Models.Queue>> GetQueues()
+        public async Task<List<Models.Queue>> GetQueuesAsync()
         {
-            return await GetData<List<Models.Queue>>("api/queues");
+            return await _client.GetData<List<Models.Queue>>("api/queues");
         }
     }
 }

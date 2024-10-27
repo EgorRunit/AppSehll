@@ -1,3 +1,5 @@
+using Ovotan.Windows.Controls.EndPointManagement.Enums;
+
 namespace Ovotan.Shell.RabbitMQ.Controls.Configurations
 {
     /// <summary>
@@ -13,7 +15,7 @@ namespace Ovotan.Shell.RabbitMQ.Controls.Configurations
         /// <summary>
         /// Пользовательские данные узла.
         /// </summary>
-        public object Data { get; set; }
+        public object Tag { get; set; }
 
         /// <summary>
         /// get,set - Список дочерних узлов
@@ -24,6 +26,11 @@ namespace Ovotan.Shell.RabbitMQ.Controls.Configurations
         /// get,set - Разрешена ли для узла отложенная загрузка
         /// </summary>
         public bool AllowLazyLoading { get; set; }
+
+        /// <summary>
+        /// get,set - Тип узла.
+        /// </summary>
+        public TreeItemType Type {get;set;}
 
         /// <summary>
         /// Конструктор.

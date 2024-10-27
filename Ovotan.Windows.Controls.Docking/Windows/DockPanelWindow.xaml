@@ -26,12 +26,12 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid Background="{Binding Source={StaticResource Ovotan.Controls.Docking.Settings.DockPanelSettings}, Path=HeaderBackground}" MouseDown="_grid_MouseDown">
+        <Grid Background="{Binding Source={StaticResource Ovotan.Windows.Controls.Docking.Settings.PanelSettings}, Path=HeaderBackground}" MouseDown="_grid_MouseDown">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Margin="5,2,5,2" Foreground="{Binding Source={StaticResource Ovotan.Controls.Docking.Settings.DockPanelSettings}, Path=HeaderForeground}" Text="RabbitMQ Exployer"/>
+            <TextBlock Margin="5,2,5,2" Foreground="{Binding Source={StaticResource Ovotan.Windows.Controls.Docking.Settings.PanelSettings}, Path=HeaderForeground}" Text="RabbitMQ Exployer"/>
             
             
             

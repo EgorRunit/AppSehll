@@ -126,7 +126,7 @@
                                         </DataTrigger>
                                         <DataTrigger  Binding="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=IsPanelFocused}" Value="False">
                                             <Setter Property="Background" Value="{Binding Source={StaticResource Ovotan.Windows.Controls.Docking.Settings.PanelSettings},Path=HeaderBackground}"/>
-                                            <Setter Property="TextBlock.Foreground" Value="{Binding Source={StaticResource Ovotan.Windows.Controls.Docking.Settings.PanelSettings},Path=HeaderActiveForeground}"/>
+                                            <Setter Property="TextBlock.Foreground" Value="{Binding Source={StaticResource Ovotan.Windows.Controls.Docking.Settings.PanelSettings},Path=HeaderForeground}"/>
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>

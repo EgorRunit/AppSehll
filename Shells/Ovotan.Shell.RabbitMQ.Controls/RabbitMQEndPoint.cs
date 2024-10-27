@@ -1,21 +1,31 @@
 using System.Windows;
 using Ovotan.Shell.RabbitMQ.Controls.DockPanels;
 using Ovotan.Shell.RabbitMQ.Controls.Configurations;
-using Ovotan.Shell.RabbitMQ.Controls.Doalogs;
-using Ovotan.Shell.RabbitMQ.Controls.Models;
 using Ovotan.ApplicationShell.Controls.Models;
 using Ovotan.Windows.Controls.Controls;
 using Ovotan.Windows.Controls.EndPointManagement.Enums;
 using Ovotan.Windows.Controls.EndPointManagement;
 using Ovotan.Windows.Controls.EndPointManagements.Interfaces;
 using Ovotan.Windows.Controls.Docking.Enums;
+using Ovotan.Shell.RabbitMQ.Controls.Services;
+using Ovotan.Shell.RabbitMQ.Controls.Enums;
+using Ovotan.Windows.Controls.Docking.Interfaces;
+using Ovotan.Windows.Controls.EndPointManagement.Configurations;
+using Ovotan.Shell.RabbitMQ.Api;
+using Ovotan.Windows.Controls.EndPointManagement.Dialogs;
+using System.Windows.Controls;
 
 namespace Ovotan.Shell.RabbitMQ.Controls
 {
     public class RabbitMQEndPoint : Manager
     {
+        ISiteHost _siteHost;
+        IDockingMessageQueue _dockingMessageQueue;
+
+
         static RabbitMQEndPoint()
         {
+            
             DefaultStyleKeyProperty.OverrideMetadata(typeof(RabbitMQEndPoint), new FrameworkPropertyMetadata(typeof(Manager)));
         }
 
@@ -34,6 +44,22 @@ namespace Ovotan.Shell.RabbitMQ.Controls
                 Type = ToolbarElementType.Button,
                 Command = new ButtonCommand<object>(_ => _addCreateConnection())
             });
+
+            MenuViewItems.Add(new MenuItem() { Header = "Тестирование соединений", Command = new ButtonCommand<object>(x=> _showTestConnection()) });
+        }
+
+        void _showTestConnection()
+        {
+            var panel = new ConnectionManagement();
+            _dockingMessageQueue.Publish(DockingMessageType.ShowDockPanelWindow, panel);
+        }
+
+        public override void Start(ISiteHost siteHost, EndPointConfigurations endPointConfigurations, IDockingMessageQueue dockingMessageQueue)
+        {
+            base.Start(siteHost, endPointConfigurations, dockingMessageQueue);
+            treeEventService = new TreeEventService(siteHost, treeView);
+            _siteHost = siteHost;
+            _dockingMessageQueue = dockingMessageQueue;
         }
 
 
@@ -48,7 +74,7 @@ namespace Ovotan.Shell.RabbitMQ.Controls
         public override void LoadConfiguration()
         {
             base.LoadConfiguration();
-            treeView.AddDataType(typeof(EndPointConnection));
+            treeView.AddDataType(typeof(RabbitMQApiHttpClient));
             var settings = endPointConfigurations.LoadEndPoint<RabbitMQEndPointConfiguration>("RabbitMQ");
             if (settings != null)
             {
@@ -63,32 +89,32 @@ namespace Ovotan.Shell.RabbitMQ.Controls
                    new TreeItemModel
                    {
                        Type = TreeItemType.Dynamic,
-                       Header = "Соеденения",
-                       Data = "Connections"
+                       Header = "Соедеинения",
+                       Tag = TreeItemActionType.Connections
                    },
                    new TreeItemModel
                    {
                         Type = TreeItemType.Dynamic,
                         Header = "Каналы",
-                        Data = "Chanels"
+                        Tag = TreeItemActionType.Channels
                    },
                    new TreeItemModel
                    {
                         Type = TreeItemType.Dynamic,
                         Header = "Обменники",
-                        Data = "Echanges"
+                        Tag = TreeItemActionType.Exchanges
                    },
                    new TreeItemModel
                    {
                         Type = TreeItemType.Dynamic,
                         Header = "Очереди",
-                        Data = "Queues"
+                        Tag = TreeItemActionType.Queues
                    },
                    new TreeItemModel
                    {
                         Type = TreeItemType.Dynamic,
                         Header = "Стримы",
-                        Data = "Streams"
+                        Tag = TreeItemActionType.Streams
                    }
             };
             return result;
@@ -96,17 +122,17 @@ namespace Ovotan.Shell.RabbitMQ.Controls
 
         void _addCreateConnection()
         {
-            var wnd = new CreateConnectionDialog();
+            var wnd = new CreateConnectionDialog(typeof(RabbitMQApiHttpClient), "Rabbit");
             if (wnd.ShowDialog() == true)
             {
-                var connection = wnd.Tag as EndPointConnection;
+                var connection = wnd.Tag as RabbitMQApiHttpClient;
                 var selectedNode = treeView.SelectedItem as TreeItem;
                 var newNode = new TreeItem() 
                 { 
-                    Header = connection.Name, 
-                    Data = connection,
-                    Type = TreeItemType.Configuration,
-                    IsLazyLoading = true,
+                    Header = connection.ConnectionName, 
+                    Tag = connection,
+                    Type = TreeItemType.BaseHttpConfiguration,
+                    IsChildrenLoaded = false,
                     AllowLazyLoading = true,
                 };
                 if (selectedNode != null)
@@ -140,64 +166,5 @@ namespace Ovotan.Shell.RabbitMQ.Controls
             });
         }
 
-        void _createConnection()
-        {
-            dockingMessageQueue.Publish(DockingMessageType.ShowDockPanelWindow, new ConnectionManagement());
-
-            //var wnd = new ConnectionManagement();// ("localhost");
-
-            //    //wnd.Owner = Application.Current.MainWindow;
-            //    wnd.Visibility = Visibility.Visible;
-            //    wnd.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            //    //var wnd = new ConnectDialog();
-            //    wnd.Show();
-
-
-            //    return;
-            //    var factory = new ConnectionFactory() { HostName = "localhost" };
-
-
-
-
-
-
-            //    using var connection = factory.CreateConnection();
-            //    //factory.CreateConnection()
-
-
-            //    using var channel = connection.CreateModel();
-            //    channel.QueueDeclare(
-            //            queue: "hello",
-            //             durable: false,
-            //             exclusive: false,
-            //    autoDelete: false,
-
-            //    arguments: null);
-
-            //    var consumer = new EventingBasicConsumer(channel);
-            //    consumer.Received += (ch, ea) =>
-            //    {
-            //        var content = Encoding.UTF8.GetString(ea.Body.ToArray());
-            //        if (index == 0)
-            //        {
-            //            index++;
-            //            channel.BasicReject(1, false);// .BasicNack(1, false, false);
-            //            //channel.BasicAck(ea.DeliveryTag, false);
-            //        };
-            //    };
-
-            //    channel.BasicConsume("hello", false, consumer);
-
-            //    const string message = "Hello World!22werwerewrwerewrewrew22";
-            //    var body = Encoding.UTF8.GetBytes(message);
-
-            //    var prop = channel.CreateBasicProperties();
-            //    prop.DeliveryMode = 2;
-            //    channel.BasicPublish(exchange: string.Empty,
-            //                         routingKey: "hello",
-            //                         basicProperties: prop,
-
-            //                         body: body);
-        }
     }
 }

@@ -1,10 +1,12 @@
 using Ovotan.ApplicationShell.Controls.Models;
+using Ovotan.EndPointManagement.Connections;
 using Ovotan.Windows.Controls.Docking.Enums;
 using Ovotan.Windows.Controls.Docking.Interfaces;
 using Ovotan.Windows.Controls.Docking.Messages;
 using Ovotan.Windows.Controls.EndPointManagement.Configurations;
 using Ovotan.Windows.Controls.EndPointManagement.Dialogs;
 using Ovotan.Windows.Controls.EndPointManagement.Enums;
+using Ovotan.Windows.Controls.EndPointManagement.Interfaces;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,6 +19,7 @@ namespace Ovotan.Windows.Controls.EndPointManagement
     /// </summary>
     public class Manager : ContentControl, IDockPanelContent
     {
+        protected ISiteHost siteHost;
         /// <summary>
         /// Очередь сообщений докинга.
         /// </summary>
@@ -34,6 +37,8 @@ namespace Ovotan.Windows.Controls.EndPointManagement
         /// </summary>
         protected Tree treeView;
 
+        protected ITreeEventService treeEventService;
+
         /// <summary>
         /// Название конечной точки.
         /// </summary>
@@ -43,6 +48,11 @@ namespace Ovotan.Windows.Controls.EndPointManagement
         /// Коллекция элементов toolbar над деревом обозевателя конечной точки.
         /// </summary>
         public ObservableCollection<ToolbarElementBase> ToolbarActions { get; protected set; }
+
+        /// <summary>
+        /// get - Список пунктов в меню в главном меню View.
+        /// </summary>
+        public ObservableCollection<MenuItem> MenuViewItems { get; protected set; }
 
         /// <summary>
         /// Коснтруктор.
@@ -58,6 +68,7 @@ namespace Ovotan.Windows.Controls.EndPointManagement
         public Manager()
         {
             ToolbarActions = new ObservableCollection<ToolbarElementBase>();
+            MenuViewItems = new ObservableCollection<MenuItem>();
         }
 
         public void ContentFocus()
@@ -76,8 +87,17 @@ namespace Ovotan.Windows.Controls.EndPointManagement
             base.OnApplyTemplate();
             toolBar = Template.FindName("Toolbar", this) as ToolBar;
             treeView = Template.FindName("TreeView", this) as Tree;
+            treeView.SelectedItemChanged += TreeView_SelectedItemChanged;
             treeView.AddHandler(TreeViewItem.ExpandedEvent, (RoutedEventHandler)_onExpandNode);
             LoadConfiguration();
+        }
+
+        private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if(treeEventService != null)
+            {
+                treeEventService.SelectedNode(e.NewValue as TreeItem);
+            }
         }
 
         /// <summary>
@@ -85,8 +105,9 @@ namespace Ovotan.Windows.Controls.EndPointManagement
         /// </summary>
         /// <param name="endPointConfigurations">Экземпляр сервиса конфигурации.</param>
         /// <param name="dockingMessageQueue">Очередь сообщений докинга.</param>
-        public void Start(EndPointConfigurations endPointConfigurations, IDockingMessageQueue dockingMessageQueue)
+        public  virtual void Start(ISiteHost siteHost, EndPointConfigurations endPointConfigurations, IDockingMessageQueue dockingMessageQueue)
         {
+            this.siteHost = siteHost;
             this.dockingMessageQueue = dockingMessageQueue;
             this.endPointConfigurations = endPointConfigurations;
             var message = new PanelAttachedMessage()
@@ -118,6 +139,10 @@ namespace Ovotan.Windows.Controls.EndPointManagement
         /// <returns></returns>
         public virtual async Task<List<TreeItemModel>> TryExpandNode(TreeItem node)
         {
+            if (node.Type == TreeItemType.BaseHttpConfiguration)
+            {
+                
+            }
             return new List<TreeItemModel>();
         }
 
@@ -154,8 +179,22 @@ namespace Ovotan.Windows.Controls.EndPointManagement
         /// </summary>
         void _onExpandNode(object sender, RoutedEventArgs e)
         {
+            var ss = e.Source as TreeItem;
             var treeViewItem = e.Source as TreeItem;
-            if (treeViewItem.IsLazyLoading)
+
+            if (!treeViewItem.IsChildrenLoaded && treeViewItem.Type == TreeItemType.BaseHttpConfiguration)
+            {
+                e.Handled = true;
+                var httpClient = treeViewItem.Tag as HttpClientBase;
+                var wnd = new ConnectionDialog(httpClient);
+                if (wnd.ShowDialog() == false)
+                {
+                    treeViewItem.IsExpanded = false;
+                    return;
+                }
+            }
+
+            if (treeViewItem.AllowLazyLoading && !treeViewItem.IsChildrenLoaded)
             {
                 Mouse.SetCursor(Cursors.Wait);
                 var task = Task.Run(async () =>
@@ -170,16 +209,13 @@ namespace Ovotan.Windows.Controls.EndPointManagement
                         treeViewItem.Items.Add(new TreeItem()
                         {
                             Type = node.Type,
-                            IsLazyLoading = node.IsLazyLoading,
+                            IsChildrenLoaded = node.IsLazyLoading,
                             Header = node.Header,
-                            Data = node.Data,
+                            Tag = node.Tag,
                         });
                     }
                 }
-                else
-                {
-                    treeViewItem.IsLazyLoading = false;
-                }
+                treeViewItem.IsChildrenLoaded = true;
             }
         }
     }

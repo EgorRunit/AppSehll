@@ -12,7 +12,11 @@ namespace Ovotan.Windows.Controls.EndPointManagement
         /// <summary>
         /// Зависимое свойство. Поддерживает ли узел ленивую загрузку дочерних узлов.
         /// </summary>
-        public static DependencyProperty IsLazyLoadingProperty;
+        public static DependencyProperty IsChildrenLoadedProperty;
+        /// <summary>
+        /// 
+        /// </summary>
+        public static DependencyProperty AllowLazyLoadingProperty;
 
         /// <summary>
         /// get,set - Тип узла.
@@ -20,27 +24,32 @@ namespace Ovotan.Windows.Controls.EndPointManagement
         public TreeItemType Type { get; set; }
 
         /// <summary>
-        /// get,set - Разрешена ли для узла отложенная загрузка
+        /// get,set - Разрешена ли для узла отложенная загрузка потомков.
         /// </summary>
-        public bool AllowLazyLoading { get; set; }
-
-        /// <summary>
-        /// Пользовательские данные узла.
-        /// </summary>
-        public object Data { get; set; }
-
-        /// <summary>
-        /// Поддерживает ли узел ленивую загрузку дочерних узлов.
-        /// </summary>
-        public bool IsLazyLoading
+        public bool AllowLazyLoading
         {
             get
             {
-                return (bool)GetValue(IsLazyLoadingProperty);
+                return (bool)GetValue(AllowLazyLoadingProperty);
             }
             set
             {
-                SetValue(IsLazyLoadingProperty, value);
+                SetValue(AllowLazyLoadingProperty, value);
+            }
+        }
+
+        /// <summary>
+        /// Потомки были згружены или нет.
+        /// </summary>
+        public bool IsChildrenLoaded
+        {
+            get
+            {
+                return (bool)GetValue(IsChildrenLoadedProperty);
+            }
+            set
+            {
+                SetValue(IsChildrenLoadedProperty, value);
             }
         }
 
@@ -50,7 +59,9 @@ namespace Ovotan.Windows.Controls.EndPointManagement
         static TreeItem()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(TreeItem), new FrameworkPropertyMetadata(typeof(TreeViewItem)));
-            IsLazyLoadingProperty = DependencyProperty.Register("IsLazyLoading", typeof(bool), typeof(TreeItem),
+            IsChildrenLoadedProperty = DependencyProperty.Register("IsChildrenLoaded", typeof(bool), typeof(TreeItem),
+                new PropertyMetadata(false));
+            AllowLazyLoadingProperty = DependencyProperty.Register("AllowLazyLoading", typeof(bool), typeof(TreeItem),
                 new PropertyMetadata(false));
         }
     }

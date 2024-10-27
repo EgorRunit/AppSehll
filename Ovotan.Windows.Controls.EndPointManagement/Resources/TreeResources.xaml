@@ -209,16 +209,23 @@
                         <!--Toogle button-->
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition Property="HasItems" Value="false"/>
-                                <Condition Property="IsLazyLoading" Value="false"/>
+                                <Condition Property="HasItems" Value="False"/>
+                                <Condition Property="AllowLazyLoading" Value="True"/>
+                                <Condition Property="IsChildrenLoaded" Value="True"/>
                             </MultiTrigger.Conditions>
                             <MultiTrigger.Setters>
                                 <Setter TargetName="Expander" Property="Visibility" Value="Hidden" />
                             </MultiTrigger.Setters>
                         </MultiTrigger>
-                        <!--<Trigger Property="HasItems" Value="false">
-                            <Setter TargetName="Expander" Property="Visibility" Value="Hidden" />
-                        </Trigger>-->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="HasItems" Value="False"/>
+                                <Condition Property="AllowLazyLoading" Value="False"/>
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter TargetName="Expander" Property="Visibility" Value="Hidden" />
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="HasHeader" Value="false" />

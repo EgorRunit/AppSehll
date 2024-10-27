@@ -12,6 +12,11 @@ namespace Ovotan.Windows.Controls.EndPointManagement.Enums
         /// <summary>
         /// Узел содержит конфигурацию и подлежит сохранению.
         /// </summary>
-        Configuration
+        Configuration,
+        /// <summary>
+        /// Узел содержит конфигурацию для подключения к конечной точки и подлежит сохранению (HttpClientBase).
+        /// </summary>
+        BaseHttpConfiguration,
+
     }
 }

@@ -4,6 +4,7 @@ using Ovotan.Windows.Controls.Docking.Enums;
 using Ovotan.Windows.Controls.Docking.Messages;
 using doc = Ovotan.Windows.Controls.Docking;
 using System.Windows.Controls;
+using System.Linq;
 
 namespace Ovotan.Windows.Controls.Docking.Services
 {
@@ -112,7 +113,11 @@ namespace Ovotan.Windows.Controls.Docking.Services
             var remainingChild = parent.Children[0];
             parent.Children.Clear();
             var ownerParent = parent.Parent as Grid;
-
+            //var splitter = ownerParent.Children.OfType<GridSplitter>() as GridSplitter;
+            //if (splitter != null)
+            //{
+            //    parent.Children.Remove(splitter);
+            //}
             remainingChild.SetValue(Grid.RowProperty, parentRowIndex);
             remainingChild.SetValue(Grid.ColumnProperty, parentColumnIndex);
             ownerParent.Children.Remove(parent);

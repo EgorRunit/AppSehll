@@ -25,7 +25,7 @@ namespace Ovotan.Windows.Controls.Docking
         /// Экземпляр сервиса очереди сообщений для DockingManager.
         /// </summary>
         public IDockingMessageQueue _dockingMessageQueue;
-        SiteHost _siteHost;
+        public ISiteHost SiteHost { get; set; }
 
         public DockingHost(IDockingMessageQueue dockingMessageQueue)
         {
@@ -37,8 +37,9 @@ namespace Ovotan.Windows.Controls.Docking
             _dockingMessageQueue.Register(DockingMessageType.ShowDockPanelWindow, (x) => ShowDockPanelWindow(x as FrameworkElement));
             _dockConstractureService = new DockConstractureService(_dockingMessageQueue);
 
-            _siteHost = new SiteHost(_dockingMessageQueue);
-            var baseContent = new DockPanel(_dockingMessageQueue, _siteHost);
+            SiteHost = new SiteHost(_dockingMessageQueue);
+
+            var baseContent = new DockPanel(_dockingMessageQueue, SiteHost as FrameworkElement);
             Content = new PanelContainer(baseContent);
             Padding = new Thickness(5);
             Background = new SolidColorBrush(Colors.Red);

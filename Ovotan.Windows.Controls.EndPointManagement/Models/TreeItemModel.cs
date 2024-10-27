@@ -22,7 +22,7 @@ namespace Ovotan.ApplicationShell.Controls.Models
         /// <summary>
         /// get,set - Пользовательские данные узла.
         /// </summary>
-        public object Data { get; set; }
+        public object Tag { get; set; }
 
         /// <summary>
         /// get,set - Разрешена ли для узла отложенная загрузка

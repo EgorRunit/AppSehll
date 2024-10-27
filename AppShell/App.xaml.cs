@@ -1,4 +1,5 @@
-﻿using System;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +14,13 @@ namespace AppShell
     /// </summary>
     public partial class App : Application
     {
+        private void ConfigureServices(IServiceCollection services)
+        {
+            services.AddHttpClient();
+
+            services.AddTransient(typeof(MainWindow));
+        }
+
+       
     }
 }

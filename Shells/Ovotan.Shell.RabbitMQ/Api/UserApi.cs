@@ -1,20 +1,20 @@
 using Ovotan.Shell.RabbitMQ.Models;
-using System.Net.Http;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Ovotan.Shell.RabbitMQ.Api
 {
-    public class UserApi : RabbitMQApiHttpClientBase
+    public class UserApi 
     {
-        internal UserApi(HttpClient client, JsonSerializerOptions options)
-            : base(client)
+        RabbitMQApiHttpClient _client;
+
+        internal UserApi(RabbitMQApiHttpClient client)
         {
+            _client = client;
         }
 
-        public async Task<CurrentlyAuthenticatedUser> GetCurrentlyAuthenticatedUser()
+        public async Task<CurrentlyAuthenticatedUser> GetCurrentlyAuthenticatedUserAsync()
         {
-            return await GetData<CurrentlyAuthenticatedUser>("api/whoami");
+            return await _client.GetData<CurrentlyAuthenticatedUser>("api/whoami");
         }
 
     }

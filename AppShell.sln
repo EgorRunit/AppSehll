@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ovotan.Windows.Controls", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ovotan.Windows.Controls.EndPointManagement", "Ovotan.Windows.Controls.EndPointManagement\Ovotan.Windows.Controls.EndPointManagement.csproj", "{7B6DEB37-7288-45FC-856D-B58A7544686A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ovotan.Windows.Controls.Docking", "Ovotan.Windows.Controls.Docking\Ovotan.Windows.Controls.Docking.csproj", "{0F257F4B-897B-4F4F-B4B8-CD98DF774219}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ovotan.Windows.Controls.Docking", "Ovotan.Windows.Controls.Docking\Ovotan.Windows.Controls.Docking.csproj", "{0F257F4B-897B-4F4F-B4B8-CD98DF774219}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ovotan.EndPointManagement", "Ovotan.EndPointManagement\Ovotan.EndPointManagement.csproj", "{8AAC9755-68AF-44E2-90F1-1E3731812965}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +51,10 @@ Global
 		{0F257F4B-897B-4F4F-B4B8-CD98DF774219}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F257F4B-897B-4F4F-B4B8-CD98DF774219}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F257F4B-897B-4F4F-B4B8-CD98DF774219}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8AAC9755-68AF-44E2-90F1-1E3731812965}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AAC9755-68AF-44E2-90F1-1E3731812965}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AAC9755-68AF-44E2-90F1-1E3731812965}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AAC9755-68AF-44E2-90F1-1E3731812965}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

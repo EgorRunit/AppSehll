@@ -1,0 +1,20 @@
+<UserControl x:Class="Ovotan.Shell.RabbitMQ.Controls.Docuemnts.ConnectionListDocument"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Ovotan.Shell.RabbitMQ.Controls.Docuemnts"
+             mc:Ignorable="d" 
+             xmlns:controls="clr-namespace:Ovotan.Windows.Controls.EndPointManagement;assembly=Ovotan.Windows.Controls.EndPointManagement"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <controls:DataGridDocument x:Name="DataGridConnections" RowHeaderWidth="0" CanUserAddRows="False">
+        </controls:DataGridDocument>
+    </Grid>
+</UserControl>

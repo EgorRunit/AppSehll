@@ -7,5 +7,7 @@
             <SolidColorBrush Color="#5D6B99" />
         </settings:DockHositngSettings.SiteHostBackground>
     </settings:DockHositngSettings>
+    
+    
 </ResourceDictionary>
      

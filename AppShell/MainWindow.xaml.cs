@@ -1,5 +1,7 @@
+using Microsoft.Extensions.DependencyInjection;
 using Ovotan.Shell.RabbitMQ.Controls;
 using System;
+using System.Net.Http;
 using System.Windows;
 
 namespace AppShell
@@ -9,12 +11,25 @@ namespace AppShell
     /// </summary>
     public partial class MainWindow : Window
     {
+        private void ConfigureServices(IServiceCollection services)
+        {
+
+            services.AddHttpClient();
+
+            services.AddTransient(typeof(MainWindow));
+        }
+
         public MainWindow()
+
         {
             InitializeComponent();
+
+
+
             MainShallManagement.AutoStartShell = new RabbitMQEndPoint();
+
+
  
-            var dd = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 //            var sss= Application.Current.
             try
             {

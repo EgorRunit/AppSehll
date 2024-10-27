@@ -44,18 +44,6 @@ namespace Ovotan.Shell.RabbitMQ.Controls.DockPanels
         {
             var connection = _connectionFactory.CreateConnection("werwerwerew");
             _connections.Add(connection);
-
-            try
-            {
-                Mouse.OverrideCursor = Cursors.Wait;
-                var ss = RabbitMQApiHttpClient.Connect("guest", "guest", "http://localhost:15672/").ConfigureAwait(false);
-                var ssss = ss.GetAwaiter().GetResult();
-                var result = ssss.ConnectionApi.GetConnections().ConfigureAwait(false);
-                Mouse.OverrideCursor = null;
-            }
-            catch (Exception ex)
-            {
-            }
         }
     }
 }

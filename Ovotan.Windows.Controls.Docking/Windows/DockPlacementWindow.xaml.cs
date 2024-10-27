@@ -127,7 +127,7 @@ namespace Ovotan.Windows.Controls.Docking.Windows
         public void Show(DockPanelWindow dragginWindpow, Action<MouseEventArgs> mouseMoveCallback)
         {
             var startPoints = _dockingHost.PointToScreen(new Point());
-            var ss = FindLogicalChildren<IDockPanel>(_dockingHost);
+            var ss = _dockingHost.FindLogicalChildren<IDockPanel>();
             _elementRectangles = new List<ElementRectangle>(ss.Count());
             _location = _dockingHost.PointToScreen(new Point());
             foreach (var element in ss)
@@ -148,19 +148,6 @@ namespace Ovotan.Windows.Controls.Docking.Windows
             Show();
             MainGrid.Visibility = Visibility.Hidden;
             Mouse.Capture(this, CaptureMode.SubTree);
-        }
-
-        public static IEnumerable<T> FindLogicalChildren<T>(DependencyObject obj) where T : class
-        {
-            if (obj != null)
-            {
-                if (obj is T)
-                    yield return obj as T;
-
-                foreach (DependencyObject child in LogicalTreeHelper.GetChildren(obj).OfType<DependencyObject>())
-                    foreach (T c in FindLogicalChildren<T>(child))
-                        yield return c;
-            }
         }
     }
 }

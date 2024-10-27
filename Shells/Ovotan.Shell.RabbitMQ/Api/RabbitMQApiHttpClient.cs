@@ -1,72 +1,52 @@
-using Ovotan.Shell.RabbitMQ.Models;
+using Ovotan.EndPointManagement.Connections;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Net;
+using System.ComponentModel;
 using System.Net.Http;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Ovotan.Shell.RabbitMQ.Api
 {
-    public class RabbitMQApiHttpClient : RabbitMQApiHttpClientBase
+    public class RabbitMQApiHttpClient : HttpClientBase
     {
-        HttpClient _httpClient;
-        JsonSerializerOptions _jsonSerializerOptions;
-
         public QueueApi QueueApi { get; private set; }
 
         public ConnectionApi ConnectionApi { get; private set; }
 
-        internal RabbitMQApiHttpClient(HttpClient httpClient) 
-            : base(httpClient)
+        public RabbitMQApiHttpClient()
         {
-            QueueApi = new QueueApi(httpClient);
-            ConnectionApi = new ConnectionApi(httpClient);
-        }
-
-        public static async Task<RabbitMQApiHttpClient> Connect(string userName, string userPassword, string baseUri)
-        {
-            // Set MQ server credentials
-            NetworkCredential networkCredential = new NetworkCredential(userName, userPassword);
-            HttpClientHandler httpClientHandler = new HttpClientHandler { Credentials = networkCredential };
-            HttpClient httpClient = new HttpClient(httpClientHandler);
-            httpClient.Timeout = new TimeSpan(0, 0, 5);
-            httpClient.BaseAddress = new Uri(baseUri);
-
-
-            // Get the response from the API endpoint.
-            try
+            jsonSerializerOptions = new JsonSerializerOptions
             {
-                var cancellationTokenSource = new CancellationTokenSource(new TimeSpan(0, 0, 5));
-
-                HttpResponseMessage httpResponseMessage = await httpClient.GetAsync("api/whoami", cancellationTokenSource.Token).ConfigureAwait(false);
-                if (httpResponseMessage.StatusCode != HttpStatusCode.Unauthorized)
-                {
-
-
-                    HttpContent httpContent = httpResponseMessage.Content;
-                    using StreamReader streamReader = new StreamReader(await httpContent.ReadAsStreamAsync());
-                    string returnedJsonString = await streamReader.ReadToEndAsync();
-                    var serializeOptions = new JsonSerializerOptions
-                    {
-                        //Converters = new JsonStringEnumConverter(JsonNamingPolicy.CamelCase, false),
-                        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                        PropertyNameCaseInsensitive = true,
-                    };
-                    var whoIAm = JsonSerializer.Deserialize<CurrentlyAuthenticatedUser>(returnedJsonString, serializeOptions);
-                    var client = new RabbitMQApiHttpClient(httpClient);
-                    client._httpClient = httpClient;
-                    client._jsonSerializerOptions = serializeOptions;
-                    return client;
-                }
-            }
-            catch (Exception ex)
-            {
-            }
-            return null;
-
+                PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
+                PropertyNameCaseInsensitive = true,
+            };
+            jsonSerializerOptions.Converters.Add(new DDD());
+            QueueApi = new QueueApi(this);
+            ConnectionApi = new ConnectionApi(this);
         }
     }
+
+    public class DDD : JsonConverter<DateTime>
+    {
+        public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
+        {
+        }
+        public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
+            var stringValue = reader.GetInt64();
+            return DateTimeOffset.FromUnixTimeMilliseconds(stringValue).DateTime;
+        }
+    }
+
+//    CamelCase First word starts with a lower case character.
+//Successive words start with an uppercase character.TempCelsius tempCelsius
+//KebabCaseLower* Words are separated by hyphens.
+//All characters are lowercase.TempCelsius temp-celsius
+//KebabCaseUpper*	Words are separated by hyphens.
+//All characters are uppercase.	TempCelsius TEMP-CELSIUS
+//SnakeCaseLower*	Words are separated by underscores.
+//All characters are lowercase.	TempCelsius temp_celsius
+//SnakeCaseUpper* Words are separated by underscores.
+//All characters are uppercase.	TempCelsius TEMP_CELSIUS
 }

@@ -104,10 +104,6 @@
             
             
          <controls1:Management x:Name="MainShallManagement" Grid.Row="1">
-            <controls1:Management.HeadMenuItems>
-                <MenuItem Header="EndPoint"></MenuItem>
-                <MenuItem Header="Tools"></MenuItem>
-            </controls1:Management.HeadMenuItems>
          </controls1:Management>
 
         <!--<TreeView x:Name="TreeView" Grid.Row="1"

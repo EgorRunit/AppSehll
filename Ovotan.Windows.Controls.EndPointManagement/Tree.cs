@@ -40,25 +40,24 @@ namespace Ovotan.Windows.Controls.EndPointManagement
         {
             foreach (var node in nodes)
             {
-                object data = null;
-                if(node.Data != null)
+                object tag = null;
+                if(node.Tag != null)
                 {
-                    var tmp = node.Data.ToString().Split(":", 2);
+                    var tmp = node.Tag.ToString().Split(":", 2);
                     if(!(_types.ContainsKey(tmp[0])))
                     {
                         throw new Exception("wwww");
                     }
                     var type = _types[tmp[0]];
-                    data = JsonSerializer.Deserialize(tmp[1], type);
+                    tag = JsonSerializer.Deserialize(tmp[1], type);
                 }
                 var item = new TreeItem()
                 {
                     Header = node.Header,
-                    Data = data,
+                    Tag = tag,
                     AllowLazyLoading = node.AllowLazyLoading,
-                    Type = TreeItemType.Configuration
+                    Type = node.Type
                 };
-                item.IsLazyLoading = item.AllowLazyLoading;
                 itemCollection.Add(item);
                 if(node.Childen != null)
                 {
@@ -74,24 +73,25 @@ namespace Ovotan.Windows.Controls.EndPointManagement
             foreach (var item in itemCollection)
             {
                 var node = item as TreeItem;
-                if (node.Type == TreeItemType.Configuration)
+                if (node.Type == TreeItemType.Configuration || node.Type == TreeItemType.BaseHttpConfiguration)
                 {
                     var children = _getConfigurationNodes(node.Items);
 
                     var data = string.Empty;
-                    if(node.Data != null)
+                    if(node.Tag != null)
                     {
-                        data = node.Data.GetType().FullName + ":";
-                        data += JsonSerializer.Serialize(node.Data);
-                        node.Data = data;
+                        data = node.Tag.GetType().FullName + ":";
+                        data += JsonSerializer.Serialize(node.Tag);
+                        node.Tag = data;
                     }
 
                     nodes.Add(new TreeItemConfiguration()
                     {
                         Header = node.Header.ToString(),
-                        Data = node.Data,
+                        Tag = node.Tag,
                         AllowLazyLoading = node.AllowLazyLoading,
                         Childen = children.Count > 0 ? children : null,
+                        Type = node.Type,
                     });
                     
                 }
