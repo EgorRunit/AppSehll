@@ -19,8 +19,9 @@ namespace AppShell
             services.AddHttpClient();
 
             services.AddTransient(typeof(MainWindow));
+            //https://habr.com/ru/articles/765064/
         }
 
-       
+
     }
 }

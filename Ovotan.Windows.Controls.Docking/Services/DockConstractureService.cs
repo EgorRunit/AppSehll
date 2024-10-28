@@ -109,6 +109,11 @@ namespace Ovotan.Windows.Controls.Docking.Services
             var parentRowIndex = (int)parent.GetValue(Grid.RowProperty);
             var parentColumnIndex = (int)parent.GetValue(Grid.ColumnProperty);
 
+            var splitter = parent.Children.OfType<GridSplitter>().FirstOrDefault();
+            if (splitter != null)
+            {
+                parent.Children.Remove(splitter);
+            }
             parent.Children.Remove(panel);
             var remainingChild = parent.Children[0];
             parent.Children.Clear();
