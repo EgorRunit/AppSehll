@@ -1,0 +1,172 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    x:Name="ertret"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <SolidColorBrush x:Key="OEP_DWS_BTN_FColor">#000000</SolidColorBrush>
+    <SolidColorBrush x:Key="OEP_DWS_BTN_DBColor">#0078D7</SolidColorBrush>
+    <Color x:Key="OEP_DWS_BTN_BFColor">#ADADAD</Color>
+    <Color x:Key="OEP_DWS_BTN_BBColor">#E1E1E1</Color>
+    <Color x:Key="OEP_DWS_BTN_MOBFColor">#0078D7</Color>
+    <Color x:Key="OEP_DWS_BTN_MOBBColor">#E5F1FB</Color>
+    <Color x:Key="OEP_DWS_BTN_MPBFColor">#005499</Color>
+    <Color x:Key="OEP_DWS_BTN_MPBBColor">#CCE4F7</Color>
+
+    <Style x:Key="OvotanEndPointManagementDialog" TargetType="{x:Type Window}">
+        <Setter Property="SizeToContent" Value="WidthAndHeight"/>
+        <Setter Property="Background" Value="#F0F0F0"/>
+        <Style.Resources>
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="SnapsToDevicePixels" Value="true" />
+                <Setter Property="OverridesDefaultStyle" Value="true" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border TextBlock.Foreground="{DynamicResource OEP_DWS_BTN_FColor}" x:Name="Border" BorderThickness="1">
+                                <Border.BorderBrush>
+                                    <SolidColorBrush Color="{DynamicResource OEP_DWS_BTN_BFColor}"/>
+                                </Border.BorderBrush>
+                                <Border.Background>
+                                    <SolidColorBrush Color="{DynamicResource OEP_DWS_BTN_BBColor}"/>
+                                </Border.Background>
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualStateGroup.Transitions>
+                                            <VisualTransition GeneratedDuration="0:0:0.2" />
+                                            <VisualTransition GeneratedDuration="0" To="Pressed" />
+                                        </VisualStateGroup.Transitions>
+                                        <VisualState x:Name="Normal">
+                                        </VisualState>
+                                        <VisualState x:Name="MouseOver">
+                                            <Storyboard>
+                                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                    Storyboard.TargetName="Border">
+                                                    <EasingColorKeyFrame KeyTime="0" Value="{DynamicResource OEP_DWS_BTN_MOBFColor}" />
+                                                </ColorAnimationUsingKeyFrames>
+                                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                    Storyboard.TargetName="Border">
+                                                    <EasingColorKeyFrame KeyTime="0" Value="{DynamicResource OEP_DWS_BTN_MOBBColor}" />
+                                                </ColorAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Pressed">
+                                            <Storyboard>
+                                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                    Storyboard.TargetName="Border">
+                                                    <EasingColorKeyFrame KeyTime="0" Value="{DynamicResource OEP_DWS_BTN_MPBFColor}" />
+                                                </ColorAnimationUsingKeyFrames>
+                                                <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                    Storyboard.TargetName="Border">
+                                                    <EasingColorKeyFrame KeyTime="0" Value="{DynamicResource OEP_DWS_BTN_MPBBColor}" />
+                                                </ColorAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Disabled">
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <ContentPresenter Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition  Property="IsDefaulted" Value="True"/>
+                                    </MultiTrigger.Conditions>
+                                    <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource OEP_DWS_BTN_DBColor}"/>
+                                    <Setter TargetName="Border" Property="BorderThickness" Value="2"/>
+                                </MultiTrigger>
+                                <Trigger Property="IsFocused" Value="true">
+                                    <Setter TargetName="Border" Property="BorderBrush" Value="{DynamicResource OEP_DWS_BTN_DBColor}"/>
+                                    <Setter TargetName="Border" Property="BorderThickness" Value="2"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </Style.Resources>
+    </Style>
+
+    <!--<Color x:Key="DisabledControlLightColor">#FFE8EDF9</Color>
+    <Color x:Key="DisabledControlDarkColor">#FFC5CBF9</Color>
+    <Color x:Key="DisabledForegroundColor">#FF888888</Color>
+    <Color x:Key="ControlPressedColor">#FF211AA9</Color>
+    <Color x:Key="ControlMouseOverColor">#FF3843C4</Color>
+    <Color x:Key="PressedBorderLightColor">#FF888888</Color>
+    <Color x:Key="PressedBorderDarkColor">#FF444444</Color>
+    <Color x:Key="DisabledBorderLightColor">#FFAAAAAA</Color>
+    <Color x:Key="DisabledBorderDarkColor">#FF888888</Color>-->
+
+    <!-- Button --><!--
+    <Style x:Key="rrrr" TargetType="Button">
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border TextBlock.Foreground="Black" x:Name="Border" BorderThickness="1">
+                        <Border.BorderBrush>
+                            <SolidColorBrush>#ADADAD</SolidColorBrush>
+                        </Border.BorderBrush>
+                        <Border.Background>
+                            <SolidColorBrush>#E1E1E1</SolidColorBrush>
+                        </Border.Background>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition GeneratedDuration="0:0:0.2" />
+                                    <VisualTransition GeneratedDuration="0" To="Pressed" />
+                                </VisualStateGroup.Transitions>
+                                <VisualState x:Name="Normal">
+                                </VisualState>
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                                      Storyboard.TargetName="Border">
+                                            <EasingColorKeyFrame KeyTime="0" Value="#0078D7" />
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                                      Storyboard.TargetName="Border">
+                                            <EasingColorKeyFrame KeyTime="0" Value="#E5F1FB" />
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.BorderBrush).(SolidColorBrush.Color)"
+                                                                    Storyboard.TargetName="Border">
+                                            <EasingColorKeyFrame KeyTime="0" Value="#005499" />
+                                        </ColorAnimationUsingKeyFrames>
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                                    Storyboard.TargetName="Border">
+                                            <EasingColorKeyFrame KeyTime="0" Value="#CCE4F7" />
+                                        </ColorAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Disabled">
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <ContentPresenter Margin="2"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            RecognizesAccessKey="True" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition  Property="IsDefaulted" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="Border" Property="BorderBrush" Value="#0078D7"/>
+                            <Setter TargetName="Border" Property="BorderThickness" Value="2"/>
+                        </MultiTrigger>
+                        <Trigger Property="IsFocused" Value="true">
+                            <Setter TargetName="Border" Property="BorderBrush" Value="#0078D7"/>
+                            <Setter TargetName="Border" Property="BorderThickness" Value="2"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>-->
+</ResourceDictionary>

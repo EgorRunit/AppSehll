@@ -3,16 +3,22 @@ using System.Windows;
 namespace Ovotan.Windows.Controls.EndPointManagement.Dialogs
 {
     /// <summary>
-    /// Interaction logic for AddGroupFolderDialog.xaml
+    /// Диалог создания новой групповой папки.
     /// </summary>
     public partial class AddGroupFolderDialog : Window
     {
+        /// <summary>
+        /// Конструктор.
+        /// </summary>
         public AddGroupFolderDialog()
         {
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Обработчик добавления новой групповой папки.
+        /// </summary>
+        void _addFolder(object sender, RoutedEventArgs e)
         {
             var name = GroupFolderName.Text.Trim();
             if (name == string.Empty)

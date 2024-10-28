@@ -48,6 +48,8 @@ namespace Ovotan.Windows.Controls.EndPointManagement
 
             HeadMenuItemsProperty = DependencyProperty.Register("Icon", typeof(ObservableCollection<MenuItem>), typeof(Management),
                 new FrameworkPropertyMetadata(new ObservableCollection<MenuItem>(), FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
+
+            SchemaManager.AddResource("pack://application:,,,/Ovotan.Windows.Controls.EndPointManagement;component/Schemas/{Schemas}/DialogResource.xaml", "{Schemas}");
         }
 
         public Management() : this(new EndPointConfigurations("EndPoint Management"))

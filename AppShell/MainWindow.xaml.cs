@@ -2,6 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Ovotan.Shell.RabbitMQ.Controls;
 using System;
 using System.Net.Http;
+using System.Runtime.Intrinsics.X86;
 using System.Windows;
 
 namespace AppShell
@@ -27,7 +28,6 @@ namespace AppShell
 
 
             MainShallManagement.AutoStartShell = new RabbitMQEndPoint();
-
 
  
 //            var sss= Application.Current.

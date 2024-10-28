@@ -4,20 +4,25 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Ovotan.Windows.Controls.EndPointManagement.Dialogs"
+        xmlns:local1="clr-namespace:Ovotan.Windows.Controls.EndPointManagement"
         mc:Ignorable="d"
-        Title="Создание групповой папки" Height="115" Width="300" Margin="0" Padding="0">
-    <Grid Height="75" Margin="0" >
+        Style="{DynamicResource OvotanEndPointManagementDialog}"
+        ResizeMode="NoResize"
+        Title="Создание групповой папки">
+    <Window.Resources>
+    </Window.Resources>
+    <Grid Height="Auto" Width="280" Margin="10,10,10,10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="Название папки" Margin="5,5,5,0"/>
-        <TextBox Focusable="True" x:Name="GroupFolderName" Grid.Row="1" Margin="5,5,5,5" BorderBrush="Black" BorderThickness="1" 
+        <TextBlock Text="Название папки" Margin="0"/>
+        <TextBox Focusable="True" x:Name="GroupFolderName" Grid.Row="1" Margin="0,5,0,0" Padding="0,3,0,3" BorderBrush="Black" BorderThickness="1" 
                  FocusManager.FocusedElement="{Binding RelativeSource={RelativeSource Self}}"/>
         <StackPanel Orientation="Horizontal" Grid.Row="2" Height="Auto" HorizontalAlignment="Right">
-            <Button Content="Добавить" Margin="0,0,5,5" Click="Button_Click"/>
-            <Button Content="Отмена" Margin="0,0,5,5" IsCancel="True"/>
+            <Button Margin="5,10,0,0" Padding="0" Content="Добавить" Click="_addFolder" IsDefault="True"/>
+            <Button Margin="5,10,0,0" Content="Отмена" IsCancel="True"/>
         </StackPanel>
     </Grid>
 </Window>

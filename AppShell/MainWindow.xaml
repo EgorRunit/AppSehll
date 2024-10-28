@@ -13,9 +13,40 @@
         Title="MainWindow" Height="450" Width="800"
 	xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
 
-    
+    <Window.Resources>
+        <Style TargetType="{x:Type controls:SiteHostTabControl}">
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Background" Value="Red"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <ControlTemplate.Resources>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Margin" Value="0,0,1,0"/>
+                                <Setter Property="Background" Value="#3B4F81"/>
+                            </Style>
+                        </ControlTemplate.Resources>
+                        <Grid Background="{Binding Source={StaticResource Ovotan.Windows.Controls.Docking.Settings.PanelSettings},Path=SplitterBackground}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Canvas x:Name="Canvas" Height="30"></Canvas>
 
-    <Grid x:Name="MainGrid">
+                            <Button Grid.Column="1" Grid.Row="1" Content="||"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+               
+    </Window.Resources>
+
+    <Grid x:Name="MainGrid" >
         <Grid.Resources>
             <ObjectDataProvider x:Key="CinfigurationContructor" ObjectType="{x:Type configuration:EndPointConfigurations}">
                 <ObjectDataProvider.ConstructorParameters>
@@ -37,6 +68,31 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+
+
+        <controls:SiteHostTabControl Margin="0" Padding="0">
+            <Button Content="43534" Width="200"/>
+            <Button Content="43534"/>
+            <Button Content="43534"/>
+            <Button Content="43wer534"/>
+            <Button Content="43534" Width="200"/>
+            <Button Content="435asff34"/>
+            <Button Content="43534"/>
+            <Button Content="43534"/>
+            <Button Content="43534" Width="200"/>
+            <Button Content="43534"/>
+            <Button Content="435as34"/>
+            <Button Content="43534"/>
+            <Button Content="43534" Width="200"/>
+            <Button Content="43asdfs534"/>
+            <Button Content="43534"/>
+            <Button Content="43534"/>
+            <Button Content="43534" Width="200"/>
+            <Button Content="43534"/>
+            <Button Content="43534"/>
+            <Button Content="43534"/>
+        </controls:SiteHostTabControl>
+
         <!--<Viewbox Width="16 " Height="16" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:System="clr-namespace:System;assembly=mscorlib">
             <Rectangle Width="16 " Height="16">
                 <Rectangle.Resources>
@@ -102,18 +158,7 @@
 
 
             
-            
          <controls1:Management x:Name="MainShallManagement" Grid.Row="1">
          </controls1:Management>
-
-        <!--<TreeView x:Name="TreeView" Grid.Row="1"
-                            Background="{Binding Source={StaticResource Ovotan_Controls_DockPanel_Settings}, Path=ContentBackground}">
-            <TreeView.ItemTemplate>
-                <HierarchicalDataTemplate ItemsSource="{Binding Nodes}">
-                    <TextBlock Text="{Binding Name}" />
-                </HierarchicalDataTemplate>
-            </TreeView.ItemTemplate>
-        </TreeView>-->
-
     </Grid>
 </Window>
