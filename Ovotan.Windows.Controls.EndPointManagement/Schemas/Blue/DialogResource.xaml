@@ -10,14 +10,26 @@
     <Color x:Key="OEP_DWS_BTN_MOBBColor">#E5F1FB</Color>
     <Color x:Key="OEP_DWS_BTN_MPBFColor">#005499</Color>
     <Color x:Key="OEP_DWS_BTN_MPBBColor">#CCE4F7</Color>
+    <SolidColorBrush x:Key="OEP_DWS_TB_BBColor">#7A7A7A</SolidColorBrush>
 
     <Style x:Key="OvotanEndPointManagementDialog" TargetType="{x:Type Window}">
         <Setter Property="SizeToContent" Value="WidthAndHeight"/>
         <Setter Property="Background" Value="#F0F0F0"/>
         <Style.Resources>
+            <Style TargetType="{x:Type TextBlock}">
+                <Setter Property="Margin" Value="0,9,5,0"/>
+            </Style>
+            <Style TargetType="{x:Type TextBox}">
+                <Setter Property="Margin" Value="0,5,0,0"/>
+                <Setter Property="Padding" Value="0,3,0,3"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource OEP_DWS_TB_BBColor}"/>
+                <Setter Property="BorderThickness" Value="1"/>
+            </Style>
             <Style TargetType="{x:Type Button}">
                 <Setter Property="SnapsToDevicePixels" Value="true" />
                 <Setter Property="OverridesDefaultStyle" Value="true" />
+                <Setter Property="MinWidth" Value="60"/>
+                <Setter Property="Margin" Value="5,10,0,0"/>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="Button">

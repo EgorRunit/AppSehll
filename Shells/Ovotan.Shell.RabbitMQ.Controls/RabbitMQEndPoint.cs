@@ -123,6 +123,8 @@ namespace Ovotan.Shell.RabbitMQ.Controls
         void _addCreateConnection()
         {
             var wnd = new CreateConnectionDialog(typeof(RabbitMQApiHttpClient), "Rabbit");
+            wnd.Owner = Application.Current.MainWindow;
+            wnd.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             if (wnd.ShowDialog() == true)
             {
                 var connection = wnd.Tag as RabbitMQApiHttpClient;

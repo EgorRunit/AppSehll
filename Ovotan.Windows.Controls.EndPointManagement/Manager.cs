@@ -187,6 +187,7 @@ namespace Ovotan.Windows.Controls.EndPointManagement
                 e.Handled = true;
                 var httpClient = treeViewItem.Tag as HttpClientBase;
                 var wnd = new ConnectionDialog(httpClient);
+                wnd.Owner = Application.Current.MainWindow;
                 if (wnd.ShowDialog() == false)
                 {
                     treeViewItem.IsExpanded = false;
