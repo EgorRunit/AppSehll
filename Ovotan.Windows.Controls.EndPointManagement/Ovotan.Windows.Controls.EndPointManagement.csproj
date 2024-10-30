@@ -25,4 +25,8 @@
     </Compile>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Schemas\Dark\" />
+  </ItemGroup>
+
 </Project>

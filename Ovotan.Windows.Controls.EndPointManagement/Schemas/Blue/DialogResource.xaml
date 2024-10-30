@@ -1,7 +1,12 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     x:Name="ertret"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-
+    <!---
+    OEP - Ovotan End Point
+    DWS - Dialog window style
+    BTN - Button
+    TB - Textbox
+    -->
     <SolidColorBrush x:Key="OEP_DWS_BTN_FColor">#000000</SolidColorBrush>
     <SolidColorBrush x:Key="OEP_DWS_BTN_DBColor">#0078D7</SolidColorBrush>
     <Color x:Key="OEP_DWS_BTN_BFColor">#ADADAD</Color>

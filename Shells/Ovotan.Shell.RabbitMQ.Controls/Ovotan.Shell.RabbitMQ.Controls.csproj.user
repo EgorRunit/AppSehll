@@ -2,18 +2,36 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
+    <Compile Update="Doalogs\CreateQueueDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="DockPanels\QueueManagement.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Docuemnts\ChannelListDocument.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Docuemnts\ConnectionListDocument.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Docuemnts\QueueListDocument.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Doalogs\CreateQueueDialog.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="DockPanels\QueueManagement.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Docuemnts\ChannelListDocument.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Docuemnts\ConnectionListDocument.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Docuemnts\QueueListDocument.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Resources\RabbitMQEndPointResource.xaml">

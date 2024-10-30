@@ -50,6 +50,8 @@ namespace Ovotan.Windows.Controls.EndPointManagement
                 new FrameworkPropertyMetadata(new ObservableCollection<MenuItem>(), FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
 
             SchemaManager.AddResource("pack://application:,,,/Ovotan.Windows.Controls.EndPointManagement;component/Schemas/{Schemas}/DialogResource.xaml", "{Schemas}");
+            SchemaManager.AddResource("pack://application:,,,/Ovotan.Windows.Controls.EndPointManagement;component/Schemas/{Schemas}/SiteHostDocumentDataGridResource.xaml", "{Schemas}");
+            SchemaManager.AddResource("pack://application:,,,/Ovotan.Windows.Controls.EndPointManagement;component/Schemas/{Schemas}/ToolbarResource.xaml", "{Schemas}");
         }
 
         public Management() : this(new EndPointConfigurations("EndPoint Management"))

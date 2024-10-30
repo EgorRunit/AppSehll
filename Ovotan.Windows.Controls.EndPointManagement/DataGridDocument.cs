@@ -36,22 +36,25 @@ namespace Ovotan.Windows.Controls.EndPointManagement
             if (Columns.Count == 0)
             {
                 var properties = list.GetType().GenericTypeArguments[0].GetProperties();
-                foreach(var property in properties)
+                foreach (var property in properties)
                 {
-                    var column = new DataGridTextColumn() { Header = property.Name };
-                    column.Binding = new Binding(property.Name);
                     var attribute = property.GetCustomAttribute<DataGridDocumentAttribute>();
                     if (attribute != null)
                     {
-                        if(attribute.Ignorable)
+                        if (attribute.Ignorable)
                         {
                             continue;
                         }
                     }
-                    else
+                    if (!property.PropertyType.IsValueType && property.PropertyType != typeof(string))
                     {
-                        Columns.Add(column);
+                        continue;
                     }
+
+                    var column = new DataGridTextColumn() { Header = property.Name };
+                    column.Header = attribute?.DisplayName ?? property.Name;
+                    column.Binding = new Binding(property.Name);
+                    Columns.Add(column);
                 }
             }
         }

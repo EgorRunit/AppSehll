@@ -1,0 +1,55 @@
+<Window x:Class="Ovotan.Shell.RabbitMQ.Controls.Doalogs.CreateQueueDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Ovotan.Shell.RabbitMQ.Controls.Doalogs"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        Style="{DynamicResource OvotanEndPointManagementDialog}"
+        SizeToContent="WidthAndHeight"
+        mc:Ignorable="d"
+        Title="CreateQueueWindow" Height="450">
+    <Grid Margin="10" Width="300">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Text="Queue name"/>
+            <TextBlock Grid.Row="1" Text="Queue type"/>
+            <TextBlock Grid.Row="2" Text="Durable"/>
+            <TextBlock Grid.Row="3" Text="Exclusive"/>
+            <TextBlock Grid.Row="4" Text="AutoDelete"/>
+
+            <TextBox Text="{Binding QueueName}" Grid.Row="0" Grid.Column="1"/>
+            <ComboBox x:Name="QueueType" Grid.Column="1" Grid.Row="1">
+                <ComboBoxItem Content="Defualt for virtual host"/>
+                <ComboBoxItem Content="Classic"/>
+                <ComboBoxItem Content="Quorum"/>
+                <ComboBoxItem Content="Stream"/>
+            </ComboBox>
+            <CheckBox HorizontalAlignment="Center" IsThreeState="False" IsChecked="{Binding Durable}" Grid.Row="2" Grid.Column="1"/>
+            <CheckBox HorizontalAlignment="Center" IsThreeState="False" IsChecked="{Binding Exclusive}" Grid.Row="3" Grid.Column="1"/>
+            <CheckBox HorizontalAlignment="Center" IsThreeState="False" IsChecked="{Binding AutoDelete}" Grid.Row="4" Grid.Column="1"/>
+        </Grid>
+        <DataGrid x:Name="DataGridQueues" Grid.Row="1">
+        </DataGrid>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="2">
+            <Button Content="AddQueue" IsDefault="True" Click="Button_Click"/>
+            <Button Content="Exit" IsCancel="True"/>
+        </StackPanel>
+    </Grid>
+</Window>

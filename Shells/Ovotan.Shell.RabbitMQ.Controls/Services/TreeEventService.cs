@@ -22,7 +22,7 @@ namespace Ovotan.Shell.RabbitMQ.Controls.Services
 
             _tmp = new Dictionary<TreeItemActionType, (Guid, Func<RabbitMQApiHttpClient, ISiteHostDocument>)>();
             _tmp.Add(TreeItemActionType.Streams, new ( RabbitMQDocumentTDs.Streams, (x) => { return null; }));
-            _tmp.Add(TreeItemActionType.Queues, new (RabbitMQDocumentTDs.Queues, (x) => { return null; }));
+            _tmp.Add(TreeItemActionType.Queues, new (RabbitMQDocumentTDs.Queues, (x) => new QueueListDocument(x)));
             _tmp.Add(TreeItemActionType.Exchanges, new(RabbitMQDocumentTDs.Exchanges, (x) => { return null; }));
             _tmp.Add(TreeItemActionType.Connections, new ( RabbitMQDocumentTDs.Connections, (x) => new ConnectionListDocument(x)));
             _tmp.Add(TreeItemActionType.Channels, new (RabbitMQDocumentTDs.Channels, (x) =>  new ChannelListDocument(x)));

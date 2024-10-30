@@ -25,7 +25,10 @@
     <Page Update="Schemas\Blue\DialogResource.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Schemas\Dark\DialogResource.xaml">
+    <Page Update="Schemas\Blue\SiteHostDocumentDataGridResource.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Schemas\Blue\ToolbarResource.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

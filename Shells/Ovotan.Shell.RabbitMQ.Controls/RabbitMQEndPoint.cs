@@ -45,7 +45,15 @@ namespace Ovotan.Shell.RabbitMQ.Controls
                 Command = new ButtonCommand<object>(_ => _addCreateConnection())
             });
 
-            MenuViewItems.Add(new MenuItem() { Header = "Тестирование соединений", Command = new ButtonCommand<object>(x=> _showTestConnection()) });
+            MenuViewItems.Add(new MenuItem() { Header = "Тестирование соединений", Command = new ButtonCommand<object>(x => _showTestConnection()) });
+            MenuViewItems.Add(new MenuItem()
+            {
+                Header = "Тестирование очередей",
+                Command = new ButtonCommand<object>(x =>
+                {
+                    dockingMessageQueue.Publish(DockingMessageType.ShowDockPanelWindow, new QueueManagement());
+                })
+            });
         }
 
         void _showTestConnection()

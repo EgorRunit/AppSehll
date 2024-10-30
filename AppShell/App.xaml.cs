@@ -14,14 +14,5 @@ namespace AppShell
     /// </summary>
     public partial class App : Application
     {
-        private void ConfigureServices(IServiceCollection services)
-        {
-            services.AddHttpClient();
-
-            services.AddTransient(typeof(MainWindow));
-            //https://habr.com/ru/articles/765064/
-        }
-
-
     }
 }

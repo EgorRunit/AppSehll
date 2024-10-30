@@ -1,0 +1,55 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:local="clr-namespace:Ovotan.Windows.Controls.EndPointManagement"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style TargetType="{x:Type local:SiteHostDocumentDataGrid}">
+        <Style.Resources>
+            <SolidColorBrush x:Key="DocumentBackground">White</SolidColorBrush>
+            <SolidColorBrush x:Key="HeaderColor">#4C1E1E</SolidColorBrush>
+            <SolidColorBrush x:Key="BusyBackground">Blue</SolidColorBrush>
+        </Style.Resources>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:SiteHostDocumentDataGrid}" >
+                    <ControlTemplate.Resources>
+                        <Style  TargetType="{x:Type Border}">
+                            <Setter Property="OverridesDefaultStyle" Value="True"/>
+                            <Setter Property="CornerRadius" Value="0,0,0,0"/>
+                        </Style>
+
+                    </ControlTemplate.Resources>
+                    <Grid Background="{StaticResource DocumentBackground}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <ToolBar Grid.ColumnSpan="2"/>
+
+                        <ToolBar Style="{DynamicResource ToolBar}" x:Name="MainToolbar" Grid.ColumnSpan="2"
+                                 ItemsSource="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ToolbarElements}">
+                        </ToolBar>
+
+                        <TextBlock FontSize="16" Foreground="{StaticResource HeaderColor}" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" x:Name="GridHeader" Text="Gread header"/>
+
+                        <StackPanel Grid.Row="1" VerticalAlignment="Stretch" Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
+                            <Button Content="&lt;&lt;"/>
+                            <Button Content="&lt;"/>
+                            <TextBox Width="40"/>
+                            <Button Content=">"/>
+                            <Button Content=">>"/>
+                            <Button Content="Refreh" x:Name="RefreshButton"/>
+                        </StackPanel>
+
+                        <local:DataGridDocument Grid.Row="2" Grid.ColumnSpan="2" x:Name="MainDataGrid"></local:DataGridDocument>
+                        <Rectangle x:Name="BusyIndecator" Grid.ColumnSpan="2" Grid.RowSpan="4" Opacity="0.01" Fill="{StaticResource BusyBackground}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

@@ -15,8 +15,11 @@ namespace Ovotan.Shell.RabbitMQ.Models
         /// </summary>
         public ConnectionClientProperties ClientProperties { get; set; }
 
-        #region Overview
+        /// <summary>
+        /// get - Название соединения (ip:port)
+        /// </summary>
         [JsonIgnore]
+        [DataGridDocument(displayName:"Name")]
         public string PeerName
         {
             get
@@ -26,25 +29,20 @@ namespace Ovotan.Shell.RabbitMQ.Models
         }
 
         /// <summary>
-        /// get,set - Дата подключения.
-        /// </summary>
-        [DataGridDocument(true)]
-        public DateTime ConnectedAt { get; set; }
-
-        /// <summary>
         /// get,set - Логин пользователя.
         /// </summary>
+        [DataGridDocument(displayName: "User name")]
         public string User { get; set; }
+
         /// <summary>
         /// get,set - Статус подключения.
         /// </summary>
         public ConnectionState State { get; set; }
-        #endregion
+
         /// <summary>
         /// get,set - Прокотол соединения.
         /// </summary>
         public string Protocol { get; set; }
-
 
         /// <summary>
         /// get,set - Количество открытых каналов в подключении.
@@ -53,15 +51,45 @@ namespace Ovotan.Shell.RabbitMQ.Models
         /// <summary>
         /// get,set - Максимально доступное каналов подключении.
         /// </summary>
+        [DataGridDocument(displayName: "Channel Max")]
         public int ChannelMax { get; set; }
 
-
         /// <summary>
-        /// get, set - Размер в байтах максимально допустимого кадра для соединения. 0 означает отсутствие ограничений
+        /// get, set - Размер в байтах максимально допустимого кадра для соединения. 0 означает отсутствие ограничений.
         /// </summary>
         /// <remarks>
+        [DataGridDocument(displayName: "Frame Max")]
         public int FrameMax { get; set; }
 
+        /// <summary>
+        /// Механизм авторизатиции.
+        /// </summary>
+        [JsonPropertyName("auth_mechanism")]
+        [DataGridDocument(displayName: "SASL auth mechanismSASL")]
+        public string auth_mechanism { get; set; }
+
+        /// <summary>
+        /// get - Сердцебиение.
+        /// </summary>
+        [JsonIgnore]
+        [DataGridDocument(displayName:"Heartbeat")]
+        public string FullTimeout
+        {
+            get
+            {
+                return $"{Timeout}s";
+            }
+        }
+
+        /// <summary>
+        /// get,set - Дата подключения.
+        /// </summary>
+        public DateTime ConnectedAt { get; set; }
+
+
+
+
+        public int Timeout { get; set; }
 
         public int PeerPort { get; set; }
 
@@ -85,18 +113,8 @@ namespace Ovotan.Shell.RabbitMQ.Models
         /// GateKeeper(& GateKeeperPassport), разработана Microsoft для MSN Chat;
         /// «KERBEROS IV» (устаревший).
         /// </remarks>
-        [JsonPropertyName("auth_mechanism")]
-        public string auth_mechanism { get; set; }
 
-        [JsonIgnore]
-        public string FullTimeout
-        {
-            get
-            {
-                return $"{Timeout}s";
-            }
-        }
-        public int Timeout { get; set; }
+
 
     }
 

@@ -14,7 +14,7 @@ namespace Ovotan.Shell.RabbitMQ.Api
 
         public async Task<CurrentlyAuthenticatedUser> GetCurrentlyAuthenticatedUserAsync()
         {
-            return await _client.GetData<CurrentlyAuthenticatedUser>("api/whoami");
+            return await _client.GetData<CurrentlyAuthenticatedUser>("api/queues");
         }
 
     }

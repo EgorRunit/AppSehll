@@ -1,7 +1,6 @@
 using Ovotan.Shell.RabbitMQ.Api;
 using Ovotan.Shell.RabbitMQ.Controls.Services;
 using Ovotan.Windows.Controls.Docking.Interfaces;
-using System.ComponentModel;
 using System.Windows.Controls;
 
 namespace Ovotan.Shell.RabbitMQ.Controls.Docuemnts
@@ -13,14 +12,14 @@ namespace Ovotan.Shell.RabbitMQ.Controls.Docuemnts
     /// </summary>
     public partial class ConnectionListDocument : UserControl, ISiteHostDocument
     {
+        /// <summary>
+        /// Экземпляр Http клиента для даступа к апи.
+        /// </summary>
         RabbitMQApiHttpClient _client;
-
-
         public bool IsStatic { get; } = true;
-
         public Guid ID { get; } = RabbitMQDocumentTDs.Connections;
-
         public string Header { get; private set; }
+
         public ConnectionListDocument(RabbitMQApiHttpClient client)
         {
             InitializeComponent();
@@ -42,19 +41,9 @@ namespace Ovotan.Shell.RabbitMQ.Controls.Docuemnts
 
         }
 
-
-        private void DataGridConnections_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        void _refresh(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (e.PropertyDescriptor is PropertyDescriptor descriptor)
-            {
-                e.Column.Header = descriptor.DisplayName ?? descriptor.Name;
-            }
-
+            Refresh();
         }
     }
-
-
-
-
-    
 }
