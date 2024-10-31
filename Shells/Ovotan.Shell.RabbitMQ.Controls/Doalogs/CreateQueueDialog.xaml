@@ -9,7 +9,7 @@
         Style="{DynamicResource OvotanEndPointManagementDialog}"
         SizeToContent="WidthAndHeight"
         mc:Ignorable="d"
-        Title="CreateQueueWindow" Height="450">
+        Title="Создание новой очереди" Height="450">
     <Grid Margin="10" Width="300">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -40,16 +40,14 @@
                 <ComboBoxItem Content="Quorum"/>
                 <ComboBoxItem Content="Stream"/>
             </ComboBox>
-            <CheckBox HorizontalAlignment="Center" IsThreeState="False" IsChecked="{Binding Durable}" Grid.Row="2" Grid.Column="1"/>
-            <CheckBox HorizontalAlignment="Center" IsThreeState="False" IsChecked="{Binding Exclusive}" Grid.Row="3" Grid.Column="1"/>
-            <CheckBox HorizontalAlignment="Center" IsThreeState="False" IsChecked="{Binding AutoDelete}" Grid.Row="4" Grid.Column="1"/>
+            <CheckBox  IsThreeState="False" IsChecked="{Binding Durable}" Grid.Row="2" Grid.Column="1"/>
+            <CheckBox  IsThreeState="False" IsChecked="{Binding Exclusive}" Grid.Row="3" Grid.Column="1"/>
+            <CheckBox  IsThreeState="False" IsChecked="{Binding AutoDelete}" Grid.Row="4" Grid.Column="1"/>
         </Grid>
-        <DataGrid x:Name="DataGridQueues" Grid.Row="1">
-        </DataGrid>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="2">
-            <Button Content="AddQueue" IsDefault="True" Click="Button_Click"/>
-            <Button Content="Exit" IsCancel="True"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right">
+            <Button Content="Добавить" IsDefault="True" Click="_addQueue"/>
+            <Button Content="Отмена" IsCancel="True"/>
         </StackPanel>
     </Grid>
 </Window>

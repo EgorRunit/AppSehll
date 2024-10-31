@@ -10,7 +10,8 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <controls:SiteHostDocumentDataGrid x:Name="SiteHostDocumentDataGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
         <controls:SiteHostDocumentDataGrid.ToolbarElements>
-            <controls1:ViewboxButton ViewboxType="NewConnection" Command="{Binding RelativeSource={ RelativeSource AncestorType=local:QueueListDocument},Path=CreateQueueCommand}"/>
+            <controls1:ViewboxButton ViewboxType="NewConnection" ToolTip="Создать очередь"
+                                     Command="{Binding RelativeSource={ RelativeSource AncestorType=local:QueueListDocument},Path=CreateQueueCommand}"/>
             <controls1:ViewboxButton ViewboxType="Connection"/>
         </controls:SiteHostDocumentDataGrid.ToolbarElements>
     </controls:SiteHostDocumentDataGrid>

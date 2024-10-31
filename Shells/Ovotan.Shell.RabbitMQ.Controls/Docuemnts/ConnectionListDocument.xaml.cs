@@ -1,11 +1,11 @@
 using Ovotan.Shell.RabbitMQ.Api;
 using Ovotan.Shell.RabbitMQ.Controls.Services;
+using Ovotan.Windows.Controls.Controls;
 using Ovotan.Windows.Controls.Docking.Interfaces;
 using System.Windows.Controls;
 
 namespace Ovotan.Shell.RabbitMQ.Controls.Docuemnts
 {
-
     /// <summary>
     /// SiteHost документ.
     /// Список активныз подключений.
@@ -25,25 +25,21 @@ namespace Ovotan.Shell.RabbitMQ.Controls.Docuemnts
             InitializeComponent();
             Header = "Rabbit - Список активных подключений";
             _client = client;
-            Refresh();
-    
+            SiteHostDocumentDataGrid.Header = Header;
+            SiteHostDocumentDataGrid.DataBindCommand = new ButtonCommand<object>(x => _getConnections());
         }
-        public void Refresh()
+
+        void _getConnections()
         {
+
             var task = _client.ConnectionApi.GetConnectionsAsync();
             task.ContinueWith((x) =>
             {
                 Dispatcher.Invoke(new Action(() =>
                 {
-                    DataGridConnections.ItemsSource = x.Result;
+                    SiteHostDocumentDataGrid.DataBind(task.Result);
                 }));
             });
-
-        }
-
-        void _refresh(object sender, System.Windows.RoutedEventArgs e)
-        {
-            Refresh();
         }
     }
 }

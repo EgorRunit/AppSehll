@@ -13,6 +13,7 @@ namespace Ovotan.EndPointManagement.Connections
     /// </summary>
     public class HttpClientBase : HttpClient
     {
+        public string HostName { get; set; }
         /// <summary>
         /// get,set - Название подключения к ноченой точке.
         /// </summary>
@@ -63,7 +64,8 @@ namespace Ovotan.EndPointManagement.Connections
                 if (httpResponseMessage.StatusCode != HttpStatusCode.Unauthorized)
                 {
                     client = httpClient;
-                    BaseUrl = baseUri; 
+                    BaseUrl = baseUri;
+                    HostName = httpClient.BaseAddress.Host;
                     UserName = userName; 
                     UserPassword = userPassword;
                     return (true, string.Empty);

@@ -20,8 +20,6 @@ namespace Ovotan.Windows.Controls.EndPointManagement
         DataGridDocument _dataGridDocument;
         Rectangle _busyIndecator;
 
-        public bool IsStatic { get;  protected set; }
-        public Guid ID { get; protected set; }
         public string Header { get; set; }
 
         public ICommand DataBindCommand { get; set; }
@@ -43,8 +41,13 @@ namespace Ovotan.Windows.Controls.EndPointManagement
         static SiteHostDocumentDataGrid()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(SiteHostDocumentDataGrid), new FrameworkPropertyMetadata(typeof(SiteHostDocumentDataGrid)));
-            ToolbarElementsProperty = DependencyProperty.Register("ToolbarElements", typeof(ObservableCollection<FrameworkElement>), typeof(SiteHostTabControl),
-                new FrameworkPropertyMetadata(new ObservableCollection<FrameworkElement>(), FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
+            ToolbarElementsProperty = DependencyProperty.Register("ToolbarElements", typeof(ObservableCollection<FrameworkElement>), typeof(SiteHostDocumentDataGrid),
+                new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
+        }
+
+        public SiteHostDocumentDataGrid()
+        {
+            ToolbarElements = new ObservableCollection<FrameworkElement>();
         }
 
         void _refresh()
@@ -55,11 +58,6 @@ namespace Ovotan.Windows.Controls.EndPointManagement
                 _busyIndecator.Visibility = Visibility.Visible;
                 Cursor = Cursors.Wait;
             }
-        }
-
-
-        public SiteHostDocumentDataGrid()
-        {
         }
 
         public void DataBind(IEnumerable values)
@@ -73,21 +71,17 @@ namespace Ovotan.Windows.Controls.EndPointManagement
         {
             base.OnInitialized(e);
             DefaultStyleKey = typeof(SiteHostDocumentDataGrid);
-            DataContext = this;
         }
-
-
 
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            (Template.FindName("MainToolbar", this) as ToolBar).DataContext = this;
             _dataGridDocument = Template.FindName("MainDataGrid", this) as DataGridDocument;
             _busyIndecator = Template.FindName("BusyIndecator", this) as Rectangle;
+            (Template.FindName("MainToolbar", this) as ToolBar).DataContext = this;
             (Template.FindName("RefreshButton", this) as Button).Click += (s, a) => _refresh();
-            //(Template.FindName("MainToolbar", this) as ToolBar).ItemsSource = ToolbarElements;
+            (Template.FindName("GridHeader", this) as TextBlock).Text = Header;
             _refresh();
         }
-
     }
 }

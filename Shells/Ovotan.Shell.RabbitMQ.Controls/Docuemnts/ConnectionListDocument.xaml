@@ -8,41 +8,6 @@
              xmlns:controls="clr-namespace:Ovotan.Windows.Controls.EndPointManagement;assembly=Ovotan.Windows.Controls.EndPointManagement"
              d:Height="400" d:Width="500"
              >
-    <UserControl.Resources>
-        <Style TargetType="{x:Type Grid}">
-            <Setter Property="Margin" Value="130"/>
-            <Setter Property="Background" Value="White"/>
-        </Style>
-        <Style x:Key="OEP_SHDS_THeader" TargetType="{x:Type TextBlock}">
-            <Setter Property="FontSize" Value="20"/>
-            <Setter Property="Foreground" Value="#4C1E1E"/>
-        </Style>
-    </UserControl.Resources>
-    <Grid Margin="10">
-        <!--- 
-        SHD - Site host docuent style
-        -->
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="4"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
-        
-        <TextBlock Style="{DynamicResource OEP_SHDS_THeader}" Text="Connections" Grid.Column="0" Grid.Row="0"/>
-        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,0,0">
-            <!--<TextBlock Text="Displaying 0 item , page size up to:" Margin="5,0,5,0"/>-->
-            <Button Content="&lt;&lt;"/>
-            <Button Content="&lt;"/>
-            <TextBox Width="40"/>
-            <Button Content=">"/>
-            <Button Content=">>"/>
-            <Button Content="Refresh" Click="_refresh"/>
-        </StackPanel>
-        <controls:DataGridDocument FrozenColumnCount="2" HorizontalContentAlignment="Right" HorizontalAlignment="Left"  x:Name="DataGridConnections" RowHeaderWidth="0" CanUserAddRows="False" Grid.ColumnSpan="2" Grid.Row="2">
-        </controls:DataGridDocument>
-    </Grid>
+    <controls:SiteHostDocumentDataGrid x:Name="SiteHostDocumentDataGrid" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+    </controls:SiteHostDocumentDataGrid>
 </UserControl>

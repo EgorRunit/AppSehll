@@ -11,7 +11,7 @@ using System.Windows.Media.Imaging;
 namespace Ovotan.Shell.RabbitMQ.Controls.Docuemnts
 {
     /// <summary>
-    /// Interaction logic for QueueListDocument.xaml
+    /// 
     /// </summary>
     public partial class QueueListDocument : UserControl, ISiteHostDocument
     {
@@ -27,15 +27,13 @@ namespace Ovotan.Shell.RabbitMQ.Controls.Docuemnts
 
         public QueueListDocument(RabbitMQApiHttpClient client)
         {
-            InitializeComponent();
             Header = "Rabbit - Список Очередей";
+            InitializeComponent();
             _client = client;
             DataContext = this;
+            SiteHostDocumentDataGrid.Header = Header;
             SiteHostDocumentDataGrid.DataBindCommand = new ButtonCommand<object>(x => _getQueues());
-            CreateQueueCommand = new ButtonCommand<object>(_ =>
-            {
-                var de = 4;
-            });
+            CreateQueueCommand = new ButtonCommand<object>(_ => _addQueue());
 
         }
         void _getQueues()
@@ -48,15 +46,14 @@ namespace Ovotan.Shell.RabbitMQ.Controls.Docuemnts
                     SiteHostDocumentDataGrid.DataBind(task.Result);
                 }));
             });
-
         }
 
-        void _addQueue(object sender, RoutedEventArgs e)
+        void _addQueue()
         {
-            var wnd = new CreateQueueDialog();
+            var wnd = new CreateQueueDialog(_client);
             wnd.Owner = Application.Current.MainWindow;
-            wnd.Topmost = true;
-            wnd.Show();
+            wnd.ShowDialog();
+            _getQueues();
         }
     }
 }
