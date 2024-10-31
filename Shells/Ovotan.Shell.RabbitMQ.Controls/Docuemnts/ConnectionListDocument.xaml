@@ -42,7 +42,7 @@
             <Button Content=">>"/>
             <Button Content="Refresh" Click="_refresh"/>
         </StackPanel>
-        <controls:DataGridDocument x:Name="DataGridConnections" RowHeaderWidth="0" CanUserAddRows="False" Grid.ColumnSpan="2" Grid.Row="2">
+        <controls:DataGridDocument FrozenColumnCount="2" HorizontalContentAlignment="Right" HorizontalAlignment="Left"  x:Name="DataGridConnections" RowHeaderWidth="0" CanUserAddRows="False" Grid.ColumnSpan="2" Grid.Row="2">
         </controls:DataGridDocument>
     </Grid>
 </UserControl>

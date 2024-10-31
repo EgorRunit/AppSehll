@@ -11,7 +11,7 @@ using Ovotan.Windows.Controls.Docking;
 
 namespace Ovotan.Windows.Controls.EndPointManagement
 {
-    [ContentProperty("ToolbarElements")]
+    //[ContentProperty("ToolbarElements")]
     public class SiteHostDocumentDataGrid : ContentControl, ISiteHostDocument
     {
         static DependencyProperty ToolbarElementsProperty;
@@ -25,7 +25,9 @@ namespace Ovotan.Windows.Controls.EndPointManagement
         public string Header { get; set; }
 
         public ICommand DataBindCommand { get; set; }
+        public ICommand CreateQueueCommand { get; set; }
 
+        //[ContentProperty("ToolbarElements")]
         public ObservableCollection<FrameworkElement> ToolbarElements
         {
             get
@@ -71,6 +73,7 @@ namespace Ovotan.Windows.Controls.EndPointManagement
         {
             base.OnInitialized(e);
             DefaultStyleKey = typeof(SiteHostDocumentDataGrid);
+            DataContext = this;
         }
 
 
@@ -78,6 +81,7 @@ namespace Ovotan.Windows.Controls.EndPointManagement
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
+            (Template.FindName("MainToolbar", this) as ToolBar).DataContext = this;
             _dataGridDocument = Template.FindName("MainDataGrid", this) as DataGridDocument;
             _busyIndecator = Template.FindName("BusyIndecator", this) as Rectangle;
             (Template.FindName("RefreshButton", this) as Button).Click += (s, a) => _refresh();

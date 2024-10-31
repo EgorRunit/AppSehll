@@ -96,7 +96,10 @@ namespace Ovotan.Windows.Controls
             if (!_loadedSchemas.ContainsKey(source))
             {
                 _loadedSchemas.Add(source, schemaNamePattern);
-                source = source.Replace(schemaNamePattern, DefaultSchemaName);
+                if (!string.IsNullOrEmpty(schemaNamePattern))
+                {
+                    source = source.Replace(schemaNamePattern, DefaultSchemaName);
+                }
                 var resource = new ResourceDictionary() { Source = new Uri(source) };
                 MergedDictionaries.Add(resource);
             }

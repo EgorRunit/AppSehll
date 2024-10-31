@@ -5,6 +5,7 @@ using Ovotan.Windows.Controls.Controls;
 using Ovotan.Windows.Controls.Docking.Interfaces;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
 namespace Ovotan.Shell.RabbitMQ.Controls.Docuemnts
@@ -22,12 +23,19 @@ namespace Ovotan.Shell.RabbitMQ.Controls.Docuemnts
         public Guid ID { get; } = RabbitMQDocumentTDs.Queues;
         public string Header { get; private set; }
 
+        public ICommand CreateQueueCommand { get; set; }
+
         public QueueListDocument(RabbitMQApiHttpClient client)
         {
             InitializeComponent();
             Header = "Rabbit - Список Очередей";
             _client = client;
+            DataContext = this;
             SiteHostDocumentDataGrid.DataBindCommand = new ButtonCommand<object>(x => _getQueues());
+            CreateQueueCommand = new ButtonCommand<object>(_ =>
+            {
+                var de = 4;
+            });
 
         }
         void _getQueues()
