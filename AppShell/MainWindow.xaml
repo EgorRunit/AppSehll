@@ -104,7 +104,13 @@
                                         <Path x:Name="Arrow" Margin="0,0,3,5" Fill="{StaticResource ToggleButtonArrowFill}" VerticalAlignment="Bottom" Data="M-0.5 3 L6.8 3 L2.8 8 Z" />
                                     </MenuItem.Icon>
                                 </MenuItem>
-                                <MenuItem Header="*">
+                                <MenuItem Padding="0">
+                                    <MenuItem.Header>
+                                        <controls3:ViewboxIcon 
+                                            FirstColor="#D5DCF5" SecondColor="#D5DCF5"
+                                            MouseOverFirstColor="White" MouseOverSecondColor="White"
+                                            Width="12" Height="12" Viewbox="{DynamicResource OVBT_Settings}"></controls3:ViewboxIcon>
+                                    </MenuItem.Header>
                                     <MenuItem  
                                               IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay,Path=IsMultiRows}"
                                               IsCheckable="True" Header="Показывать вкладки в нескольких строках"/>
