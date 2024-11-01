@@ -98,11 +98,16 @@
                             </Grid.ColumnDefinitions>
                             <Canvas x:Name="Canvas" VerticalAlignment="Stretch" ></Canvas>
 
-                            <Menu Grid.Column="1" Grid.Row="0" Background="Transparent">
+                            <Menu x:Name="ActionMenu" Grid.Column="1" Grid.Row="0" Background="Transparent">
                                 <MenuItem x:Name="DocumentDropDownList" Width="15" >
                                     <MenuItem.Icon>
                                         <Path x:Name="Arrow" Margin="0,0,3,5" Fill="{StaticResource ToggleButtonArrowFill}" VerticalAlignment="Bottom" Data="M-0.5 3 L6.8 3 L2.8 8 Z" />
                                     </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Header="*">
+                                    <MenuItem  
+                                              IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay,Path=IsMultiRows}"
+                                              IsCheckable="True" Header="Показывать вкладки в нескольких строках"/>
                                 </MenuItem>
                             </Menu>
                             <!--<ToggleButton x:Name="DropDownButton" Grid.Column="1" Grid.Row="0" Visibility="Collapsed">

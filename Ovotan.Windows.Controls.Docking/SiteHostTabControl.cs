@@ -5,11 +5,13 @@ using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
 using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Markup;
 using System.Windows.Media;
@@ -120,9 +122,16 @@ namespace Ovotan.Windows.Controls.Docking
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
 
             IsMultiRowsProperty = DependencyProperty.Register("IsMultiRows", typeof(bool), typeof(SiteHostTabControl),
-                new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
-        }
+             new FrameworkPropertyMetadata(
+        false,
+        FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,fff,null));
 
+
+
+                //new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, fff, swss));
+
+
+        }
         public SiteHostTabControl()
         {
             Elements = new ObservableCollection<SiteHostTabControlItem>();
@@ -130,28 +139,42 @@ namespace Ovotan.Windows.Controls.Docking
             _closeTabCommand = new ButtonCommand<SiteHostTabControlItem>((x) => _closeTabHandler(x));
         }
 
+        static object swss(DependencyObject d, object baseValue)
+        {
+            return baseValue;
+        }
+
+        static void fff(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var self = d as SiteHostTabControl;
+            if (self.ActualWidth > 0)
+            {
+                self.MeasureOverride(new Size(self.ActualWidth, self.ActualHeight));
+            }
+        }
 
 
 
 
-
-
+        Menu _actionMenu;
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
             _canvas = Template.FindName("Canvas", this) as Canvas;
-            var menu = Template.FindName("DocumentDropDownList", this) as MenuItem;
-            menu.Click
-             += (x, c) =>
+            _actionMenu = Template.FindName("ActionMenu", this) as Menu;
+
+            var dropDownListElements = _actionMenu.Items[0] as MenuItem;
+            dropDownListElements.ItemsSource = new List<int>() { 4 };
+            dropDownListElements.SubmenuOpened += (d, f) =>
             {
-                var ss = Elements.Select(x => new MenuItem()
+                var elements = Elements.Select(x => new MenuItem()
                 {
                     Header = x.Header,
                     Tag = x,
                     Command = new ButtonCommand<SiteHostTabControlItem>(x => _setActiveTab(x)),
                     CommandParameter = x
                 }).ToList();
-                menu.ItemsSource = ss;
+                dropDownListElements.ItemsSource = elements;
             };
             foreach (var element in Elements)
             {
@@ -162,22 +185,90 @@ namespace Ovotan.Windows.Controls.Docking
 
 
 
+
         ICommand _closeTabCommand;
 
-        protected override void OnRender(DrawingContext drawingContext)
+        protected override Size MeasureOverride(Size constraint)
         {
+            if (IsMultiRows)
+            {
+                _renderTabsInMultipleRows(constraint);
+            }
+            else
+            {
+                _renderTabsInSingleRow(constraint);
+            }
+            return base.MeasureOverride(constraint);
+        }
+
+        /// <summary>
+        /// Displaying tabs in multiple row.
+        /// </summary>
+        /// <param name="constraint">Size of content.</param>
+        void _renderTabsInMultipleRows(Size constraint)
+        {
+            var size = new Size(double.PositiveInfinity, double.PositiveInfinity);
+            var actionMenuWidth = _actionMenu.ActualWidth;
+            if (actionMenuWidth == 0.0)
+            {
+                _actionMenu.Measure(size);
+                actionMenuWidth = _actionMenu.DesiredSize.Width;
+            }
+            var actualWidth = constraint.Width;
             var left = 0.0;
             var top = 0.0;
-            var actualWidth = ActualWidth;
+            var height = 0.0;
+            foreach (var element in Elements)
+            {
+                var sss = element.Header;
+                element.Measure(size);
+                height = element.DesiredSize.Height;
+                var width = element.DesiredSize.Width;
+                if (left + width +actionMenuWidth > actualWidth)
+                {
+                    top += element.ActualHeight + 2;
+                    left = 0;
+                }
+                element.Visibility = Visibility.Visible;
+                element.SetValue(Canvas.LeftProperty, left);
+                element.SetValue(Canvas.TopProperty, top);
+                element.CloseCommand = _closeTabCommand;
+                left += width + 2;
+            }
+
+            Height = top + height + 2;
+            if (HasOverflowItems)
+            {
+                HasOverflowItems = false;
+            }
+        }
+
+
+        /// <summary>
+        /// Displaying tabs in one row.
+        /// </summary>
+        /// <param name="constraint">Size of content.</param>
+        void _renderTabsInSingleRow(Size constraint)
+        {
+            var size = new Size(double.PositiveInfinity, double.PositiveInfinity);
+            var actionMenuWidth = _actionMenu.ActualWidth;
+            if (actionMenuWidth == 0.0)
+            {
+                _actionMenu.Measure(size);
+                actionMenuWidth = _actionMenu.DesiredSize.Width;
+            }
+            var actualWidth = constraint.Width;
+            var left = 0.0;
+            var top = 0.0;
             var hasOverflowItems = false;
             var height = 0.0;
             foreach (var element in Elements)
             {
                 var sss = element.Header;
-                element.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+                element.Measure(size);
                 height = element.DesiredSize.Height;
                 var width = element.DesiredSize.Width;
-                if (left + width > actualWidth)
+                if (left + width + actionMenuWidth > actualWidth)
                 {
                     hasOverflowItems = true;
                     element.Visibility = Visibility.Hidden;
@@ -197,9 +288,7 @@ namespace Ovotan.Windows.Controls.Docking
             {
                 HasOverflowItems = hasOverflowItems;
             }
-            base.OnRender(drawingContext);
         }
-
 
 
         /// <summary>
@@ -236,7 +325,7 @@ namespace Ovotan.Windows.Controls.Docking
                     left += document.ActualWidth + 2;
                 }
             }
-            InvalidateVisual();
+            MeasureOverride(new Size(ActualWidth, ActualHeight));
         }
 
         /// <summary>
@@ -273,7 +362,7 @@ namespace Ovotan.Windows.Controls.Docking
                 }
                 newActiveSiteHostTabControlItem.IsActive = true;
             }
-            InvalidateVisual();
+            MeasureOverride(new Size(ActualWidth, ActualHeight));
         }
 
     }
