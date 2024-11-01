@@ -21,11 +21,17 @@ namespace Ovotan.Windows.Controls
         {
             if (element != null)
             {
-                while(element.Parent != null)
+                object node = element;
+                while (node != null)
                 {
-                    if(element.Parent is T)
+                    if(node is T)
                     {
-                        yield return element.Parent as T;
+                        yield return node as T;
+                    }
+                    if (node is FrameworkElement)
+                    {
+                        var ss = element.TemplatedParent;
+                        node = (node as FrameworkElement).Parent;
                     }
                 }
             }

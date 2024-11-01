@@ -15,12 +15,72 @@
 	xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
 
     <Window.Resources>
+        <Style TargetType="{x:Type controls:SiteHostTabControlItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type controls:SiteHostTabControlItem}">
+                        <ControlTemplate.Resources>
+                            <SolidColorBrush x:Key="BorderBrush">#3B4F81</SolidColorBrush>
+                            <SolidColorBrush x:Key="MouseOverClose">Black</SolidColorBrush>
+                        </ControlTemplate.Resources>
+                        <Border SnapsToDevicePixels="True" x:Name="Border" TextBlock.Foreground="#F4F5FF" BorderThickness="1" 
+                                Padding="3,0,3,2" BorderBrush="{StaticResource BorderBrush}" Background="{StaticResource BorderBrush}">
+                            <DockPanel x:Name="DockPanel" Margin="0"  VerticalAlignment="Center" HorizontalAlignment="Stretch">
+
+                                <TextBlock Text="{Binding Header}"/>
+                                <Rectangle Width="9" Height="9" Margin="5,3,2,0" x:Name="CloseButton" >
+                                    <Rectangle.Resources>
+                                        
+                                    </Rectangle.Resources>
+                                    <Rectangle.Fill>
+                                        <DrawingBrush>
+                                            <DrawingBrush.Drawing>
+                                                <DrawingGroup>
+                                                    <GeometryDrawing x:Name="CloseGeometry" Brush="{StaticResource BorderBrush}" Geometry="F1M8.207,7.5l5.147,5.146-.708.708L7.5,8.207,2.354,13.354l-.708-.708L6.793,7.5,1.646,2.354l.708-.708L7.5,6.793l5.146-5.147.708.708Z">
+                                                        
+                                                    </GeometryDrawing>
+                                                </DrawingGroup>
+                                            </DrawingBrush.Drawing>
+                                        </DrawingBrush>
+                                    </Rectangle.Fill>
+                                    
+                                </Rectangle>
+
+                            </DockPanel>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsActive" Value="False"/>
+                                    <Condition Property="IsMouseOver" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <MultiTrigger.Setters>
+                                    <Setter TargetName="Border" Property="Background" Value="#BBC6F1"/>
+                                    <Setter TargetName="Border" Property="TextBlock.Foreground" Value="Black"/>
+                                </MultiTrigger.Setters>
+                            </MultiTrigger>
+                            <Trigger Property="IsActive" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="#F5CC84"/>
+                                <Setter TargetName="Border" Property="TextBlock.Foreground" Value="Black"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
         <Style TargetType="{x:Type controls:SiteHostTabControl}">
-            <Setter Property="Height" Value="50"/>
+            <Style.Resources>
+                <SolidColorBrush x:Key="ToolBarBackground">#CCD5F0</SolidColorBrush>
+                <SolidColorBrush x:Key="ToggleButtonMouseOverBackground">#FFFFFF</SolidColorBrush>
+                <SolidColorBrush x:Key="ToggleButtonArrowFill">#D9E0F8</SolidColorBrush>
+                <SolidColorBrush x:Key="ToggleButtonListBorder">#94A6CA</SolidColorBrush>
+                <SolidColorBrush x:Key="ToggleButtonListBackground">#E9EEFF</SolidColorBrush>
+            </Style.Resources>
             <Setter Property="Background" Value="Red"></Setter>
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate>
+                    <ControlTemplate TargetType="{x:Type controls:SiteHostTabControl}">
                         <ControlTemplate.Resources>
                             <Style TargetType="{x:Type Button}">
                                 <Setter Property="Margin" Value="0,0,1,0"/>
@@ -29,17 +89,43 @@
                         </ControlTemplate.Resources>
                         <Grid Background="{Binding Source={StaticResource Ovotan.Windows.Controls.Docking.Settings.PanelSettings},Path=SplitterBackground}">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="30"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <Canvas x:Name="Canvas" Height="30"></Canvas>
+                            <Canvas x:Name="Canvas" VerticalAlignment="Stretch" ></Canvas>
 
-                            <Button Grid.Column="1" Grid.Row="1" Content="||"/>
+                            <Menu Grid.Column="1" Grid.Row="0" Background="Transparent">
+                                <MenuItem x:Name="DocumentDropDownList" Width="15" >
+                                    <MenuItem.Icon>
+                                        <Path x:Name="Arrow" Margin="0,0,3,5" Fill="{StaticResource ToggleButtonArrowFill}" VerticalAlignment="Bottom" Data="M-0.5 3 L6.8 3 L2.8 8 Z" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                            </Menu>
+                            <!--<ToggleButton x:Name="DropDownButton" Grid.Column="1" Grid.Row="0" Visibility="Collapsed">
+                                <ToggleButton.Template>
+                                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                                        <Grid Background="Transparent">
+                                            <Path x:Name="Arrow" Margin="0,0,3,5" Fill="{StaticResource ToggleButtonArrowFill}" VerticalAlignment="Bottom" Data="M-0.5 3 L6.8 3 L2.8 8 Z" />
+                                            <ContentPresenter />
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="RightMenu" Property="Fill" Value="{DynamicResource ToggleButtonMouseOverBackground}"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </ToggleButton.Template>
+                            </ToggleButton>-->
                         </Grid>
+                        <!--<ControlTemplate.Triggers>
+                            <Trigger Property="HasOverflowItems" Value="True">
+                                <Setter TargetName="DropDownButton" Property="Visibility" Value="Visible"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>-->
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -71,30 +157,17 @@
         </Grid.ColumnDefinitions>
 
 
-        <!--<controls:SiteHostTabControl Margin="0" Padding="0">
-            <Button Content="43534" Width="200"/>
-            <Button Content="43534"/>
-            <Button Content="43534"/>
-            <Button Content="43wer534"/>
-            <Button Content="43534" Width="200"/>
-            <Button Content="435asff34"/>
-            <Button Content="43534"/>
-            <Button Content="43534"/>
-            <Button Content="43534" Width="200"/>
-            <Button Content="43534"/>
-            <Button Content="435as34"/>
-            <Button Content="43534"/>
-            <Button Content="43534" Width="200"/>
-            <Button Content="43asdfs534"/>
-            <Button Content="43534"/>
-            <Button Content="43534"/>
-            <Button Content="43534" Width="200"/>
-            <Button Content="43534"/>
-            <Button Content="43534"/>
-            <Button Content="43534"/>
-        </controls:SiteHostTabControl>-->
-            
-         <controls1:Management x:Name="MainShallManagement"  Grid.Row="1">
+        <controls:SiteHostTabControl Margin="0" Padding="0">
+            <controls:SiteHostTabControlItem Header="1 Live Property"/>
+            <controls:SiteHostTabControlItem Header="2 34534534"/>
+            <controls:SiteHostTabControlItem Header="3 345wer34534"/>
+            <controls:SiteHostTabControlItem Header="4 3453453wer4"/>
+            <controls:SiteHostTabControlItem Header="5 34534534"/>
+            <controls:SiteHostTabControlItem Header="6 345werew34534"/>
+            <controls:SiteHostTabControlItem Header="7 34534534"/>
+        </controls:SiteHostTabControl>
+
+        <controls1:Management Margin="4" x:Name="MainShallManagement"  Grid.Row="1">
          </controls1:Management>
     </Grid>
 </Window>
