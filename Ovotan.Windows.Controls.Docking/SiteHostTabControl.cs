@@ -198,6 +198,7 @@ namespace Ovotan.Windows.Controls.Docking
             {
                 _renderTabsInSingleRow(constraint);
             }
+            constraint.Height = Height;
             return base.MeasureOverride(constraint);
         }
 
@@ -362,7 +363,7 @@ namespace Ovotan.Windows.Controls.Docking
                 }
                 newActiveSiteHostTabControlItem.IsActive = true;
             }
-            MeasureOverride(new Size(ActualWidth, ActualHeight));
+            InvalidateMeasure();
         }
 
     }

@@ -150,5 +150,9 @@ namespace AppShell
             //Content = new SnapManager(_messageQueue) { Tag = "EEEEEEEEEEEE" };
         }
 
+        private void Popup_Scroll(object sender, System.Windows.Controls.Primitives.ScrollEventArgs e)
+        {
+
+        }
     }
 }

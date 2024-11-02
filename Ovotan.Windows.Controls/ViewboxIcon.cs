@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -12,76 +7,16 @@ namespace Ovotan.Windows.Controls
     public class ViewboxIcon : ContentControl
     {
         public static readonly DependencyProperty ViewboxProperty;
-        //public static readonly DependencyProperty FirstColorProperty;
-        //public static readonly DependencyProperty SecondColorProperty;
-        //public static readonly DependencyProperty MouseOverFirstColorProperty;
-        //public static readonly DependencyProperty MouseOverSecondColorProperty;
 
         public SolidColorBrush FirstColor { get; set; }
         public SolidColorBrush SecondColor { get; set; }
         public SolidColorBrush MouseOverFirstColor { get; set; }
         public SolidColorBrush MouseOverSecondColor { get; set; }
 
-        //public SolidColorBrush FirstColor
-        //{
-        //    get
-        //    {
-        //        return GetValue(FirstColorProperty) as SolidColorBrush;
-        //    }
-        //    set
-        //    {
-        //        SetValue(FirstColorProperty, value);
-        //    }
-        //}
-
-        //public SolidColorBrush SecondColor
-        //{
-        //    get
-        //    {
-        //        return GetValue(SecondColorProperty) as SolidColorBrush;
-        //    }
-        //    set
-        //    {
-        //        SetValue(SecondColorProperty, value);
-        //    }
-        //}
-
-        //public SolidColorBrush MouseOverFirstColor
-        //{
-        //    get
-        //    {
-        //        return GetValue(MouseOverFirstColorProperty) as SolidColorBrush;
-        //    }
-        //    set
-        //    {
-        //        SetValue(MouseOverFirstColorProperty, value);
-        //    }
-        //}
-
-        //public SolidColorBrush MouseOverSecondColor
-        //{
-        //    get
-        //    {
-        //        return GetValue(MouseOverSecondColorProperty) as SolidColorBrush;
-        //    }
-        //    set
-        //    {
-        //        SetValue(MouseOverSecondColorProperty, value);
-        //    }
-        //}
-
-
         public Viewbox Viewbox
         {
-            get
-            {
-
-                return GetValue(ViewboxProperty) as Viewbox;
-            }
-            set
-            {
-                SetValue(ViewboxProperty, value);
-            }
+            get { return GetValue(ViewboxProperty) as Viewbox; }
+            set { SetValue(ViewboxProperty, value); }
         }
 
         static ViewboxIcon()
@@ -89,22 +24,8 @@ namespace Ovotan.Windows.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ViewboxIcon), new FrameworkPropertyMetadata(typeof(ContentControl)));
             ViewboxProperty = DependencyProperty.Register("Viewbox", typeof(Viewbox), typeof(ViewboxIcon),
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
-            //FirstColorProperty = DependencyProperty.Register("FirstColor", typeof(SolidColorBrush), typeof(ViewboxIcon),
-            //    new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
-            //SecondColorProperty = DependencyProperty.Register("SecondColor", typeof(SolidColorBrush), typeof(ViewboxIcon),
-            //    new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
-            //MouseOverFirstColorProperty = DependencyProperty.Register("MouseOverFirstColor", typeof(SolidColorBrush), typeof(ViewboxIcon),
-            //    new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
-            //MouseOverSecondColorProperty = DependencyProperty.Register("MouseOverSecondColor", typeof(SolidColorBrush), typeof(ViewboxIcon),
-            //    new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsRender, null, null));
             SchemaManager.AddResource("pack://application:,,,/Ovotan.Windows.Controls;component/Resources/ViewboxButtonResource.xaml", "");
         }
-
-        //protected override void OnInitialized(EventArgs e)
-        //{
-        //    base.OnInitialized(e);
-        //    Content = Viewbox;
-        //}
 
         public override void OnApplyTemplate()
         {
